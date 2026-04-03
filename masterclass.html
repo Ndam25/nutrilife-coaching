@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Healing Kitchen Masterclass — Transform your health through food in one weekend with live webinars and expert nutrition coaching for chronic disease management.">
+  <meta name="keywords" content="nutrition masterclass, webinar, online course, diabetes diet, healthy eating, meal prep, chronic disease nutrition">
+  <meta property="og:title" content="The Healing Kitchen Masterclass — NutriLife Coaching">
+  <meta property="og:description" content="Live & recorded masterclasses on therapeutic nutrition. Only 47 seats left for next live event!">
+  <meta property="og:type" content="website">
+  <title>Masterclass & Webinar — NutriLife Coaching</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body>
+
+<!-- ── URGENCY BAR ── -->
+<div class="urgency-bar" id="urgency-bar">
+  🔥 <span data-lang="en" class="active">Next LIVE Masterclass: <span id="countdown">00d 00h 00m 00s</span> — Only 47 seats left!
+    <a href="#book-now" style="color:white;text-decoration:underline;">Secure Your Spot →</a></span>
+  <span data-lang="fr">Prochain Masterclass EN DIRECT : <span id="countdown-fr">00d 00h 00m 00s</span> — Seulement 47 places restantes !
+    <a href="#book-now" style="color:white;text-decoration:underline;">Réservez Maintenant →</a></span>
+  <span data-lang="es">Próximo Masterclass EN DIRECTO: <span id="countdown-es">00d 00h 00m 00s</span> — ¡Solo quedan 47 lugares!
+    <a href="#book-now" style="color:white;text-decoration:underline;">Asegura Tu Lugar →</a></span>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🌿</div>
+        Nutri<span>Life</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown">
+          <a href="services.html" data-i18n="nav.services">Services ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="coaching.html">🧑‍⚕️ 1:1 Nutrition Coaching</a>
+            <a href="program.html">👥 Group Coaching Program</a>
+            <a href="masterclass.html">🎓 Masterclass & Webinars</a>
+            <a href="training.html">📚 Online Training</a>
+            <a href="services.html">🌟 All Services</a>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <a href="recipes.html" data-i18n="nav.recipes">Recipes ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="recipes.html">🔍 Recipe Portal</a>
+            <a href="nutrition-app.html">🤖 AI Recipe Generator</a>
+            <a href="nutrition-data.html">📊 Nutrition Database</a>
+          </div>
+        </li>
+        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="downloads.html">📥 Free Resources</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="fr">FR</button>
+          <button class="lang-btn" data-set-lang="es">ES</button>
+        </div>
+        <a href="nutrition-app.html" class="btn btn-primary btn-sm nav-cta">🤖 Nutrition App</a>
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu">
+  <button class="mobile-close" style="position:absolute;top:24px;right:24px;font-size:1.6rem;background:none;cursor:pointer;">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="about.html">👤 About</a></li>
+    <li><a href="services.html">⭐ Services</a></li>
+    <li><a href="coaching.html">🧑‍⚕️ 1:1 Coaching</a></li>
+    <li><a href="program.html">👥 Group Program</a></li>
+    <li><a href="masterclass.html">🎓 Masterclass</a></li>
+    <li><a href="recipes.html">🍽️ Recipes</a></li>
+    <li><a href="nutrition-app.html">🤖 Nutrition App</a></li>
+    <li><a href="blog.html">📝 Blog</a></li>
+    <li><a href="downloads.html">📥 Free Resources</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+  </ul>
+  <div style="margin-top:24px;display:flex;gap:8px;">
+    <button class="lang-btn" data-set-lang="en">EN</button>
+    <button class="lang-btn" data-set-lang="fr">FR</button>
+    <button class="lang-btn" data-set-lang="es">ES</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span data-lang="en" class="active">✨ Limited Time Offer</span>
+          <span data-lang="fr" style="display:none;">✨ Offre Limitée</span>
+          <span data-lang="es" style="display:none;">✨ Oferta Limitada</span>
+        </div>
+        <h1>
+          <span data-lang="en" class="active">The Healing Kitchen<br><em>Masterclass</em></span>
+          <span data-lang="fr" style="display:none;">Le Masterclass<br><em>Cuisine Thérapeutique</em></span>
+          <span data-lang="es" style="display:none;">El Masterclass<br><em>Cocina Curativa</em></span>
+        </h1>
+        <p class="hero-sub">
+          <span data-lang="en" class="active">Transform Your Health Through Food in One Weekend — Live group learning with expert nutritionists + lifetime access to recordings</span>
+          <span data-lang="fr" style="display:none;">Transformez Votre Santé Grâce à l'Alimentation en Un Week-End — Apprentissage en groupe en direct avec des nutritionnistes experts + accès à vie aux enregistrements</span>
+          <span data-lang="es" style="display:none;">Transforma Tu Salud a Través de la Comida en Un Fin de Semana — Aprendizaje grupal en directo con nutricionistas expertos + acceso de por vida a las grabaciones</span>
+        </p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-amber btn-lg">
+            <span data-lang="en" class="active">🎓 Enroll Now</span>
+            <span data-lang="fr" style="display:none;">🎓 S'Inscrire Maintenant</span>
+            <span data-lang="es" style="display:none;">🎓 Inscribirse Ahora</span>
+          </a>
+          <a href="#modules" class="btn btn-white btn-lg">
+            <span data-lang="en" class="active">Learn What's Inside</span>
+            <span data-lang="fr" style="display:none;">Découvrir le Contenu</span>
+            <span data-lang="es" style="display:none;">Descubre Qué Hay Dentro</span>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number"><span data-counter="2000">2000</span>+</div>
+            <div class="stat-label">Graduates</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number"><span data-counter="4">4</span>.8/5</div>
+            <div class="stat-label">Rating</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number"><span data-counter="10">10</span>+</div>
+            <div class="stat-label">Cohorts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number"><span data-counter="92">92</span>%</div>
+            <div class="stat-label">Recommend</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <div class="hero-card">
+          <p style="color:rgba(255,255,255,0.7);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">This Masterclass Includes</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="background:var(--amber);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;">✓</div>
+              <div>
+                <div style="color:white;font-weight:700;font-size:0.95rem;">5 Deep-Dive Modules</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Expert-led, interactive learning</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="background:var(--amber);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;">✓</div>
+              <div>
+                <div style="color:white;font-weight:700;font-size:0.95rem;">Live Q&A Sessions</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Ask questions in real-time</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="background:var(--amber);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;">✓</div>
+              <div>
+                <div style="color:white;font-weight:700;font-size:0.95rem;">Recipe E-Book</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.8rem;">50+ healing recipes with macros</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="background:var(--amber);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;">✓</div>
+              <div>
+                <div style="color:white;font-weight:700;font-size:0.95rem;">Lifetime Recordings</div>
+                <div style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Watch anytime, anywhere</div>
+              </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.2);">
+            <div style="color:var(--amber);font-weight:700;font-size:0.9rem;margin-bottom:8px;">🔥 Bonus Bundle Value</div>
+            <p style="color:rgba(255,255,255,0.9);font-size:0.85rem;margin:0;">Recipe e-book ($29) + shopping lists + meal prep guide = $75 value<br><strong style="color:white;">FREE when you enroll this week!</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT YOU'LL LEARN ── -->
+<section class="section" id="modules">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow" data-lang="en" class="active">The Curriculum</span>
+      <span class="eyebrow" data-lang="fr" style="display:none;">Le Curriculum</span>
+      <span class="eyebrow" data-lang="es" style="display:none;">El Plan de Estudios</span>
+      <h2 data-lang="en" class="active">5 Core Modules You'll Master</h2>
+      <h2 data-lang="fr" style="display:none;">5 Modules Fondamentaux que Vous Maîtriserez</h2>
+      <h2 data-lang="es" style="display:none;">5 Módulos Principales que Dominarás</h2>
+      <p data-lang="en" class="active">Expert-led instruction on the science and practice of therapeutic nutrition — from diagnosis to the dining table.</p>
+      <p data-lang="fr" style="display:none;">Enseignement dirigé par des experts sur la science et la pratique de la nutrition thérapeutique — du diagnostic à la table à manger.</p>
+      <p data-lang="es" style="display:none;">Instrucción dirigida por expertos sobre la ciencia y la práctica de la nutrición terapéutica — del diagnóstico a la mesa.</p>
+    </div>
+
+    <div class="grid-1" style="max-width:900px;margin:0 auto;">
+      <!-- Module 1 -->
+      <div class="fade-in fade-in-delay-1" style="background:var(--green-pale);border-radius:16px;padding:40px;margin-bottom:24px;border-left:6px solid var(--green);">
+        <div style="display:flex;align-items:start;gap:24px;">
+          <div style="font-size:2.5rem;flex-shrink:0;">🩺</div>
+          <div style="flex:1;">
+            <h3 style="margin-top:0;color:var(--green-dark);">Module 1: Understanding Your Condition & Food as Medicine</h3>
+            <p style="margin:12px 0;">Learn how your diagnosis (diabetes, hypertension, kidney disease, etc.) impacts nutritional needs. Understand the science behind therapeutic diets and why standard nutrition advice often fails chronic disease patients.</p>
+            <div style="display:flex;gap:24px;margin-top:16px;font-size:0.9rem;color:var(--dark);">
+              <span>⏱️ 3.5 hours</span>
+              <span>📚 5 lessons</span>
+              <span>✅ Certificate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="fade-in fade-in-delay-2" style="background:var(--amber-pale);border-radius:16px;padding:40px;margin-bottom:24px;border-left:6px solid var(--amber);">
+        <div style="display:flex;align-items:start;gap:24px;">
+          <div style="font-size:2.5rem;flex-shrink:0;">🏷️</div>
+          <div style="flex:1;">
+            <h3 style="margin-top:0;color:var(--dark);">Module 2: Reading Food Labels & Decoding Nutrition Info</h3>
+            <p style="margin:12px 0;">Master the hidden language of nutrition labels. Learn to identify added sugars, sodium traps, and marketing deception. Navigate the grocery aisle with confidence.</p>
+            <div style="display:flex;gap:24px;margin-top:16px;font-size:0.9rem;color:var(--dark);">
+              <span>⏱️ 2 hours</span>
+              <span>📚 4 lessons</span>
+              <span>✅ Downloadable guide</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="fade-in fade-in-delay-3" style="background:var(--cream-dark);border-radius:16px;padding:40px;margin-bottom:24px;border-left:6px solid var(--amber);">
+        <div style="display:flex;align-items:start;gap:24px;">
+          <div style="font-size:2.5rem;flex-shrink:0;">🍽️</div>
+          <div style="flex:1;">
+            <h3 style="margin-top:0;color:var(--green-dark);">Module 3: Building Your Healing Plate</h3>
+            <p style="margin:12px 0;">The proven formula for every meal: proteins, starches, vegetables, and healthy fats. Learn portion sizes, macronutrient balance, and how to adapt traditional cultural recipes for your health.</p>
+            <div style="display:flex;gap:24px;margin-top:16px;font-size:0.9rem;color:var(--dark);">
+              <span>⏱️ 3 hours</span>
+              <span>📚 6 lessons</span>
+              <span>✅ Visual plate templates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 4 -->
+      <div class="fade-in fade-in-delay-4" style="background:var(--green-pale);border-radius:16px;padding:40px;margin-bottom:24px;border-left:6px solid var(--green);">
+        <div style="display:flex;align-items:start;gap:24px;">
+          <div style="font-size:2.5rem;flex-shrink:0;">🛒</div>
+          <div style="flex:1;">
+            <h3 style="margin-top:0;color:var(--green-dark);">Module 4: Meal Prep Strategies & Time-Saving Hacks</h3>
+            <p style="margin:12px 0;">Spend less time cooking, see better results. Learn batch cooking, freezer hacks, and African-diaspora meal prep traditions that keep food flavorful and healing.</p>
+            <div style="display:flex;gap:24px;margin-top:16px;font-size:0.9rem;color:var(--dark);">
+              <span>⏱️ 2.5 hours</span>
+              <span>📚 5 lessons</span>
+              <span>✅ Prep templates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 5 -->
+      <div class="fade-in fade-in-delay-5" style="background:var(--amber-pale);border-radius:16px;padding:40px;border-left:6px solid var(--amber);">
+        <div style="display:flex;align-items:start;gap:24px;">
+          <div style="font-size:2.5rem;flex-shrink:0;">💊</div>
+          <div style="flex:1;">
+            <h3 style="margin-top:0;color:var(--dark);">Module 5: Supplements & Superfoods — Fact vs. Fiction</h3>
+            <p style="margin:12px 0;">Which supplements actually work? What superfoods are worth the hype? Learn evidence-based guidance on omega-3s, vitamins, minerals, and trending foods like bone broth and adaptogens.</p>
+            <div style="display:flex;gap:24px;margin-top:16px;font-size:0.9rem;color:var(--dark);">
+              <span>⏱️ 2 hours</span>
+              <span>📚 4 lessons</span>
+              <span>✅ Supplement guide</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:60px;">
+      <p style="font-size:1.05rem;color:var(--mid);margin-bottom:20px;">
+        <span data-lang="en" class="active"><strong>Total: 14+ hours of expert instruction</strong> + lifetime access + bonuses</span>
+        <span data-lang="fr" style="display:none;"><strong>Total : 14+ heures d'enseignement expert</strong> + accès à vie + bonus</span>
+        <span data-lang="es" style="display:none;"><strong>Total: 14+ horas de instrucción experta</strong> + acceso de por vida + bonificaciones</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IT'S FOR ── -->
+<section class="section" style="background:var(--cream-dark);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow" data-lang="en" class="active">Perfect For</span>
+      <span class="eyebrow" data-lang="fr" style="display:none;">Parfait Pour</span>
+      <span class="eyebrow" data-lang="es" style="display:none;">Perfecto Para</span>
+      <h2 data-lang="en" class="active">Who Should Enroll?</h2>
+      <h2 data-lang="fr" style="display:none;">Qui Devrait S'Inscrire ?</h2>
+      <h2 data-lang="es" style="display:none;">¿Quién Debería Inscribirse?</h2>
+    </div>
+
+    <div class="grid-3 fade-in">
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🩸</div>
+        <h4>People with Chronic Disease</h4>
+        <p style="margin:12px 0 0;font-size:0.9rem;">If you've been diagnosed with diabetes, hypertension, kidney disease, or heart condition, this masterclass will transform how you eat and manage your health.</p>
+      </div>
+
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🌍</div>
+        <h4>African Diaspora Seeking Connection</h4>
+        <p style="margin:12px 0 0;font-size:0.9rem;">Missing the taste and nutrition of home? Learn to adapt beloved West African, Caribbean, and global recipes to support your current health needs.</p>
+      </div>
+
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">👨‍👩‍👧‍👦</div>
+        <h4>Caregivers & Family Members</h4>
+        <p style="margin:12px 0 0;font-size:0.9rem;">Want to support a loved one's health? Learn the science behind therapeutic nutrition so you can cook healing meals for the people you care about.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF / TESTIMONIALS ── -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow" data-lang="en" class="active">Real Results</span>
+      <span class="eyebrow" data-lang="fr" style="display:none;">Résultats Réels</span>
+      <span class="eyebrow" data-lang="es" style="display:none;">Resultados Reales</span>
+      <h2 data-lang="en" class="active">What Past Participants Say</h2>
+      <h2 data-lang="fr" style="display:none;">Ce que disent les participants précédents</h2>
+      <h2 data-lang="es" style="display:none;">Lo que dicen los participantes anteriores</h2>
+    </div>
+
+    <div class="grid-3 fade-in">
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-md);border-top:4px solid var(--green);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid #c8e6c9;box-shadow:0 3px 12px rgba(45,106,79,0.2);"><img src="images/testimonial-nadia.jpg" alt="Nadia H." style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+          <div>
+            <div style="font-weight:700;color:var(--dark);">Ama K., Lagos & Boston</div>
+            <div style="font-size:0.8rem;color:var(--light);">Type 2 Diabetes</div>
+          </div>
+        </div>
+        <p style="margin:0;font-style:italic;color:var(--mid);line-height:1.6;">
+          "After years of failing at generic diet plans, this masterclass finally made sense of my condition. I learned how to adapt my grandmother's jollof rice and make it work for my blood sugar. My A1C dropped 1.8 points in 3 months!"
+        </p>
+        <div style="margin-top:12px;color:var(--amber);font-size:0.9rem;">★★★★★</div>
+      </div>
+
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-md);border-top:4px solid var(--amber);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid #c8e6c9;box-shadow:0 3px 12px rgba(45,106,79,0.2);"><img src="images/testimonial-kofi.jpg" alt="Kofi A." style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+          <div>
+            <div style="font-weight:700;color:var(--dark);">Marcus T., Atlanta</div>
+            <div style="font-size:0.8rem;color:var(--light);">Hypertension & Heart Health</div>
+          </div>
+        </div>
+        <p style="margin:0;font-style:italic;color:var(--mid);line-height:1.6;">
+          "The label-reading module alone saved my life. I cut my sodium intake and started making meals I actually enjoy. My cardiologist was shocked at my improvement. Highly recommend!"
+        </p>
+        <div style="margin-top:12px;color:var(--amber);font-size:0.9rem;">★★★★★</div>
+      </div>
+
+      <div style="background:white;padding:32px;border-radius:12px;box-shadow:var(--shadow-md);border-top:4px solid var(--green-mid);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <div style="width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid #c8e6c9;box-shadow:0 3px 12px rgba(45,106,79,0.2);"><img src="images/testimonial-amara.jpg" alt="Amara D." style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+          <div>
+            <div style="font-weight:700;color:var(--dark);">Zola M., Toronto</div>
+            <div style="font-size:0.8rem;color:var(--light);">Caregiver for Parent with Kidney Disease</div>
+          </div>
+        </div>
+        <p style="margin:0;font-style:italic;color:var(--mid);line-height:1.6;">
+          "As a caregiver, I felt lost preparing kidney-friendly meals. This masterclass gave me confidence and understanding. Mom's lab values have improved and she says my cooking tastes better than ever!"
+        </p>
+        <div style="margin-top:12px;color:var(--amber);font-size:0.9rem;">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section" style="background:var(--green-dark);" id="pricing">
+  <div class="container">
+    <div class="section-header fade-in" style="color:white;">
+      <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--amber-light);" data-lang="en" class="active">Flexible Options</span>
+      <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--amber-light);display:none;" data-lang="fr">Options Flexibles</span>
+      <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--amber-light);display:none;" data-lang="es">Opciones Flexibles</span>
+      <h2 style="color:white;" data-lang="en" class="active">Choose Your Access Level</h2>
+      <h2 style="color:white;display:none;" data-lang="fr">Choisissez Votre Niveau d'Accès</h2>
+      <h2 style="color:white;display:none;" data-lang="es">Elige Tu Nivel de Acceso</h2>
+      <p style="color:rgba(255,255,255,0.8);" data-lang="en" class="active">All packages include lifetime access to recordings, modules, and bonus materials. Choose what works best for your learning style.</p>
+      <p style="color:rgba(255,255,255,0.8);display:none;" data-lang="fr">Tous les forfaits incluent l'accès à vie aux enregistrements, aux modules et aux matériaux bonus. Choisissez ce qui vous convient le mieux.</p>
+      <p style="color:rgba(255,255,255,0.8);display:none;" data-lang="es">Todos los paquetes incluyen acceso de por vida a grabaciones, módulos y materiales bonificados. Elige lo que mejor se adapte a tu estilo de aprendizaje.</p>
+    </div>
+
+    <div class="grid-3 fade-in" style="max-width:1100px;margin:0 auto;">
+      <!-- Package 1: Recording Only -->
+      <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);transition:var(--transition);" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:var(--green-pale);padding:24px;text-align:center;">
+          <h3 style="margin:0 0 8px;color:var(--green-dark);">📹 Recording Only</h3>
+          <p style="margin:0;color:var(--mid);font-size:0.9rem;">Self-paced learning at your own speed</p>
+        </div>
+        <div style="padding:40px 32px;text-align:center;">
+          <div style="font-size:2.8rem;font-weight:900;color:var(--green);margin-bottom:8px;">$97</div>
+          <p style="color:var(--light);margin-bottom:32px;font-size:0.9rem;">One-time payment</p>
+          <ul style="list-style:none;margin-bottom:32px;text-align:left;font-size:0.95rem;">
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ All 5 recorded modules</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Lifetime access</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Downloadable resources</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Recipe e-book bonus</li>
+            <li style="padding:10px 0;color:var(--light);">✗ Live access & Q&A</li>
+          </ul>
+          <a href="#book-now" class="btn btn-primary btn-block">Enroll</a>
+        </div>
+      </div>
+
+      <!-- Package 2: LIVE + Recording (Recommended) -->
+      <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);border:3px solid var(--amber);position:relative;transform:scale(1.05);" onmouseover="this.style.transform='scale(1.05) translateY(-8px)'" onmouseout="this.style.transform='scale(1.05)'">
+        <div style="background:linear-gradient(135deg,var(--amber),var(--amber-light));padding:24px;text-align:center;color:white;">
+          <div style="display:inline-block;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:50px;font-size:0.8rem;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">Most Popular 🔥</div>
+          <h3 style="margin:8px 0;color:white;">🎓 LIVE + Recording</h3>
+          <p style="margin:0;color:rgba(255,255,255,0.9);font-size:0.9rem;">Full interactive experience</p>
+        </div>
+        <div style="padding:40px 32px;text-align:center;">
+          <div style="font-size:2.8rem;font-weight:900;color:var(--amber);margin-bottom:8px;">$197</div>
+          <p style="color:var(--light);margin-bottom:32px;font-size:0.9rem;">One-time payment</p>
+          <ul style="list-style:none;margin-bottom:32px;text-align:left;font-size:0.95rem;">
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ All 5 live modules</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Interactive Q&A sessions</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Lifetime recording access</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ All downloadable resources</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Recipe e-book + guides</li>
+            <li style="padding:10px 0;color:var(--dark);">✓ Community access (6 months)</li>
+          </ul>
+          <a href="#book-now" class="btn btn-amber btn-block btn-lg">Get Started Now</a>
+        </div>
+      </div>
+
+      <!-- Package 3: VIP with Coaching -->
+      <div style="background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg);transition:var(--transition);" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:linear-gradient(135deg,var(--green),var(--green-light));padding:24px;text-align:center;color:white;">
+          <h3 style="margin:0 0 8px;">⭐ VIP Premium</h3>
+          <p style="margin:0;color:rgba(255,255,255,0.9);font-size:0.9rem;">Everything + personal coaching call</p>
+        </div>
+        <div style="padding:40px 32px;text-align:center;">
+          <div style="font-size:2.8rem;font-weight:900;color:var(--green);margin-bottom:8px;">$297</div>
+          <p style="color:var(--light);margin-bottom:32px;font-size:0.9rem;">One-time payment</p>
+          <ul style="list-style:none;margin-bottom:32px;text-align:left;font-size:0.95rem;">
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Everything in LIVE package</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ 30-min personalized coaching</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Custom meal plan review</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ 1:1 Q&A email support</li>
+            <li style="padding:10px 0;border-bottom:1px solid var(--cream-dark);color:var(--dark);">✓ Priority community access</li>
+            <li style="padding:10px 0;color:var(--dark);">✓ Lifetime membership</li>
+          </ul>
+          <a href="#book-now" class="btn btn-primary btn-block">Premium Access</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px;">
+      <p style="color:rgba(255,255,255,0.8);margin-bottom:16px;font-size:0.95rem;">
+        <span data-lang="en" class="active">✓ 30-Day Money-Back Guarantee — If you don't see value, we refund your full investment.</span>
+        <span data-lang="fr" style="display:none;">✓ Garantie de Remboursement de 30 Jours — Si vous ne voyez pas de valeur, nous remboursons votre investissement complet.</span>
+        <span data-lang="es" style="display:none;">✓ Garantía de Reembolso de 30 Días — Si no ves valor, reembolsamos tu inversión completa.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── BONUSES ── -->
+<section class="section" style="background:var(--amber-pale);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow" data-lang="en" class="active">Included Free</span>
+      <span class="eyebrow" data-lang="fr" style="display:none;">Inclus Gratuitement</span>
+      <span class="eyebrow" data-lang="es" style="display:none;">Incluido Gratis</span>
+      <h2 data-lang="en" class="active">Bonus Materials (Total Value: $75+)</h2>
+      <h2 data-lang="fr" style="display:none;">Matériaux Bonus (Valeur Totale : 75 $ +)</h2>
+      <h2 data-lang="es" style="display:none;">Materiales Bonus (Valor Total: $75+)</h2>
+    </div>
+
+    <div class="grid-3 fade-in">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:16px;">📚</div>
+        <h4>Recipe E-Book ($29 value)</h4>
+        <p>50+ healing recipes with full nutritional breakdowns, macro targets, and cultural adaptations for your condition.</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:16px;">🛒</div>
+        <h4>Smart Shopping List</h4>
+        <p>Category-organized, macro-optimized grocery list to make meal prepping effortless and budget-friendly.</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:16px;">📅</div>
+        <h4>Meal Prep Templates</h4>
+        <p>Ready-to-use weekly meal prep schedules and batch cooking guides that save 10+ hours per month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header fade-in">
+      <span class="eyebrow" data-lang="en" class="active">Questions?</span>
+      <span class="eyebrow" data-lang="fr" style="display:none;">Des Questions ?</span>
+      <span class="eyebrow" data-lang="es" style="display:none;">¿Preguntas?</span>
+      <h2 data-lang="en" class="active">Frequently Asked Questions</h2>
+      <h2 data-lang="fr" style="display:none;">Questions Fréquemment Posées</h2>
+      <h2 data-lang="es" style="display:none;">Preguntas Frecuentes</h2>
+    </div>
+
+    <div style="margin-top:40px;">
+      <!-- FAQ 1 -->
+      <div class="accordion-item fade-in">
+        <div class="accordion-header" style="background:var(--green-pale);padding:20px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--green-dark);display:flex;justify-content:space-between;align-items:center;">
+          <span data-lang="en" class="active">When does the next LIVE masterclass start?</span>
+          <span data-lang="fr" style="display:none;">Quand commence le prochain masterclass EN DIRECT ?</span>
+          <span data-lang="es" style="display:none;">¿Cuándo comienza el próximo masterclass en vivo?</span>
+          <span style="font-size:1.3rem;">▾</span>
+        </div>
+        <div class="accordion-body" style="padding:20px;background:white;border-radius:0 0 12px 12px;max-height:0;overflow:hidden;">
+          <p data-lang="en" class="active" style="margin:0;">The next live session begins April 12th at 7 PM ET. Space is limited to 50 participants for interactive Q&A. If you miss it, you'll still get lifetime access to all recordings.</p>
+          <p data-lang="fr" style="display:none;margin:0;">La prochaine session en direct commence le 12 avril à 19h ET. La place est limitée à 50 participants pour les Q&A interactifs. Si vous la manquez, vous aurez toujours accès à vie à tous les enregistrements.</p>
+          <p data-lang="es" style="display:none;margin:0;">La próxima sesión en vivo comienza el 12 de abril a las 7 PM ET. El espacio se limita a 50 participantes para Q&A interactivos. Si te la pierdes, seguirás teniendo acceso de por vida a todas las grabaciones.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="accordion-item fade-in" style="margin-top:12px;">
+        <div class="accordion-header" style="background:var(--amber-pale);padding:20px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--dark);display:flex;justify-content:space-between;align-items:center;">
+          <span data-lang="en" class="active">Do I need any special equipment or software?</span>
+          <span data-lang="fr" style="display:none;">Ai-je besoin d'équipement ou de logiciel spécial ?</span>
+          <span data-lang="es" style="display:none;">¿Necesito equipo o software especial?</span>
+          <span style="font-size:1.3rem;">▾</span>
+        </div>
+        <div class="accordion-body" style="padding:20px;background:white;border-radius:0 0 12px 12px;max-height:0;overflow:hidden;">
+          <p data-lang="en" class="active" style="margin:0;">Nope! Just a computer, tablet, or phone with internet. Zoom for live sessions (free). All materials are PDF or video — no special downloads needed.</p>
+          <p data-lang="fr" style="display:none;margin:0;">Non ! Juste un ordinateur, une tablette ou un téléphone avec Internet. Zoom pour les sessions en direct (gratuit). Tous les matériaux sont en PDF ou vidéo — aucun téléchargement spécial nécessaire.</p>
+          <p data-lang="es" style="display:none;margin:0;">¡No! Solo una computadora, tableta o teléfono con Internet. Zoom para sesiones en vivo (gratis). Todos los materiales son PDF o video — sin descargas especiales necesarias.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="accordion-item fade-in" style="margin-top:12px;">
+        <div class="accordion-header" style="background:var(--cream-dark);padding:20px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--dark);display:flex;justify-content:space-between;align-items:center;">
+          <span data-lang="en" class="active">Is this course accredited or certified?</span>
+          <span data-lang="fr" style="display:none;">Ce cours est-il accrédité ou certifié ?</span>
+          <span data-lang="es" style="display:none;">¿Este curso está acreditado o certificado?</span>
+          <span style="font-size:1.3rem;">▾</span>
+        </div>
+        <div class="accordion-body" style="padding:20px;background:white;border-radius:0 0 12px 12px;max-height:0;overflow:hidden;">
+          <p data-lang="en" class="active" style="margin:0;">This is an educational masterclass, not a professional nutrition certification. You'll receive a completion certificate suitable for portfolios and personal records. For professional credentials, ask about our advanced training program.</p>
+          <p data-lang="fr" style="display:none;margin:0;">C'est un masterclass éducatif, pas une certification professionnelle en nutrition. Vous recevrez un certificat d'achèvement approprié pour les portfolios et les dossiers personnels.</p>
+          <p data-lang="es" style="display:none;margin:0;">Este es un masterclass educativo, no una certificación profesional en nutrición. Recibirás un certificado de finalización apto para portafolios y registros personales.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="accordion-item fade-in" style="margin-top:12px;">
+        <div class="accordion-header" style="background:var(--green-pale);padding:20px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--green-dark);display:flex;justify-content:space-between;align-items:center;">
+          <span data-lang="en" class="active">What if I miss a live session?</span>
+          <span data-lang="fr" style="display:none;">Que se passe-t-il si je manque une session en direct ?</span>
+          <span data-lang="es" style="display:none;">¿Qué pasa si me pierdo una sesión en vivo?</span>
+          <span style="font-size:1.3rem;">▾</span>
+        </div>
+        <div class="accordion-body" style="padding:20px;background:white;border-radius:0 0 12px 12px;max-height:0;overflow:hidden;">
+          <p data-lang="en" class="active" style="margin:0;">All live sessions are recorded and available within 24 hours. You'll have lifetime access, so watch on your own schedule. You can even ask Q&A questions via email and get responses from the instructors.</p>
+          <p data-lang="fr" style="display:none;margin:0;">Toutes les sessions en direct sont enregistrées et disponibles dans les 24 heures. Vous aurez un accès à vie, donc regardez selon votre horaire.</p>
+          <p data-lang="es" style="display:none;margin:0;">Todas las sesiones en vivo se graban y están disponibles dentro de 24 horas. Tendrás acceso de por vida, así que mira según tu horario.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="accordion-item fade-in" style="margin-top:12px;">
+        <div class="accordion-header" style="background:var(--amber-pale);padding:20px;border-radius:12px;cursor:pointer;font-weight:700;color:var(--dark);display:flex;justify-content:space-between;align-items:center;">
+          <span data-lang="en" class="active">Do you offer a refund if I'm not satisfied?</span>
+          <span data-lang="fr" style="display:none;">Offrez-vous un remboursement si je ne suis pas satisfait ?</span>
+          <span data-lang="es" style="display:none;">¿Ofrecen reembolso si no estoy satisfecho?</span>
+          <span style="font-size:1.3rem;">▾</span>
+        </div>
+        <div class="accordion-body" style="padding:20px;background:white;border-radius:0 0 12px 12px;max-height:0;overflow:hidden;">
+          <p data-lang="en" class="active" style="margin:0;">Absolutely. We're confident you'll love this masterclass, so we offer a 30-day money-back guarantee. If you're not satisfied for any reason, just email us and we'll refund your entire investment—no questions asked.</p>
+          <p data-lang="fr" style="display:none;margin:0;">Absolument. Nous sommes convaincus que vous adorerez ce masterclass, donc nous offrons une garantie de remboursement de 30 jours.</p>
+          <p data-lang="es" style="display:none;margin:0;">Absolutamente. Estamos seguros de que te encantará este masterclass, así que ofrecemos una garantía de devolución de dinero de 30 días.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="section" style="background:linear-gradient(135deg,var(--green),var(--green-dark));color:white;text-align:center;" id="book-now">
+  <div class="container">
+    <div class="fade-in">
+      <h2 style="color:white;margin-bottom:16px;" data-lang="en" class="active">Ready to Transform Your Health?</h2>
+      <h2 style="color:white;margin-bottom:16px;display:none;" data-lang="fr">Prêt à Transformer Votre Santé ?</h2>
+      <h2 style="color:white;margin-bottom:16px;display:none;" data-lang="es">¿Listo para Transformar Tu Salud?</h2>
+
+      <p style="color:rgba(255,255,255,0.9);font-size:1.1rem;margin-bottom:32px;max-width:700px;margin-left:auto;margin-right:auto;" data-lang="en" class="active">Join 2,000+ graduates who've reclaimed their health. Next live masterclass seats are filling fast.</p>
+      <p style="color:rgba(255,255,255,0.9);font-size:1.1rem;margin-bottom:32px;max-width:700px;margin-left:auto;margin-right:auto;display:none;" data-lang="fr">Rejoignez plus de 2 000 diplômés qui ont récupéré leur santé. Les places du prochain masterclass en direct se remplissent rapidement.</p>
+      <p style="color:rgba(255,255,255,0.9);font-size:1.1rem;margin-bottom:32px;max-width:700px;margin-left:auto;margin-right:auto;display:none;" data-lang="es">Únete a más de 2,000 graduados que han recuperado su salud. Los lugares del próximo masterclass en vivo se están llenando rápidamente.</p>
+
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="#pricing" class="btn btn-amber btn-lg">Enroll Now</a>
+        <a href="contact.html" class="btn btn-white btn-lg">Ask Questions First</a>
+      </div>
+
+      <p style="margin-top:24px;color:rgba(255,255,255,0.7);font-size:0.95rem;" data-lang="en" class="active">🔒 100% Secure Checkout | 30-Day Money-Back Guarantee</p>
+      <p style="margin-top:24px;color:rgba(255,255,255,0.7);font-size:0.95rem;display:none;" data-lang="fr">🔒 Paiement 100% Sécurisé | Garantie de Remboursement de 30 Jours</p>
+      <p style="margin-top:24px;color:rgba(255,255,255,0.7);font-size:0.95rem;display:none;" data-lang="es">🔒 Pago 100% Seguro | Garantía de Reembolso de 30 Días</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo logo" style="font-size:1.6rem;margin-bottom:16px;">
+          <div class="logo-icon" style="width:36px;height:36px;font-size:1.1rem;">🌿</div>
+          Nutri<span>Life</span> Coaching
+        </div>
+        <p class="footer-desc" data-i18n="footer.tagline">Transforming lives through the healing power of nutrition. Serving the US market and African diaspora worldwide.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">📘</a>
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">▶️</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="coaching.html">1:1 Nutrition Coaching</a>
+        <a href="program.html">Group Program</a>
+        <a href="masterclass.html">Masterclass</a>
+        <a href="training.html">Online Training</a>
+        <a href="services.html">All Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="nutrition-app.html">🤖 Nutrition App</a>
+        <a href="recipes.html">Recipe Portal</a>
+        <a href="downloads.html">Free Downloads</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Affiliates</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NutriLife Coaching. All rights reserved.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="lang-btn" data-set-lang="en" style="color:rgba(255,255,255,0.5);">EN</button>
+        <button class="lang-btn" data-set-lang="fr" style="color:rgba(255,255,255,0.5);">FR</button>
+        <button class="lang-btn" data-set-lang="es" style="color:rgba(255,255,255,0.5);">ES</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── COOKIE BANNER ── -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience. <a href="#" style="color:var(--green-light);">Learn more</a></p>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="decline-cookies" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:white;">Decline</button>
+    <button id="accept-cookies" class="btn btn-amber btn-sm">Accept</button>
+  </div>
+</div>
+
+<!-- ── SCROLL TO TOP ── -->
+<button class="scroll-top" id="scroll-top">↑</button>
+
+<script src="js/main.js"></script>
+  <script src="js/payment.js"></script>
+<script>
+  // Initialize countdown timer for masterclass
+  const nextMasterclass = new Date('April 12, 2025 19:00:00').toISOString();
+  initCountdown('countdown', nextMasterclass);
+  initCountdown('countdown-fr', nextMasterclass);
+  initCountdown('countdown-es', nextMasterclass);
+</script>
+</body>
+</html>

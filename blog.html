@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLife Blog — Nourishment & Knowledge</title>
+    <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body>
+<!-- ── URGENCY BAR ── -->
+<div class="urgency-bar" id="urgency-bar">
+  🎁 <span data-lang="en" class="active">Free Nutrition Resources + Personalized Coaching for Better Health —
+    <a href="downloads.html" style="color:white;text-decoration:underline;font-weight:700;">Get Your Free Guide →</a></span>
+  <span data-lang="fr">Ressources Nutrition Gratuites + Coaching Personnalisé pour Votre Santé —
+    <a href="downloads.html" style="color:white;text-decoration:underline;">Obtenir le Guide →</a></span>
+  <span data-lang="es">Recursos de Nutrición Gratuitos + Coaching Personalizado para Tu Salud —
+    <a href="downloads.html" style="color:white;text-decoration:underline;">Obtener la Guía →</a></span>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🌿</div>
+        Nutri<span>Life</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown">
+          <a href="services.html" data-i18n="nav.services">Services ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="coaching.html">🧑‍⚕️ 1:1 Nutrition Coaching</a>
+            <a href="program.html">👥 Group Coaching Program</a>
+            <a href="masterclass.html">🎓 Masterclass &amp; Webinars</a>
+            <a href="training.html">📚 Online Training</a>
+            <a href="services.html">🌟 All Services</a>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <a href="recipes.html" data-i18n="nav.recipes">Recipes ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="recipes.html">🔍 Recipe Portal</a>
+            <a href="nutrition-app.html">🤖 AI Recipe Generator</a>
+            <a href="nutrition-data.html">📊 Nutrition Database</a>
+          </div>
+        </li>
+        <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="downloads.html" data-i18n="nav.downloads">📥 Free Resources</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="fr">FR</button>
+          <button class="lang-btn" data-set-lang="es">ES</button>
+        </div>
+        <a href="nutrition-app.html" class="btn btn-primary btn-sm nav-cta">🤖 Nutrition App</a>
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu">
+  <button class="mobile-close" style="position:absolute;top:24px;right:24px;font-size:1.6rem;background:none;cursor:pointer;">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="about.html">👤 About</a></li>
+    <li><a href="services.html">⭐ Services</a></li>
+    <li><a href="coaching.html">🧑‍⚕️ 1:1 Coaching</a></li>
+    <li><a href="program.html">👥 Group Program</a></li>
+    <li><a href="masterclass.html">🎓 Masterclass</a></li>
+    <li><a href="recipes.html">🍽️ Recipes</a></li>
+    <li><a href="nutrition-app.html">🤖 Nutrition App</a></li>
+    <li><a href="blog.html" class="active">📝 Blog</a></li>
+    <li><a href="downloads.html">📥 Free Resources</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+  </ul>
+  <div style="margin-top:24px;display:flex;gap:8px;">
+    <button class="lang-btn" data-set-lang="en">EN</button>
+    <button class="lang-btn" data-set-lang="fr">FR</button>
+    <button class="lang-btn" data-set-lang="es">ES</button>
+  </div>
+</div>
+
+    <!-- Page Hero -->
+    <section class="page-hero blog-hero">
+        <div class="hero-content" style="display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;">
+            <div>
+              <h1 data-i18n="blog.page.title">NutriLife Blog</h1>
+              <p class="hero-subtitle" data-i18n="blog.page.subtitle">Nourishment &amp; Knowledge</p>
+              <p class="hero-description" data-i18n="blog.page.desc">Evidence-based nutrition insights for your healing journey</p>
+            </div>
+            <img src="images/nano-banana-student.svg" alt="Nano Banana — NutriLife Blogger"
+                 style="width:160px;height:auto;filter:drop-shadow(0 6px 20px rgba(0,0,0,0.25));animation:nanoBounce 3.5s ease-in-out infinite;"/>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="blog-container">
+        <div class="blog-main">
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <div class="featured-image" style="background: linear-gradient(135deg, #2D6A4F 0%, #E76F51 100%);"></div>
+                <div class="featured-content">
+                    <span class="category-tag">Diabetes</span>
+                    <h2>The Complete Guide to the Diabetic Diet in 2025</h2>
+                    <p class="featured-excerpt">Discover the latest evidence-based strategies for managing blood sugar through food. This comprehensive guide covers everything from understanding glycemic index to culturally-adapted meal planning for the African diaspora, with practical tips you can implement today.</p>
+                    <div class="post-meta">
+                        <span class="read-time">📖 10 min read</span>
+                        <span class="author">By Dr. Amara Johnson</span>
+                        <span class="date">March 15, 2025</span>
+                    </div>
+                    <a href="blog/diabetes-diet-guide.html" class="btn-primary" data-i18n="blog.featured.read">Read Full Article</a>
+                </div>
+            </article>
+
+            <!-- Category Filters -->
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all" data-i18n="blog.filter.all">All</button>
+                <button class="filter-btn" data-filter="diabetes" data-i18n="blog.filter.diabetes">Diabetes</button>
+                <button class="filter-btn" data-filter="heart-health" data-i18n="blog.filter.heart">Heart Health</button>
+                <button class="filter-btn" data-filter="kidney" data-i18n="blog.filter.kidney">Kidney</button>
+                <button class="filter-btn" data-filter="gut-health" data-i18n="blog.filter.gut">Gut Health</button>
+                <button class="filter-btn" data-filter="cancer" data-i18n="blog.filter.cancer">Cancer</button>
+                <button class="filter-btn" data-filter="weight-loss" data-i18n="blog.filter.weight">Weight Loss</button>
+                <button class="filter-btn" data-filter="african-foods" data-i18n="blog.filter.african">African Foods</button>
+                <button class="filter-btn" data-filter="recipes" data-i18n="blog.filter.recipes">Recipes</button>
+                <button class="filter-btn" data-filter="research" data-i18n="blog.filter.research">Research</button>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Post 1 -->
+                <article class="blog-card" data-category="heart-health">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #E76F51 0%, #FEFAE0 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🫘</div>
+                    <span class="category-tag">Heart Health</span>
+                    <h3>DASH Diet Meets African Cuisine: Lower Blood Pressure Without Losing Flavor</h3>
+                    <p class="excerpt">Learn how to adapt the proven DASH diet framework to your favorite African dishes. We show you how to reduce sodium while keeping every meal delicious and culturally meaningful.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 22, 2025</span>
+                        <span class="read-time">8 min</span>
+                    </div>
+                    <span class="author-card">By Kwesi Mensah, RD</span>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-card" data-category="gut-health">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #2D6A4F 0%, #FEFAE0 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🥒</div>
+                    <span class="category-tag">Gut Health</span>
+                    <h3>7 West African Superfoods That Heal Your Gut</h3>
+                    <p class="excerpt">Explore traditional West African staples that are nutritional powerhouses for digestive health. From fermented grains to healing herbs, discover what your ancestors knew about gut health.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 20, 2025</span>
+                        <span class="read-time">7 min</span>
+                    </div>
+                    <span class="author-card">By Dr. Amara Johnson</span>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-card" data-category="diabetes">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #E76F51 0%, #2D6A4F 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🌾</div>
+                    <span class="category-tag">Diabetes</span>
+                    <h3>Understanding the Glycemic Index for Traditional African Dishes</h3>
+                    <p class="excerpt">Not all carbs are created equal. Learn how to choose and prepare traditional African grains and starches to keep your blood sugar stable while enjoying the foods you love.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 18, 2025</span>
+                        <span class="read-time">9 min</span>
+                    </div>
+                    <span class="author-card">By Kofi Asante, MS</span>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="blog-card" data-category="kidney">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #FEFAE0 0%, #2D6A4F 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🥕</div>
+                    <span class="category-tag">Kidney</span>
+                    <h3>Kidney-Friendly Versions of 10 West African Classics</h3>
+                    <p class="excerpt">Managing kidney disease doesn't mean abandoning your heritage. Discover how to modify sodium, potassium, and phosphorus content in traditional favorites while keeping authentic flavors intact.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 16, 2025</span>
+                        <span class="read-time">11 min</span>
+                    </div>
+                    <span class="author-card">By Dr. Amara Johnson</span>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="blog-card" data-category="cancer">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #2D6A4F 0%, #E76F51 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🫐</div>
+                    <span class="category-tag">Cancer</span>
+                    <h3>The Anti-Cancer Kitchen: Foods That Fight Inflammation</h3>
+                    <p class="excerpt">Emerging research shows that certain foods have powerful anti-inflammatory and anti-cancer properties. Learn which ingredients to prioritize in your kitchen and how to use them daily.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 14, 2025</span>
+                        <span class="read-time">10 min</span>
+                    </div>
+                    <span class="author-card">By Dr. Lisa Chen, PhD</span>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="blog-card" data-category="recipes">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #E76F51 0%, #FEFAE0 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🍚</div>
+                    <span class="category-tag">Recipes</span>
+                    <h3>Thieboudienne Reimagined: A Diabetic-Friendly Senegalese Classic</h3>
+                    <p class="excerpt">This beloved West African dish can be adapted for blood sugar management. We share our favorite swaps for rice, protein, and preparation methods that keep tradition alive.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 12, 2025</span>
+                        <span class="read-time">6 min</span>
+                    </div>
+                    <span class="author-card">By Chef Aminata Diallo</span>
+                </article>
+
+                <!-- Post 7 -->
+                <article class="blog-card" data-category="diabetes">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #FEFAE0 0%, #2D6A4F 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🥬</div>
+                    <span class="category-tag">Diabetes</span>
+                    <h3>Okra: The African Superfood for Blood Sugar Control</h3>
+                    <p class="excerpt">Often overlooked, okra is a nutritional powerhouse for diabetes management. Discover its unique compounds, best cooking methods, and how to incorporate it into every meal.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 10, 2025</span>
+                        <span class="read-time">5 min</span>
+                    </div>
+                    <span class="author-card">By Dr. Amara Johnson</span>
+                </article>
+
+                <!-- Post 8 -->
+                <article class="blog-card" data-category="heart-health">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #2D6A4F 0%, #FEFAE0 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">❤️</div>
+                    <span class="category-tag">Heart Health</span>
+                    <h3>Managing Hypertension in the African Diaspora: Why Standard Advice Often Fails</h3>
+                    <p class="excerpt">One-size-fits-all nutrition advice doesn't work for our communities. Explore the cultural, genetic, and socioeconomic factors affecting blood pressure in African diaspora populations.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 8, 2025</span>
+                        <span class="read-time">12 min</span>
+                    </div>
+                    <span class="author-card">By Dr. Samuel Okonkwo, MD</span>
+                </article>
+
+                <!-- Post 9 -->
+                <article class="blog-card" data-category="recipes">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #E76F51 0%, #2D6A4F 100%); display: flex; align-items: center; justify-content: center; font-size: 3em;">🍛</div>
+                    <span class="category-tag">Recipes</span>
+                    <h3>Jollof Rice, Made Healthier: 5 Nutritional Upgrades</h3>
+                    <p class="excerpt">Love jollof? You don't have to give it up. Learn simple ingredient swaps and cooking techniques that reduce the glycemic load while enhancing flavor and nutrition.</p>
+                    <div class="post-meta-card">
+                        <span class="date">March 6, 2025</span>
+                        <span class="read-time">7 min</span>
+                    </div>
+                    <span class="author-card">By Chef Aminata Diallo</span>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-link" data-i18n="blog.pagination.prev">← Previous</a>
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <a href="#" class="page-link" data-i18n="blog.pagination.next">Next →</a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="blog-sidebar">
+            <!-- Newsletter Signup -->
+            <div class="sidebar-card newsletter-card">
+                <h3 data-i18n="blog.sidebar.newsletter.title">Get Weekly Nutrition Tips</h3>
+                <p data-i18n="blog.sidebar.newsletter.desc">Evidence-based insights delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required data-i18n-placeholder="blog.sidebar.newsletter.placeholder">
+                    <button type="submit" class="btn-primary" data-i18n="blog.sidebar.newsletter.btn">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Popular Posts -->
+            <div class="sidebar-card">
+                <h3 data-i18n="blog.sidebar.popular.title">Popular Posts</h3>
+                <ul class="popular-list">
+                    <li><a href="#">The Complete Guide to the Diabetic Diet in 2025</a></li>
+                    <li><a href="#">7 West African Superfoods That Heal Your Gut</a></li>
+                    <li><a href="#">Managing Hypertension in the African Diaspora</a></li>
+                    <li><a href="#">Okra: The African Superfood for Blood Sugar Control</a></li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-card">
+                <h3 data-i18n="blog.sidebar.categories.title">Categories</h3>
+                <ul class="category-list">
+                    <li><a href="#">Diabetes <span class="count">(12)</span></a></li>
+                    <li><a href="#">Heart Health <span class="count">(8)</span></a></li>
+                    <li><a href="#">Kidney <span class="count">(5)</span></a></li>
+                    <li><a href="#">Gut Health <span class="count">(7)</span></a></li>
+                    <li><a href="#">Cancer <span class="count">(6)</span></a></li>
+                    <li><a href="#">Recipes <span class="count">(15)</span></a></li>
+                    <li><a href="#">African Foods <span class="count">(9)</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Tags Cloud -->
+            <div class="sidebar-card">
+                <h3 data-i18n="blog.sidebar.tags.title">Popular Tags</h3>
+                <div class="tags-cloud">
+                    <a href="#" class="tag">blood sugar</a>
+                    <a href="#" class="tag">fiber</a>
+                    <a href="#" class="tag">African cuisine</a>
+                    <a href="#" class="tag">inflammation</a>
+                    <a href="#" class="tag">meal planning</a>
+                    <a href="#" class="tag">sodium</a>
+                    <a href="#" class="tag">whole grains</a>
+                    <a href="#" class="tag">superfoods</a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:12px;">
+          <div class="logo-icon">🌿</div>
+          Nutri<span>Life</span>
+        </div>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;max-width:240px;" data-i18n="footer.tagline">
+          Personalized nutrition coaching for better health, culturally adapted and evidence-based.
+        </p>
+        <div style="margin-top:16px;display:flex;gap:10px;">
+          <a href="contact.html" class="btn btn-amber btn-sm" data-i18n="btn.book">Book Session</a>
+          <a href="downloads.html" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;" data-i18n="btn.free.guide">Free Guide</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <a href="coaching.html">1:1 Coaching</a>
+        <a href="program.html">Group Program</a>
+        <a href="masterclass.html">Masterclass</a>
+        <a href="training.html">Online Academy</a>
+        <a href="services.html">All Services</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.resources">Resources</h4>
+        <a href="nutrition-app.html">🤖 Nutrition App</a>
+        <a href="recipes.html">Recipe Portal</a>
+        <a href="nutrition-data.html">📊 Nutrition Database</a>
+        <a href="downloads.html">Free Downloads</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Affiliate Program</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Medical Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copyright">© 2025 NutriLife Coaching. All rights reserved.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="lang-btn" data-set-lang="en" style="color:rgba(255,255,255,0.5);">EN</button>
+        <button class="lang-btn" data-set-lang="fr" style="color:rgba(255,255,255,0.5);">FR</button>
+        <button class="lang-btn" data-set-lang="es" style="color:rgba(255,255,255,0.5);">ES</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── COOKIE BANNER ── -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience. <a href="#" style="color:var(--green-light);">Learn more</a></p>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="decline-cookies" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:white;">Decline</button>
+    <button id="accept-cookies" class="btn btn-amber btn-sm">Accept</button>
+  </div>
+</div>
+
+<!-- ── SCROLL TO TOP ── -->
+<button class="scroll-top" id="scroll-top">↑</button>
+
+<script src="js/main.js"></script>
+</body>
+</html>

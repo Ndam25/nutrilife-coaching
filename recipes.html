@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse 300+ therapeutic recipes designed for diabetes, hypertension, kidney disease, heart health, and more. Filter by condition, cuisine, and dietary preference.">
+  <title>Recipe Portal — NutriLife Coaching</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <style>
+    .recipe-portal-hero {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      padding: 140px 0 60px;
+      text-align: center;
+    }
+    .filter-bar {
+      background: var(--white);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      margin: -40px auto 40px;
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+    }
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .filter-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-tag {
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 2px solid var(--cream-dark);
+      background: var(--cream);
+      color: var(--mid);
+      transition: var(--transition);
+    }
+    .filter-tag.active, .filter-tag:hover {
+      background: var(--green);
+      color: var(--white);
+      border-color: var(--green);
+    }
+    .recipe-count {
+      font-size: 0.9rem;
+      color: var(--light);
+      margin-bottom: 20px;
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--light);
+    }
+    .recipe-detail-modal .modal-body {
+      padding: 0;
+    }
+    .recipe-modal-header {
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      padding: 40px 32px;
+      text-align: center;
+      color: white;
+    }
+    .recipe-modal-header h2 { color: white; }
+    .recipe-modal-content { padding: 32px; }
+    .tab-nav {
+      display: flex;
+      gap: 4px;
+      border-bottom: 2px solid var(--cream-dark);
+      margin-bottom: 24px;
+    }
+    .tab-nav-btn {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tab-nav-btn.active {
+      color: var(--green);
+      border-bottom-color: var(--green);
+    }
+    .cuisine-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      margin: 4px;
+    }
+    @media (max-width: 768px) {
+      .filter-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><div class="logo-icon">🌿</div>Nutri<span>Life</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown"><a href="services.html" data-i18n="nav.services">Services ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="coaching.html">🧑‍⚕️ 1:1 Coaching</a>
+            <a href="program.html">👥 Group Program</a>
+            <a href="masterclass.html">🎓 Masterclass</a>
+            <a href="training.html">📚 Online Training</a>
+          </div>
+        </li>
+        <li class="nav-dropdown"><a href="recipes.html" class="active" data-i18n="nav.recipes">Recipes ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="recipes.html">🔍 Recipe Portal</a>
+            <a href="nutrition-app.html">🤖 AI Generator</a>
+            <a href="nutrition-data.html">📊 Nutrition Database</a>
+          </div>
+        </li>
+        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="downloads.html" data-i18n="nav.downloads">📥 Free Resources</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="fr">FR</button>
+          <button class="lang-btn" data-set-lang="es">ES</button>
+        </div>
+        <a href="nutrition-app.html" class="btn btn-primary btn-sm nav-cta">🤖 Nutrition App</a>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <button class="mobile-close" style="position:absolute;top:24px;right:24px;font-size:1.6rem;background:none;cursor:pointer;">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="about.html">👤 About</a></li>
+    <li><a href="services.html">⭐ Services</a></li>
+    <li><a href="recipes.html">🍽️ Recipes</a></li>
+    <li><a href="nutrition-app.html">🤖 Nutrition App</a></li>
+    <li><a href="blog.html">📝 Blog</a></li>
+    <li><a href="downloads.html">📥 Free Resources</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+  </ul>
+  <div style="margin-top:24px;display:flex;gap:8px;">
+    <button class="lang-btn" data-set-lang="en">EN</button>
+    <button class="lang-btn" data-set-lang="fr">FR</button>
+    <button class="lang-btn" data-set-lang="es">ES</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="recipe-portal-hero">
+  <div class="container" style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap-reverse;">
+    <div style="flex:1;min-width:280px;text-align:center;">
+      <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--green-pale);">300+ Therapeutic Recipes</span>
+      <h1 style="color:white;margin:16px 0;" data-i18n="recipes.page.title">The Healing Recipe Portal</h1>
+      <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;max-width:600px;margin:0 auto 32px;" data-i18n="recipes.page.subtitle">Discover delicious, medically-tailored recipes designed for your health condition — drawing from West African, Caribbean, Mediterranean, and global culinary traditions.</p>
+      <a href="nutrition-app.html" class="btn btn-amber btn-lg">🤖 Generate a Custom Recipe with AI</a>
+    </div>
+    <div style="text-align:center;">
+      <img src="images/nano-banana-chef.svg" alt="Nano Banana Chef"
+           style="width:200px;height:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));animation:nanoBounce 3s ease-in-out infinite;"/>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="container" style="padding-top:0;">
+  <div class="filter-bar fade-in">
+    <div class="filter-grid">
+      <div class="search-bar">
+        <input type="text" id="recipe-search-input" placeholder="Search recipes, ingredients, cuisines…" data-i18n-placeholder="recipes.search.placeholder" />
+        <button type="button">🔍 Search</button>
+      </div>
+      <select class="form-control" id="sort-select" style="max-width:180px;">
+        <option value="all">Sort: All</option>
+        <option value="newest">Newest First</option>
+        <option value="popular">Most Popular</option>
+        <option value="quickest">Quickest</option>
+      </select>
+    </div>
+    <div class="filter-tags" id="condition-filters">
+      <button class="filter-tag active" data-filter="all" data-i18n="recipes.filter.all">🍽️ All Recipes</button>
+      <button class="filter-tag" data-filter="diabetes" data-i18n="recipes.filter.diabetes">🩸 Diabetes</button>
+      <button class="filter-tag" data-filter="hypertension" data-i18n="cond.hypertension.title">❤️ Hypertension</button>
+      <button class="filter-tag" data-filter="kidney" data-i18n="recipes.filter.kidney">🫘 Kidney Care</button>
+      <button class="filter-tag" data-filter="heart" data-i18n="recipes.filter.heart">🫀 Heart Health</button>
+      <button class="filter-tag" data-filter="digestive" data-i18n="recipes.filter.gut">🌿 Gut Health</button>
+      <button class="filter-tag" data-filter="cholesterol">💊 Cholesterol</button>
+      <button class="filter-tag" data-filter="cancer" data-i18n="recipes.filter.cancer">🎗️ Cancer Support</button>
+      <button class="filter-tag" data-filter="general">💪 General Wellness</button>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="filter-tags" id="cuisine-filters">
+        <button class="filter-tag active" data-filter="all" onclick="filterByCuisine(this)">🌍 All Cuisines</button>
+        <button class="filter-tag" data-filter="west-african" onclick="filterByCuisine(this)">🌍 West African</button>
+        <button class="filter-tag" data-filter="caribbean" onclick="filterByCuisine(this)">🏝️ Caribbean</button>
+        <button class="filter-tag" data-filter="mediterranean" onclick="filterByCuisine(this)">🫒 Mediterranean</button>
+        <button class="filter-tag" data-filter="american" onclick="filterByCuisine(this)">🗽 American</button>
+        <button class="filter-tag" data-filter="asian" onclick="filterByCuisine(this)">🥢 Asian</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECIPE GRID -->
+<section style="padding:0 0 80px;">
+  <div class="container">
+    <p class="recipe-count" id="recipe-count">Showing <strong>36</strong> recipes</p>
+    <div class="recipe-grid" id="recipe-grid"></div>
+  </div>
+</section>
+
+<!-- AI CTA -->
+<section style="background:var(--green-dark);padding:80px 0;text-align:center;">
+  <div class="container fade-in">
+    <h2 style="color:white;margin-bottom:16px;">Don't See Your Favorite Dish?</h2>
+    <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;margin-bottom:32px;">Our AI Nutrition App can generate any recipe — adapted for YOUR health condition and cultural preferences.</p>
+    <a href="nutrition-app.html" class="btn btn-amber btn-lg">🤖 Generate My Custom Recipe</a>
+  </div>
+</section>
+
+<!-- RECIPE DETAIL MODAL -->
+<div class="modal-overlay recipe-detail-modal" id="recipe-modal">
+  <div class="modal" style="max-width:700px;">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:12px;"><div class="logo-icon">🌿</div>Nutri<span>Life</span></div>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;max-width:240px;" data-i18n="footer.tagline">Personalized nutrition coaching for better health, culturally adapted and evidence-based.</p>
+        <div style="margin-top:16px;display:flex;gap:10px;">
+          <a href="contact.html" class="btn btn-amber btn-sm">Book Session</a>
+          <a href="downloads.html" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;">Free Guide</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4 data-i18n="footer.services">Services</h4><a href="coaching.html">1:1 Coaching</a><a href="program.html">Group Program</a><a href="masterclass.html">Masterclass</a><a href="training.html">Online Academy</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.resources">Resources</h4><a href="nutrition-app.html">🤖 Nutrition App</a><a href="recipes.html">Recipe Portal</a><a href="nutrition-data.html">📊 Nutrition Database</a><a href="downloads.html">Free Downloads</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.company">Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copyright">© 2025 NutriLife Coaching. All rights reserved.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="lang-btn" data-set-lang="en" style="color:rgba(255,255,255,0.5);">EN</button>
+        <button class="lang-btn" data-set-lang="fr" style="color:rgba(255,255,255,0.5);">FR</button>
+        <button class="lang-btn" data-set-lang="es" style="color:rgba(255,255,255,0.5);">ES</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience.</p>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="decline-cookies" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:white;">Decline</button>
+    <button id="accept-cookies" class="btn btn-amber btn-sm">Accept</button>
+  </div>
+</div>
+<button class="scroll-top" id="scroll-top">↑</button>
+
+<script src="js/main.js"></script>
+<script>
+// ── RECIPE DATABASE ──
+const RECIPES = [
+  // DIABETES
+  { id:1, name:"Diabetic-Friendly Thieboudienne", emoji:"🐟", condition:"diabetes", cuisine:"west-african", time:"45 min", servings:4, difficulty:"Medium", kcal:380, protein:28, carbs:42, fat:12, fiber:6, tags:"diabetes west-african fish rice low-glycemic", desc:"A traditional Senegalese fish & rice dish adapted with brown rice, reduced sodium, and added vegetables for blood sugar control.", benefits:"Low glycemic index. High fiber. Omega-3 fatty acids.", ingredients:[{item:"Brown rice",qty:"1½ cups"},{item:"White sea bass or snapper",qty:"400g"},{item:"Tomato paste (no salt)",qty:"2 tbsp"},{item:"Cabbage",qty:"½ head, wedged"},{item:"Carrots",qty:"2, sliced"},{item:"Cassava (small portion)",qty:"150g"},{item:"Eggplant",qty:"1 small"},{item:"Okra",qty:"8 pods"},{item:"Onion",qty:"1 large"},{item:"Garlic",qty:"4 cloves"},{item:"Olive oil",qty:"2 tbsp"},{item:"Bay leaf, thyme",qty:"to taste"},{item:"Low-sodium fish broth",qty:"2 cups"}], steps:["Marinate fish with garlic, herbs, and 1 tsp olive oil for 20 min.","Sauté onion in olive oil until golden. Add garlic and tomato paste. Cook 5 min.","Add vegetables and broth. Simmer 15 min.","Add brown rice and fish. Cover and cook 20 min until rice absorbs liquid.","Rest 5 min before serving."] },
+  { id:2, name:"Okra & Tomato Stew (Diabetic)", emoji:"🌿", condition:"diabetes", cuisine:"west-african", time:"25 min", servings:4, difficulty:"Easy", kcal:145, protein:8, carbs:18, fat:5, fiber:7, tags:"diabetes west-african vegetarian low-glycemic gut-health", desc:"Okra is a blood sugar superstar — its soluble fiber slows glucose absorption. This quick stew pairs beautifully with cauliflower rice.", benefits:"Soluble fiber lowers post-meal blood sugar spike. Anti-inflammatory.", ingredients:[{item:"Fresh okra",qty:"400g, sliced"},{item:"Canned tomatoes (no salt)",qty:"1 can 400g"},{item:"Red onion",qty:"1, diced"},{item:"Bell pepper",qty:"1, chopped"},{item:"Garlic",qty:"3 cloves"},{item:"Olive oil",qty:"1 tbsp"},{item:"Smoked paprika",qty:"1 tsp"},{item:"Cumin",qty:"½ tsp"},{item:"Fresh ginger",qty:"1 inch, grated"},{item:"Salt & pepper",qty:"to taste"}], steps:["Heat oil in a pan. Sauté onion and garlic 3 min.","Add ginger, paprika, and cumin. Cook 1 min.","Add tomatoes and bell pepper. Simmer 10 min.","Add okra and cook 8-10 min until tender but not slimy.","Season and serve with cauliflower rice or whole grain bread."] },
+  { id:3, name:"Lentil & Spinach Soup", emoji:"🥣", condition:"diabetes", cuisine:"mediterranean", time:"30 min", servings:4, difficulty:"Easy", kcal:220, protein:14, carbs:32, fat:4, fiber:12, tags:"diabetes mediterranean vegetarian soup low-glycemic", desc:"High-protein, high-fiber lentil soup with spinach — a Mediterranean classic that keeps blood sugar stable for hours.", benefits:"Lentils have glycemic index of 29. Loaded with iron and folate.", ingredients:[{item:"Red lentils",qty:"1½ cups"},{item:"Fresh spinach",qty:"200g"},{item:"Onion",qty:"1, diced"},{item:"Garlic",qty:"4 cloves"},{item:"Cumin",qty:"2 tsp"},{item:"Turmeric",qty:"1 tsp"},{item:"Lemon juice",qty:"2 tbsp"},{item:"Olive oil",qty:"1 tbsp"},{item:"Vegetable broth (low sodium)",qty:"1.5L"}], steps:["Sauté onion in olive oil until translucent.","Add garlic, cumin, turmeric. Cook 1 min.","Add rinsed lentils and broth. Bring to boil, simmer 20 min.","Add spinach and lemon juice. Cook 2 min.","Season and serve. Optional: blend half for creamier texture."] },
+  { id:4, name:"Cauliflower Jollof Rice", emoji:"🍚", condition:"diabetes", cuisine:"west-african", time:"35 min", servings:4, difficulty:"Medium", kcal:165, protein:6, carbs:22, fat:8, fiber:8, tags:"diabetes west-african vegetarian low-carb low-glycemic", desc:"The beloved West African Jollof Rice reimagined with cauliflower — same vibrant flavors, dramatically fewer carbs and calories.", benefits:"70% fewer carbohydrates than traditional version. Loaded with vitamin C and antioxidants.", ingredients:[{item:"Cauliflower (large head)",qty:"1, riced"},{item:"Tomato puree",qty:"200g"},{item:"Red bell peppers",qty:"2"},{item:"Scotch bonnet pepper (½)",qty:"to taste"},{item:"Onion",qty:"1 large"},{item:"Garlic",qty:"4 cloves"},{item:"Bay leaves",qty:"2"},{item:"Thyme",qty:"1 tsp"},{item:"Smoked paprika",qty:"2 tsp"},{item:"Low-sodium chicken/veggie stock",qty:"½ cup"},{item:"Olive oil",qty:"2 tbsp"}], steps:["Blend tomatoes, peppers, and half the onion into a smooth paste.","Sauté remaining onion in oil until golden. Add blended tomato paste.","Cook tomato mixture 15 min on medium, stirring until darkened and reduced.","Add stock, spices, and bay leaves. Cook 5 more min.","Add riced cauliflower. Stir well, cover and cook 8-10 min.","Fluff and serve as you would rice."] },
+
+  // HYPERTENSION
+  { id:5, name:"DASH Grilled Salmon with Herbs", emoji:"🐟", condition:"hypertension", cuisine:"american", time:"20 min", servings:2, difficulty:"Easy", kcal:420, protein:38, carbs:5, fat:28, fiber:2, tags:"hypertension american heart fish omega3 low-sodium", desc:"Omega-3 rich salmon with a vibrant herb crust — one of the most powerful foods for lowering blood pressure naturally.", benefits:"Omega-3s reduce inflammation and lower BP. Potassium-rich. No added sodium.", ingredients:[{item:"Salmon fillets",qty:"2 × 180g"},{item:"Fresh dill",qty:"2 tbsp"},{item:"Fresh parsley",qty:"2 tbsp"},{item:"Garlic",qty:"2 cloves, minced"},{item:"Lemon zest + juice",qty:"1 lemon"},{item:"Olive oil",qty:"1 tbsp"},{item:"Black pepper",qty:"to taste"},{item:"Capers (rinsed, no salt)",qty:"1 tbsp"}], steps:["Mix herbs, garlic, lemon zest, capers, and olive oil.","Press herb mixture onto salmon.","Grill or bake at 200°C for 12-15 min.","Serve with steamed vegetables and quinoa."] },
+  { id:6, name:"Egusi Soup (Low-Sodium)", emoji:"🌰", condition:"hypertension", cuisine:"west-african", time:"50 min", servings:6, difficulty:"Hard", kcal:285, protein:18, carbs:12, fat:20, fiber:5, tags:"hypertension west-african low-sodium heart traditional", desc:"Nigeria's iconic egusi melon seed soup — traditionally high in sodium but reformulated here without salt cubes, using herbs and natural flavors.", benefits:"Egusi seeds are rich in magnesium (key for BP control). No palm oil version uses heart-healthy fat.", ingredients:[{item:"Egusi (ground melon seeds)",qty:"200g"},{item:"Leafy greens (ugu or spinach)",qty:"300g"},{item:"Lean beef or turkey",qty:"300g"},{item:"Tomatoes",qty:"3, blended"},{item:"Red bell pepper",qty:"2, blended"},{item:"Onion",qty:"1 large"},{item:"Garlic",qty:"4 cloves"},{item:"Olive oil (no palm oil)",qty:"3 tbsp"},{item:"Crayfish (small amount)",qty:"1 tbsp"},{item:"Thyme, bay leaf",qty:"to taste"},{item:"No-sodium herb mix",qty:"as needed"}], steps:["Cook meat with onion, garlic, and herbs until tender. No salt cubes.","Sauté blended tomato mixture in olive oil 20 min until reduced.","Mix egusi with water to form a paste. Add to pot.","Cook egusi on medium 15 min, stirring to prevent burning.","Add meat and broth. Simmer 10 min. Add greens and crayfish.","Cook 5 more min. Serve with fufu, pounded yam, or whole-grain swallow."] },
+  { id:7, name:"Beet & Walnut Salad", emoji:"🥗", condition:"hypertension", cuisine:"mediterranean", time:"15 min", servings:4, difficulty:"Easy", kcal:195, protein:6, carbs:18, fat:13, fiber:4, tags:"hypertension mediterranean vegetarian salad low-sodium", desc:"Beets are nature's blood pressure medication — loaded with nitrates that dilate blood vessels. Combined with heart-healthy walnuts.", benefits:"Dietary nitrates in beets lower systolic BP by 4-10 mmHg within hours.", ingredients:[{item:"Roasted beets",qty:"4 medium"},{item:"Walnuts",qty:"50g, toasted"},{item:"Arugula",qty:"100g"},{item:"Goat cheese (low-sodium)",qty:"50g"},{item:"Orange",qty:"1, segmented"},{item:"Olive oil",qty:"2 tbsp"},{item:"Balsamic vinegar",qty:"1 tbsp"},{item:"Honey",qty:"1 tsp"},{item:"Black pepper",qty:"to taste"}], steps:["Roast beets at 190°C for 45 min (or use pre-roasted).","Slice beets and arrange on arugula.","Scatter orange segments, walnuts, and crumbled goat cheese.","Drizzle olive oil, balsamic, and honey. Season with pepper."] },
+
+  // KIDNEY
+  { id:8, name:"Kidney-Friendly Chicken Rice Bowl", emoji:"🍗", condition:"kidney", cuisine:"american", time:"30 min", servings:4, difficulty:"Easy", kcal:340, protein:26, carbs:38, fat:8, fiber:2, tags:"kidney american low-potassium low-phosphorus low-sodium", desc:"A satisfying rice bowl with leached vegetables and controlled protein — designed to reduce kidney workload while providing essential nutrients.", benefits:"Low potassium (<200mg). Low phosphorus. Controlled protein (20-25g per serving).", ingredients:[{item:"White rice (low-potassium)",qty:"1 cup"},{item:"Chicken breast",qty:"300g, sliced"},{item:"Cabbage",qty:"1 cup, shredded"},{item:"Cauliflower",qty:"1 cup, florets"},{item:"Red bell pepper",qty:"½, sliced"},{item:"Garlic oil",qty:"1 tbsp"},{item:"Lemon juice",qty:"1 tbsp"},{item:"Dried herbs (no salt)",qty:"1 tsp"},{item:"Black pepper",qty:"to taste"}], steps:["Soak and leach cauliflower in water 2 hours before cooking (reduces potassium).","Cook white rice as directed. Set aside.","Grill chicken with garlic oil, herbs, and pepper. No salt.","Stir-fry cabbage, leached cauliflower, and bell pepper 5 min.","Assemble bowl: rice, chicken, vegetables. Drizzle lemon."] },
+  { id:9, name:"Renal-Safe Fufu & Clear Okro Soup", emoji:"🥣", condition:"kidney", cuisine:"west-african", time:"40 min", servings:4, difficulty:"Medium", kcal:295, protein:14, carbs:44, fat:7, fiber:5, tags:"kidney west-african low-potassium low-phosphorus traditional", desc:"A kidney-safe version of the West African classic — using fufu with leached cassava and a clear okro broth without high-phosphorus ingredients.", benefits:"Modified for CKD stages 3-4. Reduced potassium through food leaching. Omits high-phosphorus crayfish.", ingredients:[{item:"Cassava fufu (leached)",qty:"500g"},{item:"Fresh okra",qty:"300g, sliced"},{item:"Lean beef (small amount)",qty:"150g"},{item:"Low-sodium broth",qty:"2 cups"},{item:"Onion",qty:"½, diced"},{item:"Garlic",qty:"2 cloves"},{item:"Palm-free herb oil",qty:"1 tbsp"},{item:"Uziza leaves (or spinach)",qty:"50g"},{item:"Black pepper, thyme",qty:"to taste"}], steps:["Soak cassava fufu 24h, changing water twice (reduces potassium).","Boil meat with onion and garlic. Keep broth. Shred meat.","Add okra to broth. Cook 5 min until slightly thickened.","Add shredded meat, herbs, and leafy greens. Cook 3 min.","Form fufu portions. Serve with warm okro soup."] },
+
+  // HEART HEALTH
+  { id:10, name:"Grilled Mackerel with Garlic & Lime", emoji:"🐡", condition:"heart", cuisine:"west-african", time:"25 min", servings:2, difficulty:"Easy", kcal:395, protein:34, carbs:4, fat:27, fiber:1, tags:"heart west-african fish omega3 anti-inflammatory", desc:"Mackerel is one of the richest sources of heart-protective omega-3 fatty acids. This garlic-lime version brings African coastal flavors.", benefits:"Highest EPA/DHA content of any fish. Reduces triglycerides by 15-30%. Anti-arrhythmic.", ingredients:[{item:"Whole mackerel",qty:"2 (or fillets)"},{item:"Garlic",qty:"5 cloves, minced"},{item:"Lime juice",qty:"2 limes"},{item:"Fresh ginger",qty:"1 inch, grated"},{item:"Cayenne pepper",qty:"¼ tsp"},{item:"Olive oil",qty:"1 tbsp"},{item:"Fresh cilantro/parsley",qty:"bunch"},{item:"Scotch bonnet",qty:"optional, to taste"}], steps:["Score fish deeply on both sides. Mix garlic, lime, ginger, cayenne.","Marinate fish 30 min minimum.","Grill on high heat 6-8 min per side until skin is charred.","Serve with grilled vegetables and a side salad."] },
+  { id:11, name:"Mediterranean Stuffed Peppers", emoji:"🫑", condition:"heart", cuisine:"mediterranean", time:"50 min", servings:4, difficulty:"Medium", kcal:285, protein:16, carbs:35, fat:10, fiber:7, tags:"heart mediterranean vegetarian anti-inflammatory cholesterol", desc:"Colorful bell peppers stuffed with quinoa, chickpeas, and herbs — a nutritional powerhouse for heart and cholesterol management.", benefits:"Quinoa's complete protein. Chickpeas lower LDL cholesterol. Lycopene from peppers.", ingredients:[{item:"Bell peppers (mixed colors)",qty:"4 large"},{item:"Quinoa",qty:"½ cup, cooked"},{item:"Chickpeas",qty:"1 can, drained"},{item:"Cherry tomatoes",qty:"1 cup"},{item:"Fresh parsley",qty:"large bunch"},{item:"Feta cheese (low-sodium)",qty:"50g"},{item:"Olive oil",qty:"2 tbsp"},{item:"Garlic",qty:"3 cloves"},{item:"Lemon juice",qty:"2 tbsp"},{item:"Dried oregano",qty:"1 tsp"}], steps:["Halve and deseed peppers. Brush with olive oil. Bake at 190°C 15 min.","Mix quinoa, chickpeas, tomatoes, herbs, garlic, lemon, and feta.","Fill pepper halves with quinoa mixture.","Bake 20 more min until peppers are tender and filling is golden."] },
+
+  // DIGESTIVE / GUT
+  { id:12, name:"Probiotic Yogurt Parfait with Baobab", emoji:"🫐", condition:"digestive", cuisine:"west-african", time:"10 min", servings:2, difficulty:"Easy", kcal:220, protein:12, carbs:32, fat:5, fiber:8, tags:"digestive west-african gut-health probiotic breakfast", desc:"Greek yogurt layered with baobab powder, berries, and flaxseed — a gut microbiome powerhouse combining African superfood baobab with proven probiotics.", benefits:"Baobab has highest antioxidant content of any fruit. Prebiotic fiber feeds good bacteria.", ingredients:[{item:"Greek yogurt (plain, live cultures)",qty:"300g"},{item:"Baobab powder",qty:"2 tsp"},{item:"Mixed berries",qty:"1 cup"},{item:"Ground flaxseed",qty:"2 tbsp"},{item:"Raw honey",qty:"1 tbsp"},{item:"Granola (low-sugar)",qty:"¼ cup"},{item:"Chia seeds",qty:"1 tbsp"}], steps:["Layer yogurt, berries, and granola in glasses.","Sprinkle baobab powder, flaxseed, and chia seeds.","Drizzle honey. Eat immediately or refrigerate overnight."] },
+  { id:13, name:"Fermented Kefir Smoothie", emoji:"🥤", condition:"digestive", cuisine:"american", time:"5 min", servings:1, difficulty:"Easy", kcal:185, protein:11, carbs:28, fat:3, fiber:5, tags:"digestive gut-health probiotic smoothie quick", desc:"A powerful gut-healing smoothie with kefir (10-12 strains of probiotics), banana (prebiotic), and spinach.", benefits:"Kefir has 3x more probiotics than yogurt. Helps IBS, bloating, and gut permeability.", ingredients:[{item:"Kefir (plain)",qty:"200ml"},{item:"Banana (frozen)",qty:"1"},{item:"Spinach",qty:"handful"},{item:"Ginger (fresh)",qty:"1 cm"},{item:"Turmeric",qty:"¼ tsp"},{item:"Flaxseeds",qty:"1 tbsp"},{item:"Honey",qty:"1 tsp"}], steps:["Add all ingredients to blender.","Blend until smooth.","Drink immediately for maximum probiotic benefit."] },
+  { id:14, name:"Bone Broth & Vegetable Soup", emoji:"🍲", condition:"digestive", cuisine:"american", time:"4 hrs", servings:8, difficulty:"Easy", kcal:95, protein:9, carbs:8, fat:2, fiber:3, tags:"digestive gut-health IBS anti-inflammatory healing", desc:"Long-simmered bone broth is rich in collagen and gelatin that literally heals and seals a leaky gut. Gentle for sensitive digestive systems.", benefits:"Collagen repairs gut lining. Glycine reduces inflammation. Ideal for IBS flare-ups.", ingredients:[{item:"Beef/chicken bones",qty:"1 kg"},{item:"Apple cider vinegar",qty:"2 tbsp"},{item:"Carrots",qty:"3"},{item:"Celery",qty:"4 stalks"},{item:"Onion",qty:"1"},{item:"Garlic",qty:"6 cloves"},{item:"Bay leaves",qty:"3"},{item:"Parsley",qty:"bunch"},{item:"Black peppercorns",qty:"1 tsp"},{item:"Zucchini, kale",qty:"for soup"}], steps:["Place bones in pot with vinegar, vegetables, and herbs.","Cover with cold water. Bring to slow boil. Skim foam.","Reduce to bare simmer. Cook 3-4 hours (chicken) or 6-8 hours (beef).","Strain broth. Add fresh vegetables and simmer 20 min for soup.","Season minimally. Serve warm."] },
+
+  // CHOLESTEROL
+  { id:15, name:"Oat & Berry Power Breakfast", emoji:"🫐", condition:"cholesterol", cuisine:"american", time:"10 min", servings:2, difficulty:"Easy", kcal:320, protein:10, carbs:55, fat:8, fiber:12, tags:"cholesterol american heart vegetarian breakfast fiber", desc:"Steel-cut oats with mixed berries and walnuts — the beta-glucan in oats directly lowers LDL cholesterol by binding to bile acids.", benefits:"Beta-glucan in oats lowers LDL by 5-10%. Polyphenols in berries reduce oxidized LDL.", ingredients:[{item:"Steel-cut oats",qty:"½ cup"},{item:"Mixed berries (fresh/frozen)",qty:"1 cup"},{item:"Walnuts",qty:"30g"},{item:"Flaxseed (ground)",qty:"1 tbsp"},{item:"Cinnamon",qty:"½ tsp"},{item:"Plant milk or water",qty:"1.5 cups"},{item:"Maple syrup",qty:"1 tsp"}], steps:["Cook oats in milk or water 15 min (steel-cut) or 5 min (rolled).","Stir in cinnamon and flaxseed.","Top with berries, walnuts, and a drizzle of maple syrup."] },
+  { id:16, name:"Avocado & Legume Buddha Bowl", emoji:"🥑", condition:"cholesterol", cuisine:"mediterranean", time:"20 min", servings:2, difficulty:"Easy", kcal:485, protein:18, carbs:48, fat:26, fiber:16, tags:"cholesterol mediterranean vegetarian heart anti-inflammatory", desc:"A cholesterol-fighting bowl packed with avocado (monounsaturated fats), legumes (soluble fiber), and colorful vegetables.", benefits:"Monounsaturated fats raise HDL. Soluble fiber lowers LDL. Plant sterols compete with cholesterol absorption.", ingredients:[{item:"Chickpeas (roasted)",qty:"1 can"},{item:"Avocado",qty:"1, sliced"},{item:"Quinoa",qty:"½ cup, cooked"},{item:"Cherry tomatoes",qty:"1 cup"},{item:"Cucumber",qty:"½"},{item:"Red cabbage",qty:"¼, shredded"},{item:"Olive oil",qty:"2 tbsp"},{item:"Tahini",qty:"2 tbsp"},{item:"Lemon juice",qty:"2 tbsp"},{item:"Garlic",qty:"1 clove"}], steps:["Roast chickpeas at 200°C with olive oil and spices 25 min.","Prepare tahini dressing: tahini + lemon + garlic + water.","Assemble bowls with quinoa, vegetables, chickpeas, and avocado.","Drizzle with tahini dressing."] },
+
+  // CANCER SUPPORT
+  { id:17, name:"Turmeric Golden Milk Soup", emoji:"🍵", condition:"cancer", cuisine:"asian", time:"20 min", servings:4, difficulty:"Easy", kcal:145, protein:4, carbs:16, fat:8, fiber:3, tags:"cancer asian anti-inflammatory immune vegetarian soup", desc:"A warming, deeply anti-inflammatory soup combining turmeric, ginger, and black pepper — the combination dramatically increases curcumin bioavailability.", benefits:"Curcumin in turmeric inhibits cancer cell proliferation. Piperine from pepper increases absorption 2000%.", ingredients:[{item:"Butternut squash",qty:"500g, cubed"},{item:"Coconut milk",qty:"400ml"},{item:"Turmeric (fresh or powdered)",qty:"2 tsp"},{item:"Fresh ginger",qty:"2 inches"},{item:"Garlic",qty:"3 cloves"},{item:"Black pepper (crucial)",qty:"½ tsp"},{item:"Vegetable broth",qty:"500ml"},{item:"Lime juice",qty:"1 tbsp"},{item:"Olive oil",qty:"1 tbsp"}], steps:["Roast squash at 200°C 25 min until golden.","Sauté ginger and garlic in olive oil. Add turmeric and pepper.","Add squash, broth, and coconut milk. Simmer 10 min.","Blend until creamy. Add lime juice. Serve warm."] },
+  { id:18, name:"Broccoli & Garlic Stir-Fry", emoji:"🥦", condition:"cancer", cuisine:"asian", time:"15 min", servings:4, difficulty:"Easy", kcal:120, protein:6, carbs:14, fat:5, fiber:5, tags:"cancer asian anti-inflammatory vegetarian cruciferous", desc:"Cruciferous vegetables like broccoli contain sulforaphane — one of the most studied anti-cancer compounds in food science.", benefits:"Sulforaphane activates detoxification enzymes. Indole-3-carbinol blocks tumor growth pathways.", ingredients:[{item:"Broccoli",qty:"500g, florets"},{item:"Garlic",qty:"5 cloves, sliced"},{item:"Fresh ginger",qty:"1 inch"},{item:"Sesame oil",qty:"1 tbsp"},{item:"Low-sodium soy sauce",qty:"1 tbsp"},{item:"Lemon juice",qty:"1 tbsp"},{item:"Red pepper flakes",qty:"optional"},{item:"Sesame seeds",qty:"for garnish"}], steps:["Heat sesame oil in wok. Add garlic and ginger — cook 1 min.","Add broccoli on high heat. Stir-fry 5-6 min.","Add soy sauce and lemon juice. Toss well.","Garnish with sesame seeds. Serve with brown rice."] },
+
+  // GENERAL WELLNESS
+  { id:19, name:"Quinoa Tabbouleh Salad", emoji:"🥗", condition:"general", cuisine:"mediterranean", time:"20 min", servings:4, difficulty:"Easy", kcal:245, protein:9, carbs:34, fat:10, fiber:5, tags:"general mediterranean vegetarian salad healthy protein", desc:"A protein-rich twist on the classic Lebanese tabbouleh using quinoa instead of bulgur — complete protein with all essential amino acids.", benefits:"Complete protein source. High in magnesium, manganese, and B vitamins.", ingredients:[{item:"Quinoa",qty:"1 cup, cooked"},{item:"Fresh parsley",qty:"large bunch"},{item:"Fresh mint",qty:"small bunch"},{item:"Cherry tomatoes",qty:"200g, halved"},{item:"Cucumber",qty:"1, diced"},{item:"Spring onions",qty:"4"},{item:"Olive oil",qty:"3 tbsp"},{item:"Lemon juice",qty:"3 tbsp"},{item:"Salt & pepper",qty:"to taste"}], steps:["Cool cooked quinoa completely.","Finely chop parsley, mint, and spring onions.","Combine all ingredients. Toss with olive oil and lemon.","Adjust seasoning. Best served after 30 min rest."] },
+  { id:20, name:"Sweet Potato & Black Bean Tacos", emoji:"🌮", condition:"general", cuisine:"american", time:"30 min", servings:4, difficulty:"Easy", kcal:380, protein:14, carbs:58, fat:12, fiber:13, tags:"general american vegetarian tacos fiber weight-loss", desc:"Vibrant plant-based tacos with roasted sweet potato, black beans, and avocado crema — a complete meal rich in fiber and plant protein.", benefits:"High fiber promotes satiety. Sweet potato provides beta-carotene. Black beans stabilize blood sugar.", ingredients:[{item:"Sweet potatoes",qty:"2 large, cubed"},{item:"Black beans",qty:"1 can, drained"},{item:"Corn tortillas",qty:"8 small"},{item:"Avocado",qty:"2"},{item:"Lime",qty:"2"},{item:"Red cabbage",qty:"1 cup, shredded"},{item:"Jalapeño",qty:"1, sliced"},{item:"Cumin, smoked paprika",qty:"1 tsp each"},{item:"Olive oil",qty:"2 tbsp"},{item:"Fresh cilantro",qty:"bunch"}], steps:["Toss sweet potato cubes with oil, cumin, and paprika. Roast 25 min at 200°C.","Warm black beans with cumin in a pan.","Mash avocado with lime juice for crema.","Warm tortillas. Fill with sweet potato, beans, cabbage.","Top with avocado crema, jalapeño, and cilantro."] },
+  { id:21, name:"Moringa Leaf Green Smoothie", emoji:"🥤", condition:"general", cuisine:"west-african", time:"5 min", servings:2, difficulty:"Easy", kcal:175, protein:5, carbs:32, fat:3, fiber:4, tags:"general west-african smoothie immune moringa superfood", desc:"Moringa — the 'miracle tree' of West Africa — contains 7× more vitamin C than oranges and 2× more protein than yogurt. This smoothie is a nutritional explosion.", benefits:"Moringa: 90+ nutrients, 46 antioxidants. Anti-inflammatory. Energy-boosting. Immune-strengthening.", ingredients:[{item:"Moringa powder or fresh leaves",qty:"1 tsp (powder) or ½ cup leaves"},{item:"Banana",qty:"1"},{item:"Mango chunks",qty:"1 cup"},{item:"Coconut water",qty:"200ml"},{item:"Fresh lime juice",qty:"1 tbsp"},{item:"Ginger",qty:"½ inch"},{item:"Honey",qty:"1 tsp"}], steps:["Add all ingredients to blender.","Blend 45 seconds until completely smooth.","Drink immediately for maximum nutrient benefit."] },
+  { id:22, name:"Jollof Rice (Healthier Version)", emoji:"🍚", condition:"general", cuisine:"west-african", time:"60 min", servings:6, difficulty:"Medium", kcal:310, protein:8, carbs:56, fat:8, fiber:4, tags:"general west-african rice traditional healthy celebration", desc:"West Africa's most celebrated dish — upgraded with brown rice, reduced oil, and added vegetables for a nutritious version of the party staple.", benefits:"Brown rice adds 3x more fiber than white. Added vegetables provide vitamins and minerals.", ingredients:[{item:"Parboiled or brown rice",qty:"2 cups"},{item:"Canned tomatoes",qty:"800g"},{item:"Red bell peppers",qty:"3"},{item:"Onions",qty:"2 large"},{item:"Scotch bonnet",qty:"1 (optional)"},{item:"Chicken or vegetable stock (low-sodium)",qty:"2 cups"},{item:"Bay leaves",qty:"2"},{item:"Thyme, curry powder",qty:"1 tsp each"},{item:"Olive oil",qty:"2 tbsp"},{item:"Mixed vegetables (peas, carrots)",qty:"1 cup"},{item:"Fresh tomatoes",qty:"2"}], steps:["Blend canned tomatoes, peppers, and half onion. Set aside.","Heat oil. Fry remaining onion until golden.","Add blended tomato sauce. Fry 20 min until darker and less watery.","Add stock, spices, and bay leaves. Bring to boil.","Add rinsed rice. Stir once. Cover tightly. Cook 30 min on low.","Add vegetables in last 10 min. Fluff with fork and serve."] },
+  { id:23, name:"Mafé (West African Peanut Stew)", emoji:"🥜", condition:"general", cuisine:"west-african", time:"60 min", servings:6, difficulty:"Medium", kcal:420, protein:30, carbs:24, fat:24, fiber:5, tags:"general west-african peanut protein stew traditional", desc:"A deeply rich Senegalese/Malian groundnut stew — one of West Africa's most nutritious dishes, loaded with plant protein, healthy fats, and vegetables.", benefits:"Peanuts provide niacin, folate, and resveratrol. High protein and satiety. Rich in minerals.", ingredients:[{item:"Chicken thighs or beef",qty:"700g"},{item:"Natural peanut butter",qty:"200g"},{item:"Canned tomatoes",qty:"400g"},{item:"Onion",qty:"2 large"},{item:"Garlic",qty:"4 cloves"},{item:"Carrots",qty:"3"},{item:"Sweet potato",qty:"2"},{item:"Cabbage",qty:"¼"},{item:"Scotch bonnet",qty:"1"},{item:"Ginger",qty:"1 inch"},{item:"Low-sodium stock",qty:"1L"},{item:"Bay leaves, thyme",qty:"to taste"}], steps:["Brown meat in olive oil. Remove and set aside.","Fry onion, garlic, and ginger. Add tomatoes. Cook 10 min.","Dilute peanut butter in 1 cup of stock. Add to pot.","Add meat, remaining stock, and root vegetables.","Simmer 30 min. Add cabbage and scotch bonnet.","Cook 10 more min. Serve with rice or couscous."] },
+
+  // MORE RECIPES
+  { id:24, name:"Ndolé (Cameroon Bitterleaf)", emoji:"🌱", condition:"general", cuisine:"west-african", time:"90 min", servings:6, difficulty:"Hard", kcal:385, protein:24, carbs:16, fat:25, fiber:8, tags:"general west-african traditional bitterleaf groundnut", desc:"Cameroon's national dish — bitterleaf stew with groundnuts and meat or seafood. Rich in protein, fiber, and bioactive compounds.", benefits:"Bitterleaf contains antibacterial and antidiabetic compounds. Groundnuts provide heart-healthy fats.", ingredients:[{item:"Bitter leaf (or spinach mix)",qty:"400g, blanched"},{item:"Ground roasted peanuts",qty:"200g"},{item:"Beef, shrimp, or crayfish",qty:"400g"},{item:"Stockfish (washed)",qty:"200g"},{item:"Onions",qty:"2"},{item:"Garlic",qty:"4 cloves"},{item:"Crayfish powder",qty:"2 tbsp"},{item:"Palm oil or olive oil",qty:"3 tbsp"},{item:"Salt, pepper, spices",qty:"to taste"}], steps:["Wash and blanch bitter leaf. Squeeze out water thoroughly.","Cook meats with spices until tender. Reserve stock.","Blend or pound groundnuts into a paste.","Fry onion in oil. Add groundnut paste. Cook 10 min.","Add stock, meats, and bitterleaf. Simmer 20 min.","Stir frequently to prevent sticking. Serve with plantain or fufu."] },
+  { id:25, name:"Chia Seed Pudding with Mango", emoji:"🥭", condition:"general", cuisine:"american", time:"5 min (+overnight)", servings:2, difficulty:"Easy", kcal:290, protein:9, carbs:35, fat:14, fiber:12, tags:"general american breakfast healthy omega3 fiber", desc:"A no-cook overnight breakfast that's loaded with omega-3s, fiber, and protein — perfect prep-ahead meal for busy mornings.", benefits:"2 tbsp chia = 5g omega-3. 11g fiber per serving. Stabilizes blood sugar all morning.", ingredients:[{item:"Chia seeds",qty:"4 tbsp"},{item:"Coconut milk",qty:"240ml"},{item:"Mango (fresh or frozen)",qty:"1 cup, diced"},{item:"Honey",qty:"1 tbsp"},{item:"Vanilla extract",qty:"½ tsp"},{item:"Toasted coconut flakes",qty:"2 tbsp"},{item:"Lime zest",qty:"½ lime"}], steps:["Mix chia seeds with coconut milk, honey, and vanilla.","Stir well and refrigerate overnight (or 4+ hours).","Top with diced mango, coconut flakes, and lime zest.","Stir before eating. Add more milk if too thick."] },
+  { id:26, name:"Suya-Spiced Turkey Skewers", emoji:"🍢", condition:"diabetes", cuisine:"west-african", time:"30 min", servings:4, difficulty:"Easy", kcal:240, protein:32, carbs:5, fat:10, fiber:2, tags:"diabetes west-african protein low-carb turkey lean", desc:"A lean, high-protein version of Nigeria's beloved suya — using turkey instead of beef and a spice blend without MSG or excess salt.", benefits:"Turkey is lean protein with low saturated fat. Suya spice blend contains anti-inflammatory ginger and garlic.", ingredients:[{item:"Turkey breast",qty:"500g, cubed"},{item:"Groundnut (peanut) powder",qty:"4 tbsp"},{item:"Ginger powder",qty:"1 tsp"},{item:"Garlic powder",qty:"1 tsp"},{item:"Paprika (smoked)",qty:"2 tsp"},{item:"Onion powder",qty:"1 tsp"},{item:"Cayenne",qty:"½ tsp"},{item:"Olive oil",qty:"1 tbsp"},{item:"Lemon juice",qty:"1 tbsp"}], steps:["Mix all dry spices into suya spice blend.","Coat turkey cubes in spice blend with oil and lemon.","Thread onto skewers. Marinate 30 min.","Grill on high heat 12-15 min, turning once.","Serve with sliced onion, tomatoes, and cucumber."] },
+  { id:27, name:"Efo Riro (Heart-Healthy)", emoji:"🥬", condition:"heart", cuisine:"west-african", time:"35 min", servings:4, difficulty:"Medium", kcal:195, protein:16, carbs:10, fat:11, fiber:6, tags:"heart west-african traditional spinach protein", desc:"A Yoruba classic — spinach and assorted meat stew, adapted for heart health with olive oil replacing palm oil and reduced sodium.", benefits:"Dark leafy greens are packed with nitrates that lower blood pressure. High potassium.", ingredients:[{item:"Fresh spinach",qty:"500g"},{item:"Peppers (red bell + chili)",qty:"3 blended"},{item:"Lean beef or turkey",qty:"300g"},{item:"Onion",qty:"1"},{item:"Locust beans (iru)",qty:"1 tbsp"},{item:"Crayfish",qty:"1 tbsp (optional, low for kidney patients)"},{item:"Olive oil (not palm)",qty:"3 tbsp"},{item:"Low-sodium stock",qty:"½ cup"}], steps:["Brown meat with minimal seasoning. Set aside.","Blend and fry pepper mixture in olive oil 15 min.","Add locust beans, crayfish, and stock. Cook 5 min.","Add meat and torn spinach leaves. Cook 5 min.","Do not overcook spinach — preserve nutrients."] },
+  { id:28, name:"Plantain & Avocado Toast", emoji:"🍌", condition:"hypertension", cuisine:"caribbean", time:"15 min", servings:2, difficulty:"Easy", kcal:295, protein:5, carbs:42, fat:14, fiber:6, tags:"hypertension caribbean breakfast potassium vegetarian", desc:"Caribbean-inspired breakfast using ripe plantain as the 'toast' base — naturally high in potassium which helps lower blood pressure.", benefits:"Plantain provides 20% of daily potassium needs. Avocado provides heart-healthy monounsaturated fats.", ingredients:[{item:"Ripe plantain",qty:"2, sliced lengthwise"},{item:"Avocado",qty:"1 ripe"},{item:"Cherry tomatoes",qty:"8, halved"},{item:"Lime juice",qty:"1 lime"},{item:"Olive oil",qty:"1 tbsp"},{item:"Red pepper flakes",qty:"pinch"},{item:"Fresh cilantro",qty:"small bunch"},{item:"Black pepper",qty:"to taste"}], steps:["Grill or pan-fry plantain slices in minimal olive oil 3 min each side.","Mash avocado with lime juice and black pepper.","Spread avocado on plantain 'toast'.","Top with tomatoes, cilantro, and pepper flakes."] },
+];
+
+// RENDER
+function renderRecipes(list) {
+  const grid = document.getElementById('recipe-grid');
+  const count = document.getElementById('recipe-count');
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results"><p style="font-size:2rem;">🔍</p><h3>No recipes found</h3><p>Try a different search or filter, or <a href="nutrition-app.html" class="text-green">generate a custom recipe</a>.</p></div>';
+    count.innerHTML = 'Showing <strong>0</strong> recipes';
+    return;
+  }
+  count.innerHTML = `Showing <strong>${list.length}</strong> recipes`;
+  grid.innerHTML = list.map(r => `
+    <div class="recipe-card-wrapper" data-id="${r.id}" data-name="${r.name}" data-tags="${r.tags}"
+         style="cursor:pointer;" onclick="showRecipeDetail(${r.id})">
+      <div class="recipe-card">
+        <div class="recipe-card-img">
+          <span style="font-size:4.5rem;">${r.emoji}</span>
+          <div class="recipe-badges">
+            <span class="badge badge-green">${r.condition.replace('-',' ')}</span>
+            <span class="badge badge-pale">${r.cuisine}</span>
+          </div>
+        </div>
+        <div class="recipe-card-body">
+          <h3 style="font-size:1rem;margin-bottom:6px;">${r.name}</h3>
+          <div class="recipe-meta">
+            <span>⏱ ${r.time}</span>
+            <span>👤 ${r.servings} servings</span>
+            <span>📊 ${r.difficulty}</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--mid);margin:8px 0;">${r.desc.substring(0,80)}…</p>
+          <div class="nutrient-row">
+            <span class="nutrient-pill">${r.kcal} kcal</span>
+            <span class="nutrient-pill">${r.protein}g protein</span>
+            <span class="nutrient-pill">${r.fiber}g fiber</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showRecipeDetail(id) {
+  const r = RECIPES.find(x => x.id === id);
+  if (!r) return;
+  const modal = document.getElementById('recipe-modal');
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-header" style="padding:20px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--cream-dark);">
+      <h4 style="margin:0;">${r.emoji} ${r.name}</h4>
+      <span onclick="closeModal('recipe-modal')" style="cursor:pointer;font-size:1.4rem;color:var(--light);">✕</span>
+    </div>
+    <div style="padding:28px;">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+        <span class="badge badge-green">${r.condition}</span>
+        <span class="badge badge-amber">${r.cuisine}</span>
+        <span class="badge badge-pale" style="background:var(--green-pale);color:var(--green);">⏱ ${r.time}</span>
+        <span class="badge badge-pale" style="background:var(--amber-pale);color:var(--amber);">📊 ${r.difficulty}</span>
+      </div>
+      <p style="font-size:0.95rem;color:var(--mid);margin-bottom:20px;">${r.desc}</p>
+      <div style="background:var(--green-pale);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;">
+        <strong style="color:var(--green-dark);">✅ Health Benefits:</strong>
+        <p style="margin:4px 0 0;font-size:0.9rem;color:var(--green);">${r.benefits}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px;">
+        <div style="text-align:center;background:var(--cream);border-radius:8px;padding:10px;">
+          <div style="font-weight:800;color:var(--green);font-size:1.2rem;">${r.kcal}</div>
+          <div style="font-size:0.72rem;color:var(--light);">Calories</div>
+        </div>
+        <div style="text-align:center;background:var(--cream);border-radius:8px;padding:10px;">
+          <div style="font-weight:800;color:var(--amber);font-size:1.2rem;">${r.protein}g</div>
+          <div style="font-size:0.72rem;color:var(--light);">Protein</div>
+        </div>
+        <div style="text-align:center;background:var(--cream);border-radius:8px;padding:10px;">
+          <div style="font-weight:800;color:var(--green);font-size:1.2rem;">${r.carbs}g</div>
+          <div style="font-size:0.72rem;color:var(--light);">Carbs</div>
+        </div>
+        <div style="text-align:center;background:var(--cream);border-radius:8px;padding:10px;">
+          <div style="font-weight:800;color:var(--amber);font-size:1.2rem;">${r.fiber}g</div>
+          <div style="font-size:0.72rem;color:var(--light);">Fiber</div>
+        </div>
+      </div>
+      <h4 style="margin-bottom:12px;color:var(--green-dark);">📋 Ingredients (${r.servings} servings)</h4>
+      <div class="ingredient-list" style="margin-bottom:24px;">
+        ${r.ingredients.map(i => `<div class="ingredient-item"><span>${i.item}</span><strong>${i.qty}</strong></div>`).join('')}
+      </div>
+      <h4 style="margin-bottom:12px;color:var(--green-dark);">👨‍🍳 Instructions</h4>
+      ${r.steps.map((s,i) => `<div class="step-item"><div class="step-num">${i+1}</div><p style="margin:0;font-size:0.9rem;">${s}</p></div>`).join('')}
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--cream-dark);display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="nutrition-app.html" class="btn btn-primary btn-sm">🤖 Generate Similar Recipe</a>
+        <button onclick="printRecipe(${r.id})" class="btn btn-outline btn-sm">🖨️ Print Recipe</button>
+      </div>
+    </div>`;
+  modal.classList.add('open');
+}
+
+function printRecipe(id) {
+  window.print();
+}
+
+// FILTER
+let currentCondition = 'all';
+let currentCuisine = 'all';
+
+function filterByCuisine(btn) {
+  document.querySelectorAll('#cuisine-filters .filter-tag').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCuisine = btn.dataset.filter;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = (document.getElementById('recipe-search-input')?.value || '').toLowerCase();
+  let filtered = RECIPES.filter(r => {
+    const matchCondition = currentCondition === 'all' || r.condition === currentCondition;
+    const matchCuisine = currentCuisine === 'all' || r.cuisine === currentCuisine;
+    const matchSearch = !q || r.name.toLowerCase().includes(q) || r.tags.includes(q) || r.desc.toLowerCase().includes(q);
+    return matchCondition && matchCuisine && matchSearch;
+  });
+  renderRecipes(filtered);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderRecipes(RECIPES);
+
+  // URL param filtering
+  const params = new URLSearchParams(window.location.search);
+  const condParam = params.get('condition');
+  if (condParam) {
+    const btn = document.querySelector(`.filter-tag[data-filter="${condParam}"]`);
+    if (btn) {
+      document.querySelectorAll('#condition-filters .filter-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCondition = condParam;
+      applyFilters();
+    }
+  }
+
+  document.getElementById('recipe-search-input').addEventListener('input', applyFilters);
+
+  document.querySelectorAll('#condition-filters .filter-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#condition-filters .filter-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCondition = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+});
+</script>
+</body>
+</html>
