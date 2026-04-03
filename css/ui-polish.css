@@ -1,0 +1,856 @@
+/* ============================================================
+   NutriLife — UI Polish  (ui-polish.css)
+   Fixes: navbar overlap · contrast · responsive nav · icons
+   ============================================================ */
+
+/* ── 1. URGENCY BAR — sticky at very top ─────────────────── */
+.urgency-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1010;
+  background: linear-gradient(90deg, #1B4332 0%, #2D6A4F 50%, #1B4332 100%) !important;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 11px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+.urgency-bar a {
+  color: #FFE9A0;
+  text-decoration: underline;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+/* ── 2. NAVBAR — toujours visible avec fond solide ──────── */
+/* La navbar est sticky (dans le flux), fond beige/crème permanent.
+   On supprime les règles "texte blanc sur fond transparent"
+   qui rendaient les items invisibles sur fond beige. */
+.navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000;
+  background: rgba(254, 250, 224, 0.97) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 16px rgba(45,106,79,0.10);
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
+}
+.navbar.scrolled {
+  box-shadow: 0 4px 24px rgba(45,106,79,0.16) !important;
+}
+
+/* Texte toujours sombre — lisible sur fond beige */
+.navbar .nav-links a  { color: var(--dark) !important; text-shadow: none !important; }
+.navbar .logo         { color: var(--green-dark) !important; text-shadow: none !important; }
+.navbar .logo span    { color: var(--amber) !important; }
+.navbar .lang-btn     { color: var(--mid) !important; }
+.navbar .hamburger span { background: var(--dark) !important; }
+
+/* ── 3. HERO SECTIONS — espacement naturel ────────────────── */
+/* Urgency bar + navbar sont sticky dans le flux du document.
+   Les sections hero démarrent juste en-dessous — pas besoin
+   de padding-top excessif. On garde un espacement généreux. */
+.hero-home {
+  padding-top: 72px !important;
+}
+.page-hero {
+  padding-top: 80px !important;
+  padding-bottom: 64px !important;
+}
+/* Ensure page-hero h1 line-height prevents overlap */
+.page-hero h1 {
+  line-height: 1.2 !important;
+  margin-bottom: 16px !important;
+}
+.page-hero p {
+  line-height: 1.7 !important;
+}
+
+/* ── 4. TYPOGRAPHY — prevent character overlap ────────────── */
+h1 {
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em;
+}
+h2 {
+  line-height: 1.22 !important;
+  letter-spacing: -0.01em;
+}
+h3 {
+  line-height: 1.3 !important;
+}
+
+/* Section headers: ensure label and heading don't crowd each other */
+.section-header {
+  margin-bottom: 52px;
+}
+.section-header .eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.14em !important;
+}
+.section-header h2 {
+  margin-bottom: 14px !important;
+}
+
+/* Homepage section labels */
+.section-label {
+  display: inline-block;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.14em !important;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* ── 5. COLOR CONTRAST IMPROVEMENTS ─────────────────────────
+   WCAG AA requires 4.5:1 for normal text, 3:1 for large text.
+   --light (#888) on white = ~3.5:1 — fails for small text.
+   Fix: raise to #6b6b6b minimum. */
+:root {
+  --light: #6b6b6b !important;
+  --mid:   #444 !important;
+}
+
+/* Hero home eyebrow — was nearly invisible */
+.hero-home-eyebrow {
+  background: rgba(231,111,81,0.28) !important;
+  color: #FFE5D9 !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Hero sub text — improve readability */
+.hero-home-sub {
+  color: rgba(255,255,255,0.92) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+}
+.hero-home-note {
+  color: rgba(255,255,255,0.72) !important;
+  font-size: 0.9rem !important;
+}
+
+/* Trust strip — fix small text contrast */
+.trust-item p {
+  color: #5a5a5a !important;
+  font-size: 0.86rem !important;
+  line-height: 1.5 !important;
+}
+.trust-item h4 {
+  font-size: 0.95rem !important;
+  margin-bottom: 3px !important;
+}
+
+/* Condition cards — improve readability */
+.condition-body p {
+  color: #555 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Testimonials — improve quote readability */
+.testimonial-quote {
+  color: #3d3d3d !important;
+  font-size: 0.97rem !important;
+  line-height: 1.75 !important;
+}
+
+/* ── 6. NAVBAR — medium screen fix (900-1100px) ─────────────
+   At this range, all nav links are visible but cramped.
+   We'll reduce font-size + gaps to prevent overlapping. */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .nav-links { gap: 2px !important; }
+  .nav-links a {
+    padding: 6px 9px !important;
+    font-size: 0.86rem !important;
+  }
+  .lang-switcher { margin-left: 8px !important; }
+  .nav-cta { margin-left: 8px !important; }
+  .nav-cta .btn { padding: 9px 16px !important; font-size: 0.82rem !important; }
+  .logo { font-size: 1.3rem !important; }
+  .logo-icon { width: 34px !important; height: 34px !important; font-size: 1.1rem !important; }
+}
+
+/* ── 7. TRUST STRIP ICONS — replace generic bg with icons ─── */
+.trust-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  background: rgba(45,106,79,0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0 !important;           /* hide emoji */
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Each trust icon gets a real icon image */
+.trust-icon:nth-child(1),
+.trust-item:nth-child(1) .trust-icon { background-image: url('../images/icons/icon-coaching.png') !important; background-size: 100% 100% !important; }
+.trust-item:nth-child(2) .trust-icon { background-image: url('../images/icons/icon-globe.png') !important; background-size: 100% 100% !important; }
+.trust-item:nth-child(3) .trust-icon { background-image: url('../images/icons/icon-nutrition.png') !important; background-size: 100% 100% !important; }
+.trust-item:nth-child(4) .trust-icon { background-image: url('../images/icons/icon-check.png') !important; background-size: 100% 100% !important; }
+
+/* ── 8. SERVICE/OFFER CARD ICONS ─────────────────────────── */
+.offer-icon {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 16px !important;
+  font-size: 0 !important;       /* hide emoji */
+  overflow: hidden;
+  background: none !important;
+}
+.offer-card:nth-child(1) .offer-icon { background-image: url('../images/icons/icon-coaching.png') !important; background-size: 100% 100% !important; }
+.offer-card:nth-child(2) .offer-icon { background-image: url('../images/icons/icon-masterclass.png') !important; background-size: 100% 100% !important; }
+.offer-card:nth-child(3) .offer-icon { background-image: url('../images/icons/icon-group.png') !important; background-size: 100% 100% !important; }
+.offer-card:nth-child(4) .offer-icon { background-image: url('../images/icons/icon-training.png') !important; background-size: 100% 100% !important; }
+
+/* ── 9. STEP NUMBERS — polish ─────────────────────────────── */
+.step-number {
+  background: linear-gradient(135deg, var(--green), #52b788) !important;
+  font-size: 1.4rem !important;
+  width: 64px !important;
+  height: 64px !important;
+  box-shadow: 0 6px 20px rgba(45,106,79,0.35) !important;
+}
+
+/* ── 10. EBOOK CARDS — ensure cover image fills correctly ─── */
+.ebook-cover {
+  aspect-ratio: 4 / 3;
+  overflow: hidden !important;
+}
+.ebook-cover img {
+  transition: transform 0.5s ease !important;
+}
+.ebook-card:hover .ebook-cover img {
+  transform: scale(1.06) !important;
+}
+
+/* ── 11. LEAD MAGNET BOX — better visual separation ──────── */
+.lead-box {
+  box-shadow: 0 12px 56px rgba(45,106,79,0.14) !important;
+  border: 1px solid rgba(45,106,79,0.1) !important;
+}
+.lead-form input {
+  font-size: 0.97rem !important;
+  background: #fafaf8 !important;
+}
+.lead-form input:focus {
+  background: #fff !important;
+  box-shadow: 0 0 0 4px rgba(45,106,79,0.08) !important;
+}
+
+/* ── 12. FINAL CTA — remove circle pseudo-elements on mobile */
+@media (max-width: 600px) {
+  .final-cta::before,
+  .final-cta::after { display: none !important; }
+  .final-cta h2 { font-size: 1.6rem !important; }
+}
+
+/* ── 13. PAGE-HERO ON INNER PAGES — heading never overflows ─ */
+.page-hero .container {
+  max-width: 760px;
+}
+.page-hero h1 {
+  word-break: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* ── 14. FOOTER — improve link contrast ──────────────────── */
+.footer-col a {
+  color: rgba(255,255,255,0.72) !important;
+}
+.footer-col a:hover {
+  color: #74C69D !important;
+}
+.footer-bottom {
+  color: rgba(255,255,255,0.5) !important;
+}
+
+/* ── 15. BLOG & RECIPE CARDS — emoji → icon fallback ──────── */
+.blog-card-img,
+.recipe-card-img {
+  font-size: 0 !important;
+  background: linear-gradient(135deg, #2D6A4F, #52b788) !important;
+  position: relative;
+}
+.blog-card-img::before,
+.recipe-card-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/icons/icon-recipes.png') center/48px 48px no-repeat;
+  opacity: 0.55;
+}
+
+/* ── 16. GENERAL CARD ICONS (emoji containers) ────────────── */
+.card-icon,
+.contact-icon,
+.feature-icon {
+  font-size: 1.6rem !important;  /* reduce emoji size to be less dominant */
+}
+
+/* ── 17. SCROLL-TO-TOP BUTTON ──────────────────────────────── */
+.scroll-top {
+  background: var(--green) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  font-size: 1.2rem !important;
+  box-shadow: 0 4px 16px rgba(45,106,79,0.3) !important;
+  border: none !important;
+}
+
+/* ── 18. COOKIE BANNER ─────────────────────────────────────── */
+.cookie-banner {
+  background: #1a2e22 !important;
+  border-top: 2px solid rgba(116,198,157,0.3) !important;
+}
+
+/* ── 19. SMOOTH ANCHOR SCROLL OFFSET ──────────────────────── */
+html {
+  scroll-padding-top: 120px;
+}
+
+/* ── 20. RESPONSIVE CLEANUP ────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-home-grid { grid-template-columns: 1fr !important; }
+  .hero-home { padding: 60px 0 48px !important; }
+  .hero-home-cta { flex-direction: column !important; }
+  .hero-home-cta .btn { width: 100% !important; text-align: center !important; justify-content: center !important; }
+  .trust-grid { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+  .section-label { font-size: 0.7rem !important; }
+  h2 { line-height: 1.25 !important; }
+}
+
+@media (max-width: 480px) {
+  .trust-grid { grid-template-columns: 1fr !important; }
+  .hero-stats-row { gap: 8px !important; }
+  .hero-stat-num { font-size: 1.5rem !important; }
+}
+
+/* ============================================================
+   CONVERSION OPTIMIZATION STYLES
+   coaching.html & program.html — high-converting components
+   ============================================================ */
+
+/* ── HERO ENHANCEMENTS ── */
+.hero-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hero-benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.92);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.hbl-check {
+  background: var(--amber);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.hero-cta-primary {
+  box-shadow: 0 8px 32px rgba(231,111,81,0.4);
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.hero-cta-primary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 14px 40px rgba(231,111,81,0.55) !important;
+}
+.hero-trust-proof {
+  margin: 20px 0 0 0;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ── PROBLEM SECTION ── */
+.conv-problem-section {
+  background: #fff8f0;
+}
+.conv-pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.conv-pain-card {
+  background: white;
+  border: 1.5px solid #f0e0d0;
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.conv-pain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--amber);
+}
+.conv-pain-icon {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+.conv-pain-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--mid);
+  line-height: 1.6;
+}
+.conv-pain-card p strong {
+  color: var(--dark);
+}
+.conv-problem-highlight {
+  margin-top: 48px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(135deg, var(--green-pale), rgba(212,243,220,0.4));
+  border-left: 5px solid var(--green);
+  border-radius: 12px;
+  padding: 24px 32px;
+  text-align: center;
+}
+.conv-problem-highlight p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--green-dark);
+  font-weight: 600;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── SOLUTION SECTION ── */
+.conv-solution-section {
+  background: var(--cream-dark);
+}
+.conv-solution-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.conv-solution-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.conv-solution-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.97rem;
+  color: var(--mid);
+  line-height: 1.5;
+}
+.conv-sol-check {
+  color: var(--green);
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.conv-solution-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.conv-solution-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border: 1.5px solid rgba(45,106,79,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.conv-solution-badge:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(45,106,79,0.12);
+}
+.csb-icon {
+  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
+  background: var(--green-pale);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.csb-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.csb-text strong {
+  font-size: 0.95rem;
+  color: var(--dark);
+  font-weight: 700;
+}
+.csb-text span {
+  font-size: 0.82rem;
+  color: var(--light);
+}
+
+/* ── RESULTS CARDS ── */
+.conv-result-card {
+  background: white;
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-bottom: 4px solid transparent;
+}
+.conv-result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  border-bottom-color: var(--amber);
+}
+.conv-result-number {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+.conv-result-label {
+  font-weight: 700;
+  color: var(--dark);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.conv-result-timeframe {
+  font-size: 0.78rem;
+  color: var(--light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.conv-result-desc {
+  font-size: 0.85rem;
+  color: var(--mid);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── TESTIMONIALS ── */
+.conv-testimonial-card {
+  background: white;
+  padding: 32px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--green);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.conv-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.11);
+}
+.conv-testimonial-result-badge {
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* ── HOW IT WORKS STEPS ── */
+.conv-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.conv-step-card {
+  background: white;
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--green);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.conv-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 44px rgba(45,106,79,0.15);
+}
+.conv-step-number {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(45,106,79,0.3);
+}
+.conv-step-icon {
+  font-size: 2.5rem;
+  margin: 12px 0 16px;
+}
+.conv-step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin: 0 0 12px;
+}
+.conv-step-desc {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+.conv-step-tag {
+  display: inline-block;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.conv-step-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  color: var(--amber);
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-top: 80px;
+}
+
+/* ── INCLUDED CARDS ── */
+.conv-include-card {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.conv-include-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.09);
+}
+
+/* ── OFFER / FREE CONSULTATION SECTION ── */
+.conv-offer-section {
+  background: linear-gradient(135deg, var(--green-dark) 0%, #1a3d2b 100%);
+  padding: 80px 24px;
+}
+.conv-offer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.conv-offer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.conv-offer-list li {
+  color: rgba(255,255,255,0.88);
+  font-size: 0.97rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.conv-offer-cta {
+  font-size: 1.1rem !important;
+  padding: 18px 36px !important;
+  box-shadow: 0 8px 32px rgba(231,111,81,0.5) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.conv-offer-cta:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 16px 48px rgba(231,111,81,0.6) !important;
+}
+
+/* ── PRICING CARDS ── */
+.conv-pricing-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.conv-pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+.conv-pricing-featured {
+  border: 3px solid var(--amber);
+  transform: scale(1.04);
+}
+.conv-pricing-featured:hover {
+  transform: scale(1.04) translateY(-6px);
+}
+
+/* ── FAQ STYLES ── */
+.conv-faq-header {
+  background: var(--green-pale);
+  padding: 20px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--green-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.2s;
+}
+.conv-faq-header:hover {
+  background: #c8e6c9;
+}
+.conv-faq-arrow {
+  font-size: 1.3rem;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.conv-faq-body {
+  padding: 20px 24px;
+  background: white;
+  border-radius: 0 0 12px 12px;
+  max-height: 0;
+  overflow: hidden;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+/* ── FINAL CTA SECTION ── */
+.conv-final-cta-section {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: white;
+}
+.conv-final-btn {
+  font-size: 1.15rem !important;
+  padding: 20px 48px !important;
+  box-shadow: 0 8px 32px rgba(231,111,81,0.45) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.conv-final-btn:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 18px 52px rgba(231,111,81,0.6) !important;
+}
+
+/* ── RESPONSIVE — CONVERSION SECTIONS ── */
+@media (max-width: 1024px) {
+  .conv-steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+  .conv-step-connector {
+    transform: rotate(90deg);
+    margin: 4px auto;
+    padding: 4px;
+  }
+  .conv-solution-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .conv-offer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .conv-offer-list li {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .conv-solution-section h2,
+  .conv-solution-section .eyebrow {
+    text-align: center !important;
+  }
+  .conv-solution-section .btn {
+    display: block;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .conv-pain-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .conv-pricing-featured {
+    transform: scale(1);
+  }
+  .conv-pricing-featured:hover {
+    transform: translateY(-6px);
+  }
+}
+@media (max-width: 480px) {
+  .conv-pain-grid {
+    grid-template-columns: 1fr;
+  }
+  .conv-steps-grid {
+    max-width: 100%;
+  }
+  .conv-final-btn {
+    padding: 16px 28px !important;
+    font-size: 1rem !important;
+  }
+  .conv-offer-cta {
+    padding: 16px 24px !important;
+    font-size: 1rem !important;
+  }
+}
