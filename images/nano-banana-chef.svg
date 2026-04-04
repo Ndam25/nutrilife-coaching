@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Nano Banana — Chef Cooking Pose — Recipe Portal Mascot -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" width="300" height="360">
+  <defs>
+    <radialGradient id="body2" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="65%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#D4A800"/>
+    </radialGradient>
+    <radialGradient id="bowlGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#F8F8F8"/>
+      <stop offset="100%" stop-color="#D0D0D0"/>
+    </radialGradient>
+    <filter id="steam">
+      <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Shadow -->
+  <ellipse cx="150" cy="355" rx="75" ry="11" fill="#2D6A4F" opacity="0.13"/>
+
+  <!-- ── BODY ── -->
+  <path d="M 150 25
+           C 122 20, 82 55, 72 115
+           C 62 170, 78 225, 102 268
+           C 112 283, 128 293, 142 295
+           C 157 297, 172 293, 182 282
+           C 198 268, 208 248, 212 222
+           C 222 178, 220 130, 208 90
+           C 196 52, 175 22, 150 25 Z"
+        fill="url(#body2)" stroke="#C0A000" stroke-width="2"/>
+
+  <!-- Banana highlight -->
+  <path d="M 150 35 C 130 32, 98 60, 88 108 C 80 150, 90 200, 112 242"
+        fill="none" stroke="#FFF8DC" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- Stem -->
+  <path d="M 148 23 C 150 10, 158 4, 162 2 C 165 0, 167 3, 165 8 C 163 13, 157 18, 152 23"
+        fill="#8B6914" stroke="#6B4F0E" stroke-width="1.5"/>
+
+  <!-- Bottom tip -->
+  <path d="M 140 293 C 137 305, 141 316, 144 320 C 147 323, 152 322, 154 319 C 157 314, 157 304, 155 295"
+        fill="#8B6914" stroke="#6B4F0E" stroke-width="1.5"/>
+
+  <!-- ── CHEF HAT ── -->
+  <!-- Hat base band -->
+  <path d="M 108 45 C 118 40, 140 38, 162 40 C 175 42, 185 48, 185 55
+           L 182 68 C 170 64, 150 62, 130 64 C 118 66, 110 69, 108 72 Z"
+        fill="white" stroke="#EEE" stroke-width="1.5"/>
+  <!-- Hat puff top -->
+  <path d="M 112 52 C 108 30, 115 12, 128 8 C 138 5, 152 5, 162 8
+           C 175 12, 182 30, 178 52 C 165 47, 150 45, 135 47 C 125 48, 117 50, 112 52 Z"
+        fill="white" stroke="#EEE" stroke-width="1.5"/>
+  <!-- Chef hat band stripe (green) -->
+  <path d="M 110 65 L 182 62 L 181 68 L 109 72 Z" fill="#2D6A4F"/>
+  <!-- Chef hat band stripe (gold) -->
+  <path d="M 110 60 L 183 57 L 182 62 L 110 65 Z" fill="#FFD700"/>
+
+  <!-- ── FACE ── -->
+  <!-- Eyes — happy/squinting while cooking -->
+  <g transform="translate(120, 135)">
+    <ellipse cx="0" cy="0" rx="13" ry="14" fill="white"/>
+    <ellipse cx="0" cy="0" rx="9" ry="10" fill="#222"/>
+    <ellipse cx="-3" cy="-3" rx="3.5" ry="3.5" fill="#111"/>
+    <ellipse cx="-5" cy="-5" rx="2" ry="2" fill="white" opacity="0.9"/>
+    <path d="M -13 -10 C -10 -16, -2 -17, 2 -12" fill="none" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(180, 133)">
+    <ellipse cx="0" cy="0" rx="13" ry="14" fill="white"/>
+    <ellipse cx="0" cy="0" rx="9" ry="10" fill="#222"/>
+    <ellipse cx="-3" cy="-3" rx="3.5" ry="3.5" fill="#111"/>
+    <ellipse cx="-5" cy="-5" rx="2" ry="2" fill="white" opacity="0.9"/>
+    <path d="M -12 -10 C -9 -16, -1 -17, 3 -12" fill="none" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Big smile (happy cooking) -->
+  <path d="M 120 175 C 130 192, 170 192, 180 175"
+        fill="none" stroke="#8B4513" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 124 178 C 132 190, 168 190, 176 178" fill="white"/>
+  <line x1="140" y1="180" x2="141" y2="188" stroke="#EEE" stroke-width="1"/>
+  <line x1="150" y1="179" x2="151" y2="188" stroke="#EEE" stroke-width="1"/>
+  <line x1="160" y1="180" x2="161" y2="188" stroke="#EEE" stroke-width="1"/>
+
+  <!-- Rosy cheeks -->
+  <ellipse cx="106" cy="170" rx="13" ry="9" fill="#FF8C8C" opacity="0.3"/>
+  <ellipse cx="194" cy="170" rx="13" ry="9" fill="#FF8C8C" opacity="0.3"/>
+
+  <!-- Nose -->
+  <ellipse cx="150" cy="158" rx="5" ry="3.5" fill="#E6A800" opacity="0.65"/>
+  <ellipse cx="147" cy="160" rx="2" ry="2.5" fill="#C8880A"/>
+  <ellipse cx="153" cy="160" rx="2" ry="2.5" fill="#C8880A"/>
+
+  <!-- ── APRON ── -->
+  <path d="M 100 210 C 110 206, 150 203, 198 208 L 195 270
+           C 188 275, 160 280, 145 280
+           C 130 280, 110 275, 105 270 Z"
+        fill="white" stroke="#EEE" stroke-width="1.5"/>
+  <!-- Apron pocket -->
+  <rect x="135" y="245" width="35" height="25" rx="5" fill="#E8E8E8" stroke="#DDD" stroke-width="1"/>
+  <!-- Green trim on apron -->
+  <path d="M 100 210 L 198 208 L 196 215 L 102 217 Z" fill="#2D6A4F"/>
+  <!-- Apron tie strings -->
+  <path d="M 100 215 C 88 213, 80 208, 78 202" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 198 214 C 210 212, 218 207, 220 201" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <!-- NutriLife logo on apron pocket -->
+  <text x="152" y="262" text-anchor="middle" fill="#2D6A4F" font-family="Georgia, serif" font-size="7" font-weight="bold">NutriLife</text>
+  <path d="M 137 250 C 143 247, 152 247, 158 250" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+
+  <!-- ── ARMS ── -->
+  <!-- Right arm: holding a large steaming bowl -->
+  <path d="M 200 215 C 222 218, 240 225, 248 238 C 252 244, 250 254, 245 256"
+        fill="#FFD700" stroke="#C0A000" stroke-width="2.5"/>
+  <!-- Right hand under bowl -->
+  <ellipse cx="245" cy="258" rx="12" ry="9" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <!-- Fingers -->
+  <path d="M 238 255 C 234 250, 236 244, 240 246" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <path d="M 252 255 C 256 250, 258 244, 254 246" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+
+  <!-- LARGE BOWL OF FOOD held by right hand -->
+  <ellipse cx="245" cy="245" rx="32" ry="13" fill="#1B4332" stroke="#2D6A4F" stroke-width="2"/>
+  <path d="M 213 240 Q 245 228, 277 240 L 275 248 Q 245 238, 215 248 Z" fill="#2D6A4F"/>
+  <!-- Bowl interior/food -->
+  <ellipse cx="245" cy="238" rx="28" ry="10" fill="#2D6A4F"/>
+  <!-- Food items in bowl: jollof rice, vegetables -->
+  <ellipse cx="240" cy="235" rx="8" ry="5" fill="#E76F51" transform="rotate(-10, 240, 235)"/>
+  <ellipse cx="255" cy="233" rx="7" ry="4" fill="#F4A261" transform="rotate(8, 255, 233)"/>
+  <ellipse cx="248" cy="238" rx="5" ry="3" fill="#FFD700"/>
+  <ellipse cx="235" cy="237" rx="4" ry="2.5" fill="#74C69D"/>
+  <circle cx="258" cy="237" r="3" fill="#FFD700"/>
+  <circle cx="242" cy="230" r="2.5" fill="#74C69D"/>
+
+  <!-- Steam from bowl -->
+  <path d="M 235 225 C 232 218, 234 210, 232 204" fill="none" stroke="#DDD" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
+    <animate attributeName="d" values="M 235 225 C 232 218, 234 210, 232 204;M 235 225 C 238 218, 236 210, 238 204;M 235 225 C 232 218, 234 210, 232 204" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 245 223 C 243 216, 245 208, 243 202" fill="none" stroke="#DDD" stroke-width="2.5" stroke-linecap="round" opacity="0.6">
+    <animate attributeName="d" values="M 245 223 C 243 216, 245 208, 243 202;M 245 223 C 248 216, 246 208, 248 202;M 245 223 C 243 216, 245 208, 243 202" dur="2.3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 257 225 C 254 218, 256 210, 254 203" fill="none" stroke="#DDD" stroke-width="2.5" stroke-linecap="round" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.8s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Left arm: holding a wooden spoon -->
+  <path d="M 100 215 C 80 220, 64 232, 58 246"
+        fill="#FFD700" stroke="#C0A000" stroke-width="2.5"/>
+  <!-- Left hand -->
+  <ellipse cx="56" cy="250" rx="11" ry="8" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <!-- Wooden spoon -->
+  <rect x="40" y="238" width="6" height="45" rx="3" fill="#8B6914" transform="rotate(-25, 43, 260)"/>
+  <ellipse cx="28" cy="240" rx="12" ry="9" fill="#A0785A" stroke="#8B6914" stroke-width="1.5" transform="rotate(-25, 28, 240)"/>
+
+  <!-- ── LEGS & FEET ── -->
+  <path d="M 125 292 C 122 310, 120 325, 118 335" fill="#FFD700" stroke="#C0A000" stroke-width="3"/>
+  <ellipse cx="115" cy="339" rx="15" ry="7" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <path d="M 163 292 C 166 310, 168 325, 170 335" fill="#FFD700" stroke="#C0A000" stroke-width="3"/>
+  <ellipse cx="173" cy="339" rx="15" ry="7" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <!-- Shoes -->
+  <ellipse cx="115" cy="342" rx="15" ry="6" fill="#2D6A4F"/>
+  <ellipse cx="173" cy="342" rx="15" ry="6" fill="#2D6A4F"/>
+
+  <!-- ── SPARKLES ── -->
+  <g transform="translate(42, 85)" opacity="0.75">
+    <path d="M 0 -7 L 1.3 -1.3 L 7 0 L 1.3 1.3 L 0 7 L -1.3 1.3 L -7 0 L -1.3 -1.3 Z" fill="#FFD700"/>
+  </g>
+  <g transform="translate(258, 100)" opacity="0.65">
+    <path d="M 0 -5 L 1 -1 L 5 0 L 1 1 L 0 5 L -1 1 L -5 0 L -1 -1 Z" fill="#E76F51"/>
+  </g>
+  <g transform="translate(30, 155)" opacity="0.6">
+    <path d="M 0 -4 L 0.8 -0.8 L 4 0 L 0.8 0.8 L 0 4 L -0.8 0.8 L -4 0 L -0.8 -0.8 Z" fill="#74C69D"/>
+  </g>
+
+  <!-- Caption -->
+  <rect x="75" y="350" width="150" height="22" rx="11" fill="#2D6A4F"/>
+  <text x="150" y="365" text-anchor="middle" fill="#FFD700" font-family="Georgia, serif" font-size="11" font-weight="bold" letter-spacing="1">NANO BANANA CHEF</text>
+</svg>

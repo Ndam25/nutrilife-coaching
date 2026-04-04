@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NutriLife Coaching Services — AI nutrition app, 1:1 coaching, group programs, masterclasses, e-books, corporate wellness, and affiliate programs for chronic disease management.">
+  <meta name="keywords" content="nutrition coaching, meal planning, diabetes management, nutrition services, group coaching, masterclass, online training">
+  <meta property="og:title" content="Services — NutriLife Coaching">
+  <meta property="og:description" content="Explore our comprehensive nutrition coaching and wellness programs designed for your health journey.">
+  <meta property="og:type" content="website">
+  <title>Services — NutriLife Coaching</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body>
+
+<!-- ── URGENCY BAR ── -->
+<div class="urgency-bar" id="urgency-bar">
+  🔥 <span data-lang="en" class="active">Limited spots: Free 30-min Nutrition Consultation this week only!
+    <a href="contact.html" style="color:white;text-decoration:underline;">Book Now →</a></span>
+  <span data-lang="fr">Places limitées : Consultation Nutrition Gratuite de 30 min cette semaine !
+    <a href="contact.html" style="color:white;text-decoration:underline;">Réservez →</a></span>
+  <span data-lang="es">Plazas limitadas: ¡Consulta de Nutrición Gratis de 30 min esta semana!
+    <a href="contact.html" style="color:white;text-decoration:underline;">Reservar →</a></span>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🌿</div>
+        Nutri<span>Life</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown">
+          <a href="services.html" class="active" data-i18n="nav.services">Services ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="coaching.html">🧑‍⚕️ 1:1 Nutrition Coaching</a>
+            <a href="program.html">👥 Group Coaching Program</a>
+            <a href="masterclass.html">🎓 Masterclass & Webinars</a>
+            <a href="training.html">📚 Online Training</a>
+            <a href="services.html">🌟 All Services</a>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <a href="recipes.html" data-i18n="nav.recipes">Recipes ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="recipes.html">🔍 Recipe Portal</a>
+            <a href="nutrition-app.html">🤖 AI Recipe Generator</a>
+            <a href="nutrition-data.html">📊 Nutrition Database</a>
+          </div>
+        </li>
+        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="downloads.html">📥 Free Resources</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="fr">FR</button>
+          <button class="lang-btn" data-set-lang="es">ES</button>
+        </div>
+        <a href="nutrition-app.html" class="btn btn-primary btn-sm nav-cta">🤖 Nutrition App</a>
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu">
+  <button class="mobile-close" style="position:absolute;top:24px;right:24px;font-size:1.6rem;background:none;cursor:pointer;">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="about.html">👤 About</a></li>
+    <li><a href="services.html">⭐ Services</a></li>
+    <li><a href="coaching.html">🧑‍⚕️ 1:1 Coaching</a></li>
+    <li><a href="program.html">👥 Group Program</a></li>
+    <li><a href="masterclass.html">🎓 Masterclass</a></li>
+    <li><a href="recipes.html">🍽️ Recipes</a></li>
+    <li><a href="nutrition-app.html">🤖 Nutrition App</a></li>
+    <li><a href="blog.html">📝 Blog</a></li>
+    <li><a href="downloads.html">📥 Free Resources</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+  </ul>
+  <div style="margin-top:24px;display:flex;gap:8px;">
+    <button class="lang-btn" data-set-lang="en">EN</button>
+    <button class="lang-btn" data-set-lang="fr">FR</button>
+    <button class="lang-btn" data-set-lang="es">ES</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════════════════ -->
+<section class="hero" id="hero" style="padding:140px 0 80px;">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="container hero-content">
+    <div class="hero-grid" style="grid-template-columns:1fr;">
+      <div>
+        <div class="hero-eyebrow">⭐ Comprehensive Services</div>
+        <h1 style="color:var(--white);">
+          <span data-lang="en" class="active">Our Services<br><em>Choose Your Path</em></span>
+          <span data-lang="fr">Nos Services<br><em>Choisissez Votre Chemin</em></span>
+          <span data-lang="es">Nuestros Servicios<br><em>Elige Tu Camino</em></span>
+        </h1>
+        <p class="hero-sub" style="max-width:600px;">
+          <span data-lang="en" class="active">From free resources to intensive 1:1 coaching — we have a service designed for every stage of your wellness journey.</span>
+          <span data-lang="fr">Des ressources gratuites au coaching 1:1 intensif — nous avons un service pour chaque étape.</span>
+          <span data-lang="es">De recursos gratuitos al coaching 1:1 intensivo — tenemos un servicio para cada etapa.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SERVICES GRID
+══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">All Services</span>
+      <h2>
+        <span data-lang="en" class="active">What We Offer</span>
+        <span data-lang="fr">Ce Que Nous Offrons</span>
+        <span data-lang="es">Lo Que Ofrecemos</span>
+      </h2>
+    </div>
+
+    <!-- Service 1: Nutrition App -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;">
+      <div class="fade-in">
+        <div style="font-size:4rem;margin-bottom:20px;">🤖</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Free Nutrition App</span>
+          <span data-lang="fr">App de Nutrition Gratuite</span>
+          <span data-lang="es">Aplicación de Nutrición Gratuita</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Our AI-powered nutrition app generates personalized recipes and 7-day meal plans instantly. No credit card required. Perfect for anyone looking to eat better without committing to coaching.</span>
+          <span data-lang="fr">Notre application alimentée par l'IA génère des recettes personnalisées et des plans de repas.</span>
+          <span data-lang="es">Nuestra aplicación impulsada por IA genera recetas personalizadas y planes de comidas.</span>
+        </p>
+        <div style="background:var(--green-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--green);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: FREE</span>
+            <span data-lang="fr">Prix: GRATUIT</span>
+            <span data-lang="es">Precio: GRATIS</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">AI Recipe Generator</span><span data-lang="fr">Générateur de Recettes IA</span><span data-lang="es">Generador de Recetas IA</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">7-Day Meal Plans</span><span data-lang="fr">Plans de Repas de 7 Jours</span><span data-lang="es">Planes de Comida de 7 Días</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Nutrition Tracking</span><span data-lang="fr">Suivi Nutritionnel</span><span data-lang="es">Seguimiento Nutricional</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Cultural Recipe Library</span><span data-lang="fr">Bibliothèque de Recettes Culturelles</span><span data-lang="es">Biblioteca de Recetas Culturales</span></li>
+        </ul>
+        <a href="nutrition-app.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Try the App Now</span>
+          <span data-lang="fr">Essayer l'App</span>
+          <span data-lang="es">Probar la App</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.15);">
+        <img src="images/app-mockup-real.jpg" alt="NutriLife Nutrition App on mobile"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,rgba(20,50,35,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--green);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">FREE ✨</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0;font-size:1.05rem;">Available on Web, iOS & Android</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 2: Recipe E-Books -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;direction:rtl;">
+      <div style="direction:ltr;" class="fade-in fade-in-delay-1">
+        <div style="font-size:4rem;margin-bottom:20px;">📚</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Recipe E-Books</span>
+          <span data-lang="fr">E-Livres de Recettes</span>
+          <span data-lang="es">Libros Electrónicos de Recetas</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Curated collections of healing recipes organized by health condition, cuisine, or cooking time. Beautifully designed, printable PDFs with full nutrition information and step-by-step instructions.</span>
+          <span data-lang="fr">Collections de recettes curieuses organisées par condition de santé ou cuisine.</span>
+          <span data-lang="es">Colecciones de recetas curadas organizadas por condición de salud o cocina.</span>
+        </p>
+        <div style="background:var(--amber-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--amber);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: $29 each</span>
+            <span data-lang="fr">Prix: 29 $ chacun</span>
+            <span data-lang="es">Precio: $29 cada uno</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">50+ Recipes per Book</span><span data-lang="fr">50+ Recettes par Livre</span><span data-lang="es">50+ Recetas por Libro</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Complete Nutrition Facts</span><span data-lang="fr">Informations Nutritionnelles Complètes</span><span data-lang="es">Información Nutricional Completa</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Shopping Lists</span><span data-lang="fr">Listes de Courses</span><span data-lang="es">Listas de Compras</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Printable & Digital</span><span data-lang="fr">Imprimable et Numérique</span><span data-lang="es">Imprimible y Digital</span></li>
+        </ul>
+        <a href="downloads.html" class="btn btn-amber">
+          <span data-lang="en" class="active">Browse E-Books</span>
+          <span data-lang="fr">Parcourir les E-Livres</span>
+          <span data-lang="es">Explorar E-Libros</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.15);">
+        <img src="images/recipe-card-real.jpg" alt="NutriLife healing recipe e-books"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(180,80,20,0.82));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--amber);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">$29 each 📖</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.05rem;">50+ Culturally-Inclusive Recipes</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">Diabetes · Heart Health · Gut Healing · Weight Loss</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 3: Free Downloads & Resources -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;">
+      <div class="fade-in fade-in-delay-2">
+        <div style="font-size:4rem;margin-bottom:20px;">📥</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Free Downloads & Resources</span>
+          <span data-lang="fr">Téléchargements Gratuits et Ressources</span>
+          <span data-lang="es">Descargas Gratuitas y Recursos</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Access our library of free guides, printable meal prep templates, condition-specific nutrition checklists, shopping lists, and educational videos. No sign-up required.</span>
+          <span data-lang="fr">Accédez à notre bibliothèque de guides gratuits, de modèles de préparation de repas et de listes de contrôle.</span>
+          <span data-lang="es">Acceda a nuestra biblioteca de guías gratuitas, plantillas de preparación de comidas y listas de verificación.</span>
+        </p>
+        <div style="background:var(--green-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--green);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: FREE</span>
+            <span data-lang="fr">Prix: GRATUIT</span>
+            <span data-lang="es">Precio: GRATIS</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Nutrition Guides (Diabetes, Heart Health, IBS)</span><span data-lang="fr">Guides Nutritionnels (Diabète, Santé Cardiaque, SCI)</span><span data-lang="es">Guías de Nutrición (Diabetes, Salud Cardíaca, SII)</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Meal Prep Templates</span><span data-lang="fr">Modèles de Préparation de Repas</span><span data-lang="es">Plantillas de Preparación de Comidas</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Food & Nutrition Tracking Sheets</span><span data-lang="fr">Feuilles de Suivi des Aliments et de la Nutrition</span><span data-lang="es">Hojas de Seguimiento de Alimentos y Nutrición</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Educational Video Library</span><span data-lang="fr">Bibliothèque de Vidéos Éducatives</span><span data-lang="es">Biblioteca de Videos Educativos</span></li>
+        </ul>
+        <a href="downloads.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Access Free Resources</span>
+          <span data-lang="fr">Accéder aux Ressources Gratuites</span>
+          <span data-lang="es">Acceder a Recursos Gratuitos</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.15);">
+        <img src="images/meal-prep-real.jpg" alt="Free nutrition resources and meal prep guides"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(27,67,50,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--green);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">100% FREE 🎁</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.05rem;">Guides, Templates & Video Library</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">No sign-up required</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 4: 1:1 Nutrition Coaching -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;direction:rtl;">
+      <div style="direction:ltr;" class="fade-in fade-in-delay-3">
+        <div style="font-size:4rem;margin-bottom:20px;">🧑‍⚕️</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">1:1 Nutrition Coaching</span>
+          <span data-lang="fr">Coaching Nutritionnel 1:1</span>
+          <span data-lang="es">Coaching Nutricional 1:1</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Private coaching sessions with our registered dietitian. Includes personalized nutrition plan, disease-specific guidance, habit coaching, and ongoing support. Perfect for serious health transformation.</span>
+          <span data-lang="fr">Séances de coaching privées avec notre diététicienne agréée. Comprend un plan de nutrition personnalisé et un soutien continu.</span>
+          <span data-lang="es">Sesiones de coaching privadas con nuestra dietista registrada. Incluye un plan de nutrición personalizado y apoyo continuo.</span>
+        </p>
+        <div style="background:var(--amber-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--amber);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: From $197/session</span>
+            <span data-lang="fr">Prix: À partir de 197 $/session</span>
+            <span data-lang="es">Precio: Desde $197/sesión</span>
+          </div>
+          <p style="font-size:0.9rem;color:var(--dark);margin:0;">
+            <span data-lang="en" class="active">3-month package: $1,200 (6 sessions) — Save $582</span>
+            <span data-lang="fr">Package de 3 mois: 1 200 $ (6 sessions) — Économisez 582 $</span>
+            <span data-lang="es">Paquete de 3 meses: $1,200 (6 sesiones) — Ahorre $582</span>
+          </p>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Initial Comprehensive Assessment</span><span data-lang="fr">Évaluation Initiale Complète</span><span data-lang="es">Evaluación Inicial Completa</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Personalized Nutrition Plan</span><span data-lang="fr">Plan de Nutrition Personnalisé</span><span data-lang="es">Plan de Nutrición Personalizado</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Bi-weekly Coaching Sessions</span><span data-lang="fr">Séances de Coaching Bimensuelles</span><span data-lang="es">Sesiones de Coaching Quincenales</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Email & Message Support Between Sessions</span><span data-lang="fr">Support par Email et Message Entre les Séances</span><span data-lang="es">Soporte por Email y Mensaje Entre Sesiones</span></li>
+        </ul>
+        <a href="coaching.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Book 1:1 Coaching</span>
+          <span data-lang="fr">Réserver un Coaching 1:1</span>
+          <span data-lang="es">Reservar Coaching 1:1</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/consultation-session.jpg" alt="1:1 nutrition coaching session with dietitian"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(180,70,20,0.85));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--amber);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">⭐ Most Popular</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Personal transformation with expert guidance</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">From $197/session · Save with packages</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 5: Group Coaching Program -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;">
+      <div class="fade-in fade-in-delay-4">
+        <div style="font-size:4rem;margin-bottom:20px;">👥</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">12-Week Group Coaching Program</span>
+          <span data-lang="fr">Programme de Coaching en Groupe de 12 Semaines</span>
+          <span data-lang="es">Programa de Coaching en Grupo de 12 Semanas</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Join a community of like-minded people transforming their health. Weekly live group calls, curriculum-based lessons, accountability partners, and community support. Great for motivation and shared learning.</span>
+          <span data-lang="fr">Rejoignez une communauté de personnes transformant leur santé. Appels de groupe hebdomadaires en direct et soutien communautaire.</span>
+          <span data-lang="es">Únete a una comunidad de personas transformando su salud. Llamadas grupales semanales en vivo y apoyo comunitario.</span>
+        </p>
+        <div style="background:var(--green-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--green);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: $397 (12 weeks)</span>
+            <span data-lang="fr">Prix: 397 $ (12 semaines)</span>
+            <span data-lang="es">Precio: $397 (12 semanas)</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Weekly Live Group Calls (90 min)</span><span data-lang="fr">Appels de Groupe en Direct Hebdomadaires (90 min)</span><span data-lang="es">Llamadas de Grupo en Vivo Semanales (90 min)</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">12-Week Curriculum</span><span data-lang="fr">Programme de 12 Semaines</span><span data-lang="es">Plan de Estudios de 12 Semanas</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Private Community Forum</span><span data-lang="fr">Forum Communautaire Privé</span><span data-lang="es">Foro Comunitario Privado</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Accountability & Support</span><span data-lang="fr">Responsabilité et Soutien</span><span data-lang="es">Responsabilidad y Apoyo</span></li>
+        </ul>
+        <a href="program.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Join Group Program</span>
+          <span data-lang="fr">Rejoindre le Programme en Groupe</span>
+          <span data-lang="es">Únete al Programa en Grupo</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/zoom-call-program.jpg" alt="Group coaching program live call session"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(27,67,50,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--green);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">👥 12 Weeks Together</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Transform together with 20–30 people</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">Weekly live calls · Accountability · Community</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 6: Masterclass & Webinars -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;direction:rtl;">
+      <div style="direction:ltr;" class="fade-in fade-in-delay-5">
+        <div style="font-size:4rem;margin-bottom:20px;">🎓</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Masterclass & Webinars</span>
+          <span data-lang="fr">Masterclass et Webinaires</span>
+          <span data-lang="es">Masterclass y Webinarios</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Live and recorded educational sessions on specific topics: managing diabetes through food, DASH diet for hypertension, gut healing, menopause nutrition, athletic performance, and more. Expert-led, Q&A included.</span>
+          <span data-lang="fr">Séances éducatives en direct et enregistrées sur des sujets spécifiques. Sessions menées par des experts avec Q&A.</span>
+          <span data-lang="es">Sesiones educativas en vivo y grabadas sobre temas específicos. Sesiones dirigidas por expertos con preguntas y respuestas.</span>
+        </p>
+        <div style="background:var(--amber-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--amber);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: From $97</span>
+            <span data-lang="fr">Prix: À partir de 97 $</span>
+            <span data-lang="es">Precio: Desde $97</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Live Expert Sessions</span><span data-lang="fr">Séances d'Experts en Direct</span><span data-lang="es">Sesiones de Expertos en Vivo</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Lifetime Replay Access</span><span data-lang="fr">Accès Illimité aux Replays</span><span data-lang="es">Acceso Ilimitado a Repeticiones</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Downloadable Slides & Recipes</span><span data-lang="fr">Diapositives et Recettes Téléchargeables</span><span data-lang="es">Diapositivas y Recetas Descargables</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Exclusive Community Access</span><span data-lang="fr">Accès Communautaire Exclusif</span><span data-lang="es">Acceso Comunitario Exclusivo</span></li>
+        </ul>
+        <a href="masterclass.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Explore Masterclasses</span>
+          <span data-lang="fr">Explorer les Masterclasses</span>
+          <span data-lang="es">Explorar Masterclasses</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/health-consultation.jpg" alt="Nutrition masterclass and expert webinar"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(50,20,100,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:#7C3AED;color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">🎓 Expert-Led</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Deep dives into specific nutrition topics</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">Lifetime replay access · Q&A included</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 7: Online Training Course -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;">
+      <div class="fade-in">
+        <div style="font-size:4rem;margin-bottom:20px;">📖</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Online Training Course</span>
+          <span data-lang="fr">Cours de Formation en Ligne</span>
+          <span data-lang="es">Curso de Capacitación en Línea</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Self-paced comprehensive nutrition education program. Learn the foundations of nutrition science, disease-specific strategies, meal planning, and habit change. Certificate upon completion. Access for 1 year.</span>
+          <span data-lang="fr">Programme d'éducation nutritionnelle complète à votre rythme. Apprenez les fondements de la science de la nutrition.</span>
+          <span data-lang="es">Programa de educación nutricional integral a su propio ritmo. Aprende los fundamentos de la ciencia de la nutrición.</span>
+        </p>
+        <div style="background:var(--green-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--green);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: $297 (lifetime access)</span>
+            <span data-lang="fr">Prix: 297 $ (accès illimité)</span>
+            <span data-lang="es">Precio: $297 (acceso de por vida)</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">10+ Comprehensive Modules</span><span data-lang="fr">10+ Modules Complets</span><span data-lang="es">10+ Módulos Completos</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Video Lessons & Downloadable Materials</span><span data-lang="fr">Leçons Vidéo et Matériaux Téléchargeables</span><span data-lang="es">Lecciones en Video y Materiales Descargables</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Quizzes & Assignments</span><span data-lang="fr">Quiz et Devoirs</span><span data-lang="es">Cuestionarios y Tareas</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Certificate of Completion</span><span data-lang="fr">Certificat d'Achèvement</span><span data-lang="es">Certificado de Finalización</span></li>
+        </ul>
+        <a href="training.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Enroll Now</span>
+          <span data-lang="fr">S'inscrire Maintenant</span>
+          <span data-lang="es">Inscribirse Ahora</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/coaching-action.jpg" alt="Online nutrition training course"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(180,70,20,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--amber);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">📜 Certificate Included</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Learn nutrition at your own pace</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">Anytime, anywhere · 10+ modules · $297 lifetime</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 8: Corporate Wellness Programs -->
+    <div class="grid-2" style="gap:60px;align-items:center;margin-bottom:80px;direction:rtl;">
+      <div style="direction:ltr;" class="fade-in fade-in-delay-1">
+        <div style="font-size:4rem;margin-bottom:20px;">🏢</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Corporate Wellness Programs</span>
+          <span data-lang="fr">Programmes de Bien-Être Corporatif</span>
+          <span data-lang="es">Programas de Bienestar Corporativo</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Custom nutrition programs for companies looking to improve employee health. Includes nutrition assessments, team workshops, coaching sessions, and health tracking. Customizable for any team size or health goals.</span>
+          <span data-lang="fr">Programmes de nutrition personnalisés pour les entreprises. Comprend des ateliers d'équipe et des séances de coaching.</span>
+          <span data-lang="es">Programas de nutrición personalizados para empresas. Incluye talleres de equipo y sesiones de coaching.</span>
+        </p>
+        <div style="background:var(--green-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--green);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Price: Custom Pricing</span>
+            <span data-lang="fr">Prix: Tarification Personnalisée</span>
+            <span data-lang="es">Precio: Precio Personalizado</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Employee Nutrition Assessments</span><span data-lang="fr">Évaluations Nutritionnelles des Employés</span><span data-lang="es">Evaluaciones Nutricionales de Empleados</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Team Nutrition Workshops</span><span data-lang="fr">Ateliers de Nutrition en Équipe</span><span data-lang="es">Talleres de Nutrición en Equipo</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Group Coaching Sessions</span><span data-lang="fr">Séances de Coaching en Groupe</span><span data-lang="es">Sesiones de Coaching en Grupo</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Health Metrics Tracking</span><span data-lang="fr">Suivi des Métriques de Santé</span><span data-lang="es">Seguimiento de Métricas de Salud</span></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Request Custom Quote</span>
+          <span data-lang="fr">Demander un Devis Personnalisé</span>
+          <span data-lang="es">Solicitar Presupuesto Personalizado</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/healthy-family.jpg" alt="Corporate wellness nutrition program"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,20,30,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:#1a1a2e;color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">🏢 Custom Pricing</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Transform your company's health culture</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">Custom programs · Any team size · Full support</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 9: Affiliate & Referral Program -->
+    <div class="grid-2" style="gap:60px;align-items:center;">
+      <div class="fade-in fade-in-delay-2">
+        <div style="font-size:4rem;margin-bottom:20px;">🤝</div>
+        <h3 style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Affiliate & Referral Program</span>
+          <span data-lang="fr">Programme d'Affiliation et de Parrainage</span>
+          <span data-lang="es">Programa de Afiliación y Referencia</span>
+        </h3>
+        <p style="margin-bottom:16px;">
+          <span data-lang="en" class="active">Earn competitive commissions for every client you refer or every product sold. Join our affiliate network and help spread the word about culturally-inclusive nutrition. Perfect for health professionals, coaches, and influencers.</span>
+          <span data-lang="fr">Gagnez des commissions compétitives pour chaque client que vous référez. Rejoignez notre réseau d'affiliation.</span>
+          <span data-lang="es">Gana comisiones competitivas por cada cliente que refieran. Únete a nuestra red de afiliados.</span>
+        </p>
+        <div style="background:var(--amber-pale);padding:16px;border-radius:12px;margin-bottom:20px;">
+          <div style="font-size:1.3rem;color:var(--amber);font-weight:700;margin-bottom:6px;">
+            <span data-lang="en" class="active">Commission: 20-30% per sale</span>
+            <span data-lang="fr">Commission: 20-30% par vente</span>
+            <span data-lang="es">Comisión: 20-30% por venta</span>
+          </div>
+        </div>
+        <ul style="margin-bottom:20px;">
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">20-30% Recurring Commission</span><span data-lang="fr">Commission Récurrente de 20-30%</span><span data-lang="es">Comisión Recurrente del 20-30%</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Affiliate Dashboard & Tracking</span><span data-lang="fr">Tableau de Bord et Suivi d'Affiliation</span><span data-lang="es">Panel de Control y Seguimiento de Afiliados</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Marketing Materials Provided</span><span data-lang="fr">Matériaux Marketing Fournis</span><span data-lang="es">Materiales de Marketing Proporcionados</span></li>
+          <li style="margin-bottom:8px;">✅ <span data-lang="en" class="active">Dedicated Affiliate Support</span><span data-lang="fr">Support d'Affiliation Dédié</span><span data-lang="es">Soporte de Afiliados Dedicado</span></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">
+          <span data-lang="en" class="active">Join Affiliate Program</span>
+          <span data-lang="fr">Rejoindre le Programme d'Affiliation</span>
+          <span data-lang="es">Únete al Programa de Afiliados</span>
+        </a>
+      </div>
+      <div style="position:relative;border-radius:24px;overflow:hidden;min-height:400px;box-shadow:0 16px 48px rgba(0,0,0,0.18);">
+        <img src="images/client-wellness.jpg" alt="NutriLife affiliate and referral program"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:400px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(27,67,50,0.88));pointer-events:none;"></div>
+        <div style="position:absolute;top:16px;left:16px;background:var(--green);color:white;border-radius:20px;padding:6px 14px;font-size:0.82rem;font-weight:700;">💰 20–30% Commission</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+          <p style="color:white;font-weight:700;margin:0 0 4px;font-size:1.1rem;">Build passive income while helping others heal</p>
+          <p style="color:rgba(255,255,255,0.8);margin:0;font-size:0.88rem;">For coaches, health pros & influencers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     COACHING OPTIONS COMPARISON TABLE
+══════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--cream-dark);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Comparison</span>
+      <h2>
+        <span data-lang="en" class="active">Compare Coaching Options</span>
+        <span data-lang="fr">Comparer les Options de Coaching</span>
+        <span data-lang="es">Comparar Opciones de Coaching</span>
+      </h2>
+    </div>
+    <div style="overflow-x:auto;margin-top:40px;">
+      <table style="width:100%;border-collapse:collapse;text-align:center;">
+        <thead>
+          <tr style="background:var(--green);color:white;">
+            <th style="padding:16px;text-align:left;color:white;">
+              <span data-lang="en" class="active">Feature</span>
+              <span data-lang="fr">Fonctionnalité</span>
+              <span data-lang="es">Característica</span>
+            </th>
+            <th style="padding:16px;">
+              <span data-lang="en" class="active">1:1 Coaching</span>
+              <span data-lang="fr">Coaching 1:1</span>
+              <span data-lang="es">Coaching 1:1</span>
+            </th>
+            <th style="padding:16px;">
+              <span data-lang="en" class="active">Group Program</span>
+              <span data-lang="fr">Programme en Groupe</span>
+              <span data-lang="es">Programa en Grupo</span>
+            </th>
+            <th style="padding:16px;">
+              <span data-lang="en" class="active">Masterclass</span>
+              <span data-lang="fr">Masterclass</span>
+              <span data-lang="es">Masterclass</span>
+            </th>
+            <th style="padding:16px;">
+              <span data-lang="en" class="active">Online Course</span>
+              <span data-lang="fr">Cours en Ligne</span>
+              <span data-lang="es">Curso en Línea</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--light);">
+            <td style="padding:16px;text-align:left;"><span data-lang="en" class="active">Personalized Plan</span><span data-lang="fr">Plan Personnalisé</span><span data-lang="es">Plan Personalizado</span></td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">❌</td>
+            <td style="padding:16px;">❌</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--light);">
+            <td style="padding:16px;text-align:left;"><span data-lang="en" class="active">1:1 Sessions</span><span data-lang="fr">Séances 1:1</span><span data-lang="es">Sesiones 1:1</span></td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">❌</td>
+            <td style="padding:16px;">❌</td>
+            <td style="padding:16px;">❌</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--light);">
+            <td style="padding:16px;text-align:left;"><span data-lang="en" class="active">Group Support</span><span data-lang="fr">Soutien en Groupe</span><span data-lang="es">Apoyo en Grupo</span></td>
+            <td style="padding:16px;">❌</td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">✅</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--light);">
+            <td style="padding:16px;text-align:left;"><span data-lang="en" class="active">Email Support</span><span data-lang="fr">Support par Email</span><span data-lang="es">Soporte por Email</span></td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">✅</td>
+            <td style="padding:16px;">❌</td>
+            <td style="padding:16px;">❌</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--light);">
+            <td style="padding:16px;text-align:left;"><span data-lang="en" class="active">Duration</span><span data-lang="fr">Durée</span><span data-lang="es">Duración</span></td>
+            <td style="padding:16px;">3-12 months</td>
+            <td style="padding:16px;">12 weeks</td>
+            <td style="padding:16px;">2-3 hours</td>
+            <td style="padding:16px;">Self-paced</td>
+          </tr>
+          <tr>
+            <td style="padding:16px;text-align:left;font-weight:700;"><span data-lang="en" class="active">Starting Price</span><span data-lang="fr">Prix de Départ</span><span data-lang="es">Precio Inicial</span></td>
+            <td style="padding:16px;font-weight:700;color:var(--green);">$197</td>
+            <td style="padding:16px;font-weight:700;color:var(--green);">$397</td>
+            <td style="padding:16px;font-weight:700;color:var(--green);">$97</td>
+            <td style="padding:16px;font-weight:700;color:var(--green);">$297</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FAQ SECTION
+══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Help</span>
+      <h2>
+        <span data-lang="en" class="active">Service FAQs</span>
+        <span data-lang="fr">FAQ du Service</span>
+        <span data-lang="es">Preguntas Frecuentes sobre el Servicio</span>
+      </h2>
+    </div>
+    <div style="max-width:800px;margin:0 auto;">
+      <div class="accordion fade-in">
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span data-lang="en" class="active">How do I choose which service is right for me?</span>
+            <span data-lang="fr">Comment choisir le service qui me convient?</span>
+            <span data-lang="es">¿Cómo elijo el servicio adecuado para mí?</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              <span data-lang="en" class="active">Start with our free resources and app if you're just beginning. If you want accountability and personalized guidance, 1:1 coaching is best. For community support and lower cost, try our group program. Masterclasses are great for learning about specific topics, and the online course is perfect for self-directed learning. Book a free consultation to get personalized recommendations!</span>
+              <span data-lang="fr">Commencez par nos ressources gratuites si vous débutez. Si vous voulez des conseils personnalisés, le coaching 1:1 est préférable.</span>
+              <span data-lang="es">Comience con nuestros recursos gratuitos si está comenzando. Si desea orientación personalizada, el coaching 1:1 es lo mejor.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span data-lang="en" class="active">Can I combine multiple services?</span>
+            <span data-lang="fr">Puis-je combiner plusieurs services?</span>
+            <span data-lang="es">¿Puedo combinar varios servicios?</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              <span data-lang="en" class="active">Absolutely! Many clients combine 1:1 coaching with the nutrition app, e-books, and masterclasses. We offer package discounts for combined services. Contact us for custom bundling options.</span>
+              <span data-lang="fr">Absolument! Beaucoup de clients combinent le coaching 1:1 avec l'app et les masterclasses.</span>
+              <span data-lang="es">¡Absolutamente! Muchos clientes combinan el coaching 1:1 con la aplicación y las masterclasses.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span data-lang="en" class="active">Do you offer payment plans?</span>
+            <span data-lang="fr">Offrez-vous des plans de paiement?</span>
+            <span data-lang="es">¿Ofrecen planes de pago?</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              <span data-lang="en" class="active">Yes! We offer flexible payment plans for all of our coaching services. Most clients do 2-3 monthly payments for 1:1 packages and group programs. Contact us to set up a custom payment arrangement.</span>
+              <span data-lang="fr">Oui! Nous proposons des plans de paiement flexibles pour tous nos services de coaching.</span>
+              <span data-lang="es">¡Sí! Ofrecemos planes de pago flexibles para todos nuestros servicios de coaching.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span data-lang="en" class="active">What if I'm not satisfied with a service?</span>
+            <span data-lang="fr">Et si je ne suis pas satisfait d'un service?</span>
+            <span data-lang="es">¿Qué pasa si no estoy satisfecho con un servicio?</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              <span data-lang="en" class="active">We stand behind our services with a 30-day money-back guarantee on all coaching packages. Digital products (e-books, courses) cannot be refunded but can be exchanged. If you're unsatisfied, contact us immediately to discuss options.</span>
+              <span data-lang="fr">Nous garantissons nos services avec une garantie de remboursement de 30 jours sur tous les packages de coaching.</span>
+              <span data-lang="es">Respaldamos nuestros servicios con una garantía de devolución de dinero de 30 días en todos los paquetes de coaching.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <span data-lang="en" class="active">Are your services covered by insurance?</span>
+            <span data-lang="fr">Vos services sont-ils couverts par une assurance?</span>
+            <span data-lang="es">¿Sus servicios están cubiertos por seguros?</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              <span data-lang="en" class="active">Many nutrition coaching services are covered by health insurance plans, especially if prescribed by your doctor. We provide receipts and detailed documentation for insurance reimbursement. Check with your insurance provider about coverage. Some employer wellness programs also reimburse nutrition coaching — ask your HR department!</span>
+              <span data-lang="fr">Beaucoup de services de coaching en nutrition sont couverts par les régimes d'assurance santé.</span>
+              <span data-lang="es">Muchos servicios de coaching nutricional están cubiertos por planes de seguros de salud.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CTA SECTION
+══════════════════════════════════════════════════ -->
+<section class="section" style="background:linear-gradient(135deg,var(--green-dark),var(--green));color:white;text-align:center;">
+  <div class="container">
+    <h2 style="color:white;margin-bottom:24px;">
+      <span data-lang="en" class="active">Ready to Take the Next Step?</span>
+      <span data-lang="fr">Prêt à franchir la prochaine étape?</span>
+      <span data-lang="es">¿Listo para dar el siguiente paso?</span>
+    </h2>
+    <p style="color:rgba(255,255,255,0.9);font-size:1.1rem;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;">
+      <span data-lang="en" class="active">Book a free 30-minute consultation to discuss which service is perfect for your health goals.</span>
+      <span data-lang="fr">Réservez une consultation gratuite de 30 minutes pour discuter du service qui convient à vos objectifs de santé.</span>
+      <span data-lang="es">Reserva una consulta gratuita de 30 minutos para discutir qué servicio se adapta a tus objetivos de salud.</span>
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-amber btn-lg">
+        📅 <span data-lang="en" class="active">Book Free Consultation</span>
+        <span data-lang="fr">Consulter Gratuit</span>
+        <span data-lang="es">Consulta Gratis</span>
+      </a>
+      <a href="nutrition-app.html" class="btn btn-white btn-lg">
+        🤖 <span data-lang="en" class="active">Try Nutrition App</span>
+        <span data-lang="fr">Essayer l'App</span>
+        <span data-lang="es">Probar la App</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo logo" style="font-size:1.6rem;margin-bottom:16px;">
+          <div class="logo-icon" style="width:36px;height:36px;font-size:1.1rem;">🌿</div>
+          Nutri<span>Life</span> Coaching
+        </div>
+        <p class="footer-desc" data-i18n="footer.tagline">Transforming lives through the healing power of nutrition. Serving the US market and African diaspora worldwide.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">📘</a>
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">▶️</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="coaching.html">1:1 Nutrition Coaching</a>
+        <a href="program.html">Group Program</a>
+        <a href="masterclass.html">Masterclass</a>
+        <a href="training.html">Online Training</a>
+        <a href="services.html">All Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="nutrition-app.html">🤖 Nutrition App</a>
+        <a href="recipes.html">Recipe Portal</a>
+        <a href="downloads.html">Free Downloads</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Affiliates</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NutriLife Coaching. All rights reserved.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="lang-btn" data-set-lang="en" style="color:rgba(255,255,255,0.5);">EN</button>
+        <button class="lang-btn" data-set-lang="fr" style="color:rgba(255,255,255,0.5);">FR</button>
+        <button class="lang-btn" data-set-lang="es" style="color:rgba(255,255,255,0.5);">ES</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── COOKIE BANNER ── -->
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience. <a href="#" style="color:var(--green-light);">Learn more</a></p>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="decline-cookies" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:white;">Decline</button>
+    <button id="accept-cookies" class="btn btn-amber btn-sm">Accept</button>
+  </div>
+</div>
+
+<!-- ── SCROLL TO TOP ── -->
+<button class="scroll-top" id="scroll-top">↑</button>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Nano Banana — Student/Learning Pose — Blog/Training Mascot -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360" width="280" height="360">
+  <defs>
+    <radialGradient id="bodyS" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="65%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#D4A800"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="140" cy="352" rx="68" ry="10" fill="#2D6A4F" opacity="0.13"/>
+
+  <!-- Body -->
+  <path d="M 140 28 C 112 23, 72 58, 62 118 C 52 173, 68 228, 92 268 C 102 283, 118 293, 132 295 C 147 297, 162 293, 172 282 C 188 268, 198 248, 202 222 C 212 178, 210 130, 198 90 C 186 52, 165 22, 140 28 Z"
+        fill="url(#bodyS)" stroke="#C0A000" stroke-width="2"/>
+  <path d="M 140 38 C 120 35, 88 62, 78 110 C 70 152, 80 202, 102 242"
+        fill="none" stroke="#FFF8DC" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 138 26 C 140 13, 148 6, 152 4 C 155 2, 157 5, 155 9 C 153 13, 148 18, 142 25"
+        fill="#8B6914" stroke="#6B4F0E" stroke-width="1.5"/>
+  <path d="M 130 293 C 127 305, 131 315, 134 319 C 137 322, 142 322, 144 319 C 147 315, 147 305, 145 295"
+        fill="#8B6914" stroke="#6B4F0E" stroke-width="1.5"/>
+
+  <!-- Graduation cap -->
+  <rect x="100" y="48" width="82" height="12" rx="4" fill="#1B4332"/>
+  <!-- Cap top board -->
+  <rect x="88" y="36" width="108" height="14" rx="4" fill="#1B4332" transform="rotate(-3, 140, 43)"/>
+  <!-- Tassel -->
+  <line x1="196" y1="40" x2="210" y2="68" stroke="#FFD700" stroke-width="2.5"/>
+  <circle cx="210" cy="70" r="6" fill="#FFD700"/>
+  <line x1="210" y1="74" x2="207" y2="86" stroke="#FFD700" stroke-width="1.5"/>
+  <line x1="210" y1="74" x2="213" y2="86" stroke="#FFD700" stroke-width="1.5"/>
+  <line x1="210" y1="74" x2="210" y2="87" stroke="#FFD700" stroke-width="1.5"/>
+
+  <!-- Outfit: Casual sweater with kente trim -->
+  <path d="M 85 210 C 95 205, 140 202, 195 208 L 192 272 C 182 277, 155 282, 140 282 C 125 282, 102 277, 97 272 Z"
+        fill="#2D6A4F"/>
+  <!-- Sweater kente bands at bottom -->
+  <path d="M 98 265 L 191 263 L 190 270 L 99 272 Z" fill="#FFD700"/>
+  <path d="M 99 272 L 190 270 L 189 278 L 100 280 Z" fill="#C0392B"/>
+  <!-- Collar -->
+  <path d="M 120 210 L 140 230 L 160 210" fill="none" stroke="#74C69D" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Face — studious look -->
+  <!-- Glasses -->
+  <ellipse cx="112" cy="135" rx="20" ry="17" fill="none" stroke="#8B6914" stroke-width="3"/>
+  <ellipse cx="168" cy="135" rx="20" ry="17" fill="none" stroke="#8B6914" stroke-width="3"/>
+  <line x1="132" y1="133" x2="148" y2="133" stroke="#8B6914" stroke-width="3"/>
+  <path d="M 92 129 C 88 126, 84 128, 84 132" fill="none" stroke="#8B6914" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 188 129 C 192 126, 196 128, 196 132" fill="none" stroke="#8B6914" stroke-width="3" stroke-linecap="round"/>
+  <!-- Glass lens fill -->
+  <ellipse cx="112" cy="135" rx="18" ry="15" fill="white" opacity="0.2"/>
+  <ellipse cx="168" cy="135" rx="18" ry="15" fill="white" opacity="0.2"/>
+
+  <!-- Eyes behind glasses -->
+  <g transform="translate(112, 135)">
+    <ellipse cx="0" cy="0" rx="10" ry="11" fill="white"/>
+    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#1A1A1A"/>
+    <ellipse cx="-2" cy="-2" rx="3" ry="3" fill="#111"/>
+    <ellipse cx="-4" cy="-4" rx="2" ry="2" fill="white" opacity="0.85"/>
+    <path d="M -8 -10 C -5 -15, 1 -15, 4 -10" fill="none" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(168, 135)">
+    <ellipse cx="0" cy="0" rx="10" ry="11" fill="white"/>
+    <ellipse cx="0" cy="0" rx="7" ry="8" fill="#1A1A1A"/>
+    <ellipse cx="-2" cy="-2" rx="3" ry="3" fill="#111"/>
+    <ellipse cx="-4" cy="-4" rx="2" ry="2" fill="white" opacity="0.85"/>
+    <path d="M -7 -10 C -4 -15, 2 -15, 5 -10" fill="none" stroke="#8B6914" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Slight smirk/smile -->
+  <path d="M 120 172 C 130 182, 155 183, 162 174" fill="none" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Nose -->
+  <ellipse cx="140" cy="158" rx="5" ry="3.5" fill="#E6A800" opacity="0.65"/>
+  <ellipse cx="137" cy="160" rx="2" ry="2.5" fill="#C8880A"/>
+  <ellipse cx="143" cy="160" rx="2" ry="2.5" fill="#C8880A"/>
+
+  <!-- Cheeks -->
+  <ellipse cx="96" cy="168" rx="12" ry="8" fill="#FF8C8C" opacity="0.25"/>
+  <ellipse cx="184" cy="168" rx="12" ry="8" fill="#FF8C8C" opacity="0.25"/>
+
+  <!-- Left arm: holding open book -->
+  <path d="M 85 218 C 65 224, 50 236, 44 252"
+        fill="#FFD700" stroke="#C0A000" stroke-width="2.5"/>
+  <ellipse cx="42" cy="256" rx="11" ry="8" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <!-- Open book -->
+  <path d="M 5 232 C 20 226, 38 228, 42 232 L 38 268 C 26 264, 12 264, 8 268 Z" fill="#FAF3E0" stroke="#C8B400" stroke-width="2"/>
+  <path d="M 42 232 C 46 228, 60 228, 72 232 L 68 268 C 58 266, 46 266, 42 268 Z" fill="#FAF3E0" stroke="#C8B400" stroke-width="2"/>
+  <!-- Book spine -->
+  <line x1="42" y1="232" x2="42" y2="268" stroke="#8B6914" stroke-width="2.5"/>
+  <!-- Book lines (text) -->
+  <line x1="12" y1="244" x2="36" y2="242" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="12" y1="250" x2="36" y2="249" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="12" y1="256" x2="36" y2="255" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="12" y1="262" x2="28" y2="261" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="46" y1="242" x2="68" y2="240" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="46" y1="248" x2="68" y2="248" stroke="#DDD" stroke-width="1.5"/>
+  <line x1="46" y1="254" x2="68" y2="254" stroke="#DDD" stroke-width="1.5"/>
+  <text x="24" y="240" text-anchor="middle" fill="#2D6A4F" font-size="5" font-weight="bold">NUTRITION</text>
+  <text x="57" y="237" text-anchor="middle" fill="#2D6A4F" font-size="5" font-weight="bold">SCIENCE</text>
+
+  <!-- Right arm: raised with pencil -->
+  <path d="M 200 218 C 222 214, 238 205, 244 195"
+        fill="#FFD700" stroke="#C0A000" stroke-width="2.5"/>
+  <ellipse cx="246" cy="191" rx="10" ry="8" fill="#FFE066" stroke="#C0A000" stroke-width="1.5" transform="rotate(-25, 246, 191)"/>
+  <!-- Pencil -->
+  <rect x="244" y="162" width="8" height="34" rx="2" fill="#FFD700" stroke="#C8A000" stroke-width="1" transform="rotate(20, 248, 180)"/>
+  <path d="M 251 154 L 255 162 L 247 162 Z" fill="#E74C3C"/>
+  <path d="M 248 153 L 252 160 L 249 160 Z" fill="#D5D5D5"/>
+  <rect x="244" y="190" width="8" height="5" rx="1" fill="#D4A800" transform="rotate(20, 248, 192)"/>
+
+  <!-- Legs -->
+  <path d="M 118 292 C 115 310, 113 325, 111 335" fill="#FFD700" stroke="#C0A000" stroke-width="3"/>
+  <ellipse cx="108" cy="339" rx="15" ry="7" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <path d="M 158 292 C 161 310, 163 325, 165 335" fill="#FFD700" stroke="#C0A000" stroke-width="3"/>
+  <ellipse cx="168" cy="339" rx="15" ry="7" fill="#FFE066" stroke="#C0A000" stroke-width="1.5"/>
+  <ellipse cx="108" cy="342" rx="15" ry="6" fill="#1B4332"/>
+  <ellipse cx="168" cy="342" rx="15" ry="6" fill="#1B4332"/>
+
+  <!-- Thought bubble -->
+  <circle cx="218" cy="75" r="3" fill="white" opacity="0.7"/>
+  <circle cx="228" cy="65" r="5" fill="white" opacity="0.75"/>
+  <circle cx="242" cy="52" r="8" fill="white" opacity="0.8"/>
+  <circle cx="258" cy="40" r="14" fill="white" opacity="0.85"/>
+  <!-- Content of thought: nutrition symbol -->
+  <text x="258" y="44" text-anchor="middle" font-size="14">🥗</text>
+</svg>
