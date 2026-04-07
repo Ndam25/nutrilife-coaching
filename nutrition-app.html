@@ -2348,6 +2348,81 @@ document.addEventListener('DOMContentLoaded', () => {
     _showPaywall();
   }
 });
+  /* ═══════════════════════════════════════
+   FREEMIUM LOGIC — USAGE + PAYWALL
+═══════════════════════════════════════ */
+
+const MAX_FREE_RECIPES = 3;
+
+function getUsage() {
+  return parseInt(localStorage.getItem("recipe_usage") || "0");
+}
+
+function setUsage(val) {
+  localStorage.setItem("recipe_usage", val);
+}
+
+function incrementUsage() {
+  let usage = getUsage() + 1;
+  setUsage(usage);
+  updateUsageUI();
+}
+
+function updateUsageUI() {
+  const usage = getUsage();
+  const btn = document.getElementById("generate-recipe-btn");
+
+  if (!btn) return;
+
+  const remaining = MAX_FREE_RECIPES - usage;
+
+  if (usage >= MAX_FREE_RECIPES) {
+    btn.innerHTML = "🔒 Unlock Premium";
+    btn.classList.add("gen-btn-locked");
+  } else {
+    btn.innerHTML = `🤖 Generate My Recipe <span class="usage-badge">${remaining} left</span>`;
+    btn.classList.remove("gen-btn-locked");
+  }
+}
+
+/* ── PAYWALL DISPLAY ── */
+function showPaywall() {
+  document.getElementById("recipe-output").style.display = "none";
+  document.getElementById("welcome-screen").style.display = "none";
+  document.getElementById("paywall-screen").style.display = "flex";
+}
+
+/* ── SOFT PROMPT ── */
+function showSoftPrompt() {
+  const usage = getUsage();
+  if (usage === 1) {
+    document.getElementById("soft-upgrade-prompt").style.display = "block";
+  }
+}
+
+/* ── WRAP ORIGINAL FUNCTION ── */
+const originalGenerateRecipe = generateRecipe;
+
+generateRecipe = function () {
+  const usage = getUsage();
+
+  if (usage >= MAX_FREE_RECIPES) {
+    showPaywall();
+    return;
+  }
+
+  originalGenerateRecipe();
+
+  setTimeout(() => {
+    incrementUsage();
+    showSoftPrompt();
+  }, 500);
+};
+
+/* INIT */
+document.addEventListener("DOMContentLoaded", () => {
+  updateUsageUI();
+});
 </script>
 </body>
 </html>
