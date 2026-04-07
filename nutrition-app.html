@@ -2128,6 +2128,13 @@ function generateRecipe() {
     if (usage === 0) {
       document.getElementById('soft-upgrade-prompt').style.display = 'block';
     }
+
+    // If limit is reached on this generation, reveal paywall shortly after result is shown
+    if (newUsage >= 3) {
+      setTimeout(() => {
+        _showPaywall();
+      }, 1200);
+    }
   }, 1800);
 }
 
@@ -2333,10 +2340,13 @@ function switchTab(tab) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initTagSelectors();
-  // Initialize first tab
   switchTab('recipe');
-  // Auto-populate tips for default condition
   updateTipsTab('diabetes');
+  const usage = getUsageCount();
+  _updateGenButton(usage);
+  if (usage >= 3) {
+    _showPaywall();
+  }
 });
 </script>
 </body>
