@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HOMEPAGE — highest priority -->
+  <url>
+    <loc>https://nutrilifecoaching.shop/</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- CORE PAGES -->
+  <url>
+    <loc>https://nutrilifecoaching.shop/about.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/services.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/contact.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- COACHING SERVICES -->
+  <url>
+    <loc>https://nutrilifecoaching.shop/coaching.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/program.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/masterclass.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/training.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- NUTRITION TOOLS -->
+  <url>
+    <loc>https://nutrilifecoaching.shop/nutrition-app.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/recipes.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/nutrition-data.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- CONTENT & RESOURCES -->
+  <url>
+    <loc>https://nutrilifecoaching.shop/blog.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/blog/diabetes-diet-guide.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/downloads.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nutrilifecoaching.shop/resources.html</loc>
+    <lastmod>2025-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

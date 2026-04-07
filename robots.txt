@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap location — CRITICAL for Google indexing
+Sitemap: https://nutrilifecoaching.shop/sitemap.xml
+
+# Block admin/utility files from indexing
+Disallow: /css/
+Disallow: /js/
+Disallow: /ebooks/
+Disallow: /videos/
+Disallow: /404.html
