@@ -1,0 +1,2343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NutriLife AI — Generate personalized recipes and 7-day meal plans based on your health condition, dietary preferences, and cultural background. Free tool.">
+  <title>AI Nutrition App — NutriLife Coaching</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <style>
+    .app-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .app-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 60px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .app-wrapper {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      min-height: 700px;
+    }
+    .app-sidebar {
+      background: var(--green-dark);
+      padding: 36px 28px;
+      overflow-y: auto;
+    }
+    .app-sidebar h3 { color: white; font-size: 1.1rem; margin-bottom: 20px; }
+    .app-form-group { margin-bottom: 18px; }
+    .app-label {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .app-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    .app-input:focus { outline: none; border-color: var(--amber-light); background: rgba(255,255,255,0.15); }
+    .app-input option { background: var(--green-dark); color: white; }
+    .app-input::placeholder { color: rgba(255,255,255,0.45); }
+    .tags-container { display: flex; flex-wrap: wrap; gap: 6px; }
+    .health-tag {
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.75);
+      transition: var(--transition);
+    }
+    .health-tag.selected { background: var(--amber); color: white; border-color: var(--amber-light); }
+    .health-tag:hover { background: rgba(255,255,255,0.18); }
+    .cuisine-tag {
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.75);
+      transition: var(--transition);
+    }
+    .cuisine-tag.selected { background: var(--green-light); color: var(--green-dark); border-color: var(--green-light); }
+    .gen-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--amber);
+      color: white;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+    .gen-btn:hover { background: #D4613C; transform: scale(1.02); }
+    .plan-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: var(--transition);
+      margin-top: 8px;
+    }
+    .plan-btn:hover { background: rgba(255,255,255,0.2); }
+    .app-main {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+    }
+    .app-tab-bar {
+      display: flex;
+      background: var(--white);
+      border-bottom: 2px solid var(--cream-dark);
+      padding: 0 24px;
+    }
+    .app-tab {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--light);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: var(--transition);
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+    .app-tab.active { color: var(--green); border-bottom-color: var(--green); }
+    .app-content { flex: 1; padding: 32px; overflow-y: auto; }
+    .welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      text-align: center;
+    }
+    .welcome-icon { font-size: 5rem; margin-bottom: 24px; }
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .result-header {
+      background: linear-gradient(135deg, var(--green), var(--green-mid));
+      padding: 24px 28px;
+      color: white;
+    }
+    .result-header h2 { color: white; font-size: 1.5rem; margin-bottom: 6px; }
+    .result-body { padding: 28px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin: 24px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--green-pale);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ing-table { width: 100%; border-collapse: collapse; }
+    .ing-table tr { border-bottom: 1px solid var(--cream-dark); }
+    .ing-table td { padding: 10px 8px; font-size: 0.9rem; }
+    .ing-table td:first-child { color: var(--dark); font-weight: 600; }
+    .ing-table td:last-child { color: var(--green); font-weight: 700; text-align: right; }
+    .step-box { display: flex; gap: 14px; margin-bottom: 16px; }
+    .step-circle {
+      min-width: 32px; height: 32px;
+      background: var(--green);
+      border-radius: 50%;
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text { font-size: 0.9rem; color: var(--mid); padding-top: 4px; line-height: 1.6; }
+    .macro-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 16px; }
+    .macro-card {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .macro-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+    .macro-label { font-size: 0.7rem; color: var(--light); margin-top: 2px; text-transform: uppercase; }
+    .benefit-card {
+      background: var(--green-pale);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--green);
+    }
+    .benefit-card p { margin: 0; font-size: 0.88rem; color: var(--green-dark); }
+    .meal-plan-table { width: 100%; border-collapse: collapse; }
+    .meal-plan-table th {
+      background: var(--green);
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .meal-plan-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--cream-dark);
+      font-size: 0.85rem;
+    }
+    .meal-plan-table tr:nth-child(even) { background: var(--cream); }
+    .meal-plan-table .day-cell {
+      font-weight: 800;
+      color: var(--green-dark);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    .kcal-chip {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--green-pale);
+      border-radius: 50px;
+      font-size: 0.72rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .tip-box {
+      background: var(--amber-pale);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      border-left: 4px solid var(--amber);
+      margin-top: 20px;
+    }
+    .tip-box p { margin: 0; font-size: 0.88rem; color: var(--dark); }
+    .loading-dots::after {
+      content: '';
+      animation: dots 1.5s infinite;
+    }
+    @keyframes dots {
+      0%   { content: ''; }
+      25%  { content: '.'; }
+      50%  { content: '..'; }
+      75%  { content: '...'; }
+    }
+    .print-recipe-btn {
+      padding: 10px 20px;
+      background: none;
+      border: 2px solid var(--green);
+      color: var(--green);
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .print-recipe-btn:hover { background: var(--green); color: white; }
+    @media (max-width: 900px) {
+      .app-wrapper { grid-template-columns: 1fr; }
+      .app-sidebar { display: block; }
+      .macro-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media print {
+      .navbar, .app-hero, .app-sidebar, .app-tab-bar, footer, .cookie-banner, .scroll-top { display: none; }
+      .app-wrapper { box-shadow: none; grid-template-columns: 1fr; }
+      .app-main { padding: 0; }
+    }
+
+    /* ══ PREMIUM SUBSCRIPTION COMPONENTS ══════════════════════════ */
+
+    /* ── Block 1: Sidebar subscription teaser ── */
+    .app-subscription-cta {
+      margin-top: 22px;
+      padding: 20px 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .app-subscription-cta .sub-eyebrow {
+      display: inline-block;
+      background: var(--amber);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .app-subscription-cta h4 {
+      color: white;
+      font-size: 0.95rem;
+      margin: 0 0 6px;
+      line-height: 1.4;
+    }
+    .app-subscription-cta .sub-desc {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.76rem;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .pricing-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    /* Annual — primary/dominant action in sidebar */
+    .cta-secondary {
+      display: block;
+      width: 100%;
+      padding: 13px 16px;
+      background: linear-gradient(135deg, #F08C42, #E06A2C);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition);
+      text-align: center;
+      box-sizing: border-box;
+      position: relative;
+      box-shadow: 0 4px 18px rgba(224, 106, 44, 0.45);
+      transform: scale(1.03);
+    }
+    .cta-secondary:hover {
+      background: linear-gradient(135deg, #E06A2C, #C95A20);
+      color: white;
+      transform: scale(1.06);
+      box-shadow: 0 6px 24px rgba(224, 106, 44, 0.55);
+      text-decoration: none;
+    }
+    /* Monthly — secondary/muted action in sidebar */
+    .cta-primary {
+      display: block;
+      width: 100%;
+      padding: 11px 16px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      font-size: 0.82rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.18);
+      transition: var(--transition);
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .cta-primary:hover { background: rgba(255,255,255,0.15); color: white; text-decoration: none; }
+    .best-value-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 50px;
+      margin-left: 5px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sub-features {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .sub-features span {
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sub-features span::before {
+      content: '✔';
+      color: var(--amber-light);
+      font-weight: 900;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+    }
+    .cta-caption {
+      font-size: 0.67rem;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      margin: 5px 0 0;
+      letter-spacing: 0.01em;
+    }
+    .microcopy {
+      font-size: 0.71rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 12px;
+      margin-bottom: 0;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ── Block 2: Full-width premium upgrade section ── */
+    .premium-upgrade-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.10);
+      padding: 60px 48px;
+      text-align: center;
+      margin-top: 60px;
+      border: 1px solid var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .premium-upgrade-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--green), var(--amber));
+    }
+    .premium-upgrade-box .upgrade-eyebrow {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+    .premium-upgrade-box h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .premium-upgrade-box .upgrade-lead {
+      color: var(--mid);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .upgrade-feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+      margin-bottom: 40px;
+      padding: 0;
+    }
+    .upgrade-feature-list li {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--mid);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .upgrade-feature-list li::before {
+      content: '✔';
+      color: var(--green);
+      font-weight: 900;
+      font-size: 0.78rem;
+    }
+    .pricing-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+    .pricing-card {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 30px 24px;
+      border: 2px solid var(--cream-dark);
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pricing-card:hover { border-color: var(--green-light); box-shadow: var(--shadow-sm); }
+    .pricing-card.featured {
+      background: linear-gradient(155deg, var(--green-dark), var(--green));
+      border-color: var(--green);
+    }
+    .plan-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .plan-badge.badge-default { background: var(--cream-dark); color: var(--mid); }
+    .plan-badge.badge-featured { background: var(--amber); color: white; }
+    .plan-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .pricing-card.featured .plan-name { color: rgba(255,255,255,0.85); }
+    .plan-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-card.featured .plan-price { color: var(--amber-light); }
+    .plan-period {
+      font-size: 0.78rem;
+      color: var(--light);
+      margin-bottom: 14px;
+    }
+    .pricing-card.featured .plan-period { color: rgba(255,255,255,0.6); }
+    .plan-saving {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      color: white;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 11px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+    .plan-cta-primary {
+      display: block;
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--amber);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition);
+      text-align: center;
+      box-sizing: border-box;
+      margin-top: auto;
+    }
+    .plan-cta-primary:hover { background: #D4613C; color: white; transform: scale(1.02); text-decoration: none; }
+    .plan-cta-secondary {
+      display: block;
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--white);
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 2px solid var(--cream-dark);
+      transition: var(--transition);
+      text-align: center;
+      box-sizing: border-box;
+      margin-top: auto;
+    }
+    .plan-cta-secondary:hover { border-color: var(--green); color: var(--green-dark); text-decoration: none; }
+    .upgrade-guarantee {
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 600px) {
+      .pricing-cards-row { grid-template-columns: 1fr; }
+      .premium-upgrade-box { padding: 36px 20px; }
+      .pricing-card.featured { order: -1; }
+    }
+
+    /* ══ FREEMIUM PAYWALL & USAGE UI ══════════════════════════════ */
+
+    /* Locked generate button state */
+    .gen-btn-locked {
+      background: rgba(255,255,255,0.12) !important;
+      color: rgba(255,255,255,0.55) !important;
+      box-shadow: none !important;
+      transform: none !important;
+      cursor: pointer !important;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      font-size: 0.9rem;
+    }
+    .gen-btn-locked:hover {
+      background: rgba(255,255,255,0.18) !important;
+      color: white !important;
+      transform: none !important;
+    }
+
+    /* Usage remaining badge inside generate button */
+    .usage-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 50px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Hard Paywall Screen ── */
+    .paywall-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      padding: 40px 28px;
+      text-align: center;
+      animation: paywall-in 0.35s ease;
+    }
+    @keyframes paywall-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .paywall-icon {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .paywall-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .paywall-desc {
+      color: var(--mid);
+      font-size: 0.95rem;
+      max-width: 380px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .paywall-plans {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 16px;
+    }
+    .paywall-btn-annual {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #F08C42, #E06A2C);
+      color: white;
+      font-weight: 800;
+      font-size: 1rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(224,106,44,0.4);
+      position: relative;
+      box-sizing: border-box;
+    }
+    .paywall-btn-annual:hover {
+      background: linear-gradient(135deg, #E06A2C, #C95A20);
+      box-shadow: 0 6px 28px rgba(224,106,44,0.55);
+      transform: translateY(-1px);
+      color: white;
+      text-decoration: none;
+    }
+    .paywall-btn-annual .pw-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.25);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 50px;
+      margin-left: 8px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .paywall-btn-monthly {
+      display: block;
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--cream);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid var(--cream-dark);
+      transition: all 0.2s ease;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .paywall-btn-monthly:hover {
+      border-color: var(--green);
+      color: var(--green-dark);
+      background: var(--green-pale);
+      text-decoration: none;
+    }
+    .paywall-microcopy {
+      font-size: 0.78rem;
+      color: var(--light);
+      margin: 4px 0 0;
+    }
+    .paywall-divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--amber));
+      border-radius: 2px;
+      margin: 0 auto 24px;
+    }
+
+    /* ── Soft upgrade prompt (non-blocking, after first recipe) ── */
+    .soft-upgrade-prompt {
+      display: none;
+      margin-top: 20px;
+      background: linear-gradient(135deg, var(--green-pale), #f0f7ec);
+      border: 1.5px solid var(--green-light);
+      border-radius: 14px;
+      padding: 18px 22px;
+      position: relative;
+      animation: soft-in 0.4s ease;
+    }
+    @keyframes soft-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .soft-upgrade-prompt .soft-close {
+      position: absolute;
+      top: 10px; right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      color: var(--light);
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px;
+    }
+    .soft-upgrade-prompt .soft-close:hover { color: var(--mid); }
+    .soft-upgrade-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .soft-upgrade-text { flex: 1; min-width: 160px; }
+    .soft-upgrade-text strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--green-dark);
+      margin-bottom: 3px;
+    }
+    .soft-upgrade-text span {
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+    .soft-upgrade-btn {
+      display: inline-block;
+      padding: 9px 20px;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .soft-upgrade-btn:hover {
+      background: var(--green-dark);
+      color: white;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 600px) {
+      .paywall-screen { padding: 32px 16px; }
+      .soft-upgrade-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><div class="logo-icon">🌿</div>Nutri<span>Life</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li class="nav-dropdown"><a href="services.html" data-i18n="nav.services">Services ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="coaching.html">🧑‍⚕️ 1:1 Coaching</a>
+            <a href="program.html">👥 Group Program</a>
+            <a href="masterclass.html">🎓 Masterclass</a>
+            <a href="training.html">📚 Online Training</a>
+          </div>
+        </li>
+        <li class="nav-dropdown"><a href="recipes.html" data-i18n="nav.recipes">Recipes ▾</a>
+          <div class="nav-dropdown-menu">
+            <a href="recipes.html">🔍 Recipe Portal</a>
+            <a href="nutrition-app.html" class="active">🤖 AI Generator</a>
+            <a href="nutrition-data.html">📊 Nutrition Database</a>
+          </div>
+        </li>
+        <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="downloads.html" data-i18n="nav.downloads">📥 Free Resources</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-set-lang="en">EN</button>
+          <button class="lang-btn" data-set-lang="fr">FR</button>
+          <button class="lang-btn" data-set-lang="es">ES</button>
+        </div>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <button class="mobile-close" style="position:absolute;top:24px;right:24px;font-size:1.6rem;background:none;cursor:pointer;">✕</button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="services.html">⭐ Services</a></li>
+    <li><a href="recipes.html">🍽️ Recipes</a></li>
+    <li><a href="nutrition-app.html">🤖 Nutrition App</a></li>
+    <li><a href="blog.html">📝 Blog</a></li>
+    <li><a href="contact.html">📞 Contact</a></li>
+  </ul>
+  <div style="margin-top:24px;display:flex;gap:8px;">
+    <button class="lang-btn" data-set-lang="en">EN</button>
+    <button class="lang-btn" data-set-lang="fr">FR</button>
+    <button class="lang-btn" data-set-lang="es">ES</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="app-hero">
+  <div class="container" style="display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <img src="images/nano-banana-doctor.svg" alt="Nano Banana Doctor"
+           style="width:180px;height:auto;filter:drop-shadow(0 6px 20px rgba(0,0,0,0.3));animation:nanoBounce 3.5s ease-in-out infinite;"/>
+    </div>
+    <div style="text-align:center;max-width:600px;">
+      <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--green-pale);">🤖 AI-Powered</span>
+      <h1 style="color:white;margin:16px 0;" data-i18n="app.page.title">Your Personal Nutrition Intelligence</h1>
+      <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;max-width:640px;margin:0 auto;" data-i18n="app.page.desc">
+        Enter your health profile and preferences — get a clinically-tailored recipe or a full 7-day meal plan in seconds.
+        Powered by FDA, CIQUAL, and FAO West Africa food composition databases.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section style="padding:40px 0 80px;background:var(--cream);">
+  <div class="container">
+    <div class="app-wrapper fade-in">
+
+      <!-- SIDEBAR: USER PROFILE -->
+      <div class="app-sidebar">
+        <h3>⚕️ Your Health Profile</h3>
+
+        <div class="app-form-group">
+          <label class="app-label">Age</label>
+          <input type="number" id="age" class="app-input" placeholder="e.g. 45" min="1" max="120" value="45">
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">Gender</label>
+          <select id="gender" class="app-input">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="other">Other / Prefer not to say</option>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="app-form-group">
+            <label class="app-label">Weight (kg)</label>
+            <input type="number" id="weight" class="app-input" placeholder="70" min="30" max="300" value="75">
+          </div>
+          <div class="app-form-group">
+            <label class="app-label">Height (cm)</label>
+            <input type="number" id="height" class="app-input" placeholder="165" min="100" max="250" value="168">
+          </div>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">Activity Level</label>
+          <select id="activity" class="app-input">
+            <option value="sedentary">Sedentary (desk job)</option>
+            <option value="light" selected>Lightly Active (1-3x/wk)</option>
+            <option value="moderate">Moderately Active (3-5x/wk)</option>
+            <option value="active">Very Active (6-7x/wk)</option>
+          </select>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">🩺 Health Condition(s)</label>
+          <div class="tags-container" id="condition-tags">
+            <span class="health-tag" data-val="general">💪 General Health</span>
+            <span class="health-tag selected" data-val="diabetes">🩸 Diabetes</span>
+            <span class="health-tag" data-val="prediabetes">🔶 Pre-Diabetes</span>
+            <span class="health-tag" data-val="hypertension">❤️ Hypertension</span>
+            <span class="health-tag" data-val="kidney">🫘 Kidney Disease</span>
+            <span class="health-tag" data-val="heart">🫀 Heart Disease</span>
+            <span class="health-tag" data-val="stroke">🧠 Stroke Recovery</span>
+            <span class="health-tag" data-val="cholesterol">💊 High Cholesterol</span>
+            <span class="health-tag" data-val="digestive">🌿 Digestive Issues</span>
+            <span class="health-tag" data-val="cancer">🎗️ Cancer Support</span>
+            <span class="health-tag" data-val="weightloss">⚖️ Weight Loss</span>
+            <span class="health-tag" data-val="pregnancy">🤰 Pregnancy</span>
+          </div>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">🍽️ Cuisine Preference</label>
+          <div class="tags-container" id="cuisine-tags">
+            <span class="cuisine-tag selected" data-val="west-african">🌍 West African</span>
+            <span class="cuisine-tag" data-val="caribbean">🏝️ Caribbean</span>
+            <span class="cuisine-tag" data-val="mediterranean">🫒 Mediterranean</span>
+            <span class="cuisine-tag" data-val="american">🗽 American</span>
+            <span class="cuisine-tag" data-val="asian">🥢 Asian</span>
+            <span class="cuisine-tag" data-val="global">🌐 Any Cuisine</span>
+          </div>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">🥦 Dietary Restrictions</label>
+          <div class="tags-container" id="diet-tags">
+            <span class="health-tag" data-val="vegetarian">🌱 Vegetarian</span>
+            <span class="health-tag" data-val="vegan">🌿 Vegan</span>
+            <span class="health-tag" data-val="gluten-free">🌾 Gluten-Free</span>
+            <span class="health-tag" data-val="dairy-free">🥛 Dairy-Free</span>
+            <span class="health-tag" data-val="nut-free">🥜 Nut-Free</span>
+            <span class="health-tag" data-val="low-sodium">🧂 Low-Sodium</span>
+          </div>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">⏱️ Max Cooking Time</label>
+          <select id="cooktime" class="app-input">
+            <option value="15">Under 15 minutes</option>
+            <option value="30" selected>Under 30 minutes</option>
+            <option value="60">Under 1 hour</option>
+            <option value="120">Up to 2 hours</option>
+            <option value="any">No limit</option>
+          </select>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">🍲 Meal Type</label>
+          <select id="mealtype" class="app-input">
+            <option value="any">Any Meal</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner" selected>Dinner</option>
+            <option value="snack">Snack</option>
+            <option value="dessert">Dessert</option>
+          </select>
+        </div>
+
+        <div class="app-form-group">
+          <label class="app-label">✏️ Specific Request (optional)</label>
+          <input type="text" id="specific-request" class="app-input" placeholder="e.g. Jollof Rice for diabetics, kidney-safe fufu…">
+        </div>
+
+        <button class="gen-btn" id="generate-recipe-btn" onclick="generateRecipe()">
+          🤖 Generate My Recipe
+        </button>
+        <button class="plan-btn" id="generate-plan-btn" onclick="generateMealPlan()">
+          📅 Generate 7-Day Meal Plan
+        </button>
+
+        <!-- ── PREMIUM SUBSCRIPTION CTA ── -->
+        <div class="app-subscription-cta">
+          <span class="sub-eyebrow">✨ Go Premium</span>
+          <h4>Unlock the Full Experience</h4>
+          <div class="sub-features">
+            <span>Save recipes</span>
+            <span>Full meal plan history</span>
+            <span>Advanced nutrition insights</span>
+          </div>
+          <div class="pricing-options">
+            <a href="https://buy.stripe.com/7sY3cxa804ZHfkP6KlgYU02"
+               target="_blank" rel="noopener noreferrer"
+               class="cta-secondary">
+              Annual – $79 &nbsp;<span class="best-value-badge">Best Value 🔥</span>
+            </a>
+            <p class="cta-caption">Save 33% — Limited offer</p>
+            <a href="https://buy.stripe.com/8x2bJ34NG77P6Oj6KlgYU01"
+               target="_blank" rel="noopener noreferrer"
+               class="cta-primary">
+              Monthly – $9.90/mo
+            </a>
+          </div>
+          <p class="microcopy">✔ Cancel anytime &nbsp;•&nbsp; No commitment<br>⭐ Trusted by 1,000+ users</p>
+        </div>
+
+        <p style="color:rgba(255,255,255,0.45);font-size:0.72rem;margin-top:16px;line-height:1.5;">
+          ⚠️ This tool provides general nutritional guidance and is not a substitute for professional medical advice. Always consult your healthcare provider.
+        </p>
+      </div>
+
+      <!-- MAIN PANEL -->
+      <div class="app-main">
+        <div class="app-tab-bar">
+          <button class="app-tab active" id="tab-recipe" onclick="switchTab('recipe')">🍽️ Recipe</button>
+          <button class="app-tab" id="tab-plan" onclick="switchTab('plan')">📅 Meal Plan</button>
+          <button class="app-tab" id="tab-nutrition" onclick="switchTab('nutrition')">📊 Nutrition Info</button>
+          <button class="app-tab" id="tab-tips" onclick="switchTab('tips')">💡 Health Tips</button>
+        </div>
+
+        <!-- TAB: RECIPE -->
+        <div class="app-content" id="content-recipe">
+          <div class="welcome-screen" id="welcome-screen">
+            <div class="welcome-icon">🌿</div>
+            <h2>Welcome to NutriLife AI</h2>
+            <p style="max-width:400px;color:var(--mid);">Fill in your health profile on the left and click <strong>"Generate My Recipe"</strong> to receive a personalized, clinically-informed recipe tailored to your body and health goals.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;max-width:400px;width:100%;">
+              <div style="background:var(--green-pale);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:6px;">🩺</div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--green-dark);">Health-Tailored</div>
+                <div style="font-size:0.72rem;color:var(--mid);">Every recipe adapted to your condition</div>
+              </div>
+              <div style="background:var(--amber-pale);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:6px;">🌍</div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--amber);">Culturally-Aware</div>
+                <div style="font-size:0.72rem;color:var(--mid);">Recipes from your cultural background</div>
+              </div>
+              <div style="background:var(--green-pale);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:6px;">📊</div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--green-dark);">Full Nutrition Facts</div>
+                <div style="font-size:0.72rem;color:var(--mid);">Based on FDA & CIQUAL databases</div>
+              </div>
+              <div style="background:var(--amber-pale);border-radius:10px;padding:16px;text-align:center;">
+                <div style="font-size:1.8rem;margin-bottom:6px;">🎁</div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--amber);">3 Free Recipes</div>
+                <div style="font-size:0.72rem;color:var(--mid);">Upgrade for unlimited access</div>
+              </div>
+            </div>
+          </div>
+          <div id="recipe-output" style="display:none;"></div>
+
+          <!-- HARD PAYWALL (shown after 3 free generations) -->
+          <div id="paywall-screen" class="paywall-screen" style="display:none;">
+            <div class="paywall-icon">🔒</div>
+            <h3 class="paywall-title">You've used your 3 free recipes</h3>
+            <p class="paywall-desc">Upgrade to keep generating personalized recipes, save your meal history, and unlock advanced nutrition insights.</p>
+            <div class="paywall-plans">
+              <a href="https://buy.stripe.com/7sY3cxa804ZHfkP6KlgYU02"
+                 target="_blank" rel="noopener noreferrer"
+                 class="paywall-btn-annual">
+                🔥 Annual – $79 &nbsp;<span style="background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:50px;font-size:0.78rem;font-weight:700;">Best Value</span>
+              </a>
+              <div class="paywall-divider">or</div>
+              <a href="https://buy.stripe.com/8x2bJ34NG77P6Oj6KlgYU01"
+                 target="_blank" rel="noopener noreferrer"
+                 class="paywall-btn-monthly">
+                Monthly – $9.90/mo
+              </a>
+            </div>
+            <p class="paywall-microcopy">✔ Cancel anytime &nbsp;•&nbsp; No commitment &nbsp;•&nbsp; Instant access after payment</p>
+          </div>
+
+          <!-- SOFT UPGRADE PROMPT (shown after 1st generation, non-blocking) -->
+          <div id="soft-upgrade-prompt" class="soft-upgrade-prompt" style="display:none;">
+            <button class="soft-close" onclick="document.getElementById('soft-upgrade-prompt').style.display='none';" aria-label="Dismiss">✕</button>
+            <div class="soft-upgrade-inner">
+              <div class="soft-upgrade-text">
+                <strong>💡 Enjoying your recipe?</strong><br>
+                <span>Upgrade to unlock unlimited generations, save recipes &amp; full meal history.</span>
+              </div>
+              <a href="https://buy.stripe.com/7sY3cxa804ZHfkP6KlgYU02"
+                 target="_blank" rel="noopener noreferrer"
+                 class="soft-upgrade-btn">
+                Go Premium 🔥
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: MEAL PLAN -->
+        <div class="app-content" id="content-plan" style="display:none;">
+          <div class="welcome-screen" id="plan-welcome">
+            <div class="welcome-icon">📅</div>
+            <h2>7-Day Healing Meal Plan</h2>
+            <p style="max-width:400px;color:var(--mid);">Click <strong>"Generate 7-Day Meal Plan"</strong> to receive a complete weekly meal plan with breakfast, lunch, dinner and snacks — all tailored to your health condition and calorie target.</p>
+            <button class="btn btn-primary btn-lg" style="margin-top:20px;" onclick="generateMealPlan()">📅 Generate My 7-Day Plan</button>
+          </div>
+          <div id="plan-output" style="display:none;"></div>
+        </div>
+
+        <!-- TAB: NUTRITION -->
+        <div class="app-content" id="content-nutrition" style="display:none;">
+          <div id="nutrition-output">
+            <h3 style="margin-bottom:24px;">📊 Your Daily Nutrition Targets</h3>
+            <p style="color:var(--mid);">Complete your profile and generate a recipe to see detailed nutrition analysis. Your personalized targets will appear here based on your age, weight, height, activity level, and health condition.</p>
+            <div id="nutrition-calc-output"></div>
+          </div>
+        </div>
+
+        <!-- TAB: HEALTH TIPS -->
+        <div class="app-content" id="content-tips" style="display:none;">
+          <div id="tips-output">
+            <h3 style="margin-bottom:20px;">💡 Condition-Specific Nutrition Tips</h3>
+            <p style="color:var(--mid);margin-bottom:24px;">Select a condition in your profile and generate a recipe to see evidence-based nutrition tips tailored to your health needs.</p>
+            <div id="tips-cards"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO CARDS BELOW APP -->
+    <div class="grid-3 fade-in" style="margin-top:60px;">
+      <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem;margin-bottom:12px;">🗄️</div>
+        <h4>Food Databases Used</h4>
+        <p style="font-size:0.85rem;">USDA FoodData Central · CIQUAL (France) · FAO West African Food Composition · UK Nutrient Databank · WHO Nutrient Reference Values</p>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem;margin-bottom:12px;">🩺</div>
+        <h4>Clinical Guidelines</h4>
+        <p style="font-size:0.85rem;">ADA (Diabetes) · AHA (Heart/Hypertension) · KDOQI (Kidney) · ESPEN (Cancer) · WHO (General Health) · ACG (Digestive)</p>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem;margin-bottom:12px;">🔒</div>
+        <h4>Privacy & Safety</h4>
+        <p style="font-size:0.85rem;">No personal data stored. All calculations run locally in your browser. Always consult your doctor or dietitian for medical advice.</p>
+      </div>
+    </div>
+
+    <!-- ══ PREMIUM UPGRADE SECTION ══════════════════════════════ -->
+    <div class="premium-upgrade-box fade-in">
+      <span class="upgrade-eyebrow">⭐ NutriLife Premium</span>
+      <h2>Take Your Nutrition Further</h2>
+      <p class="upgrade-lead">
+        The free tool gets you started. Premium unlocks everything — unlimited saves, full history,
+        priority AI generation, and in-depth analytics tuned to your exact health profile.
+      </p>
+
+      <ul class="upgrade-feature-list">
+        <li>Unlimited recipe saves</li>
+        <li>Full meal plan history</li>
+        <li>Priority AI generation</li>
+        <li>Advanced nutrition analytics</li>
+        <li>Condition-specific tracking</li>
+        <li>Multi-language support</li>
+        <li>Printable weekly reports</li>
+        <li>Early access to new features</li>
+      </ul>
+
+      <div class="pricing-cards-row">
+
+        <!-- Monthly plan -->
+        <div class="pricing-card">
+          <span class="plan-badge badge-default">Monthly</span>
+          <div class="plan-name">Flexible Plan</div>
+          <div class="plan-price">$9.90</div>
+          <div class="plan-period">per month · cancel anytime</div>
+          <a href="https://buy.stripe.com/8x2bJ34NG77P6Oj6KlgYU01"
+             target="_blank" rel="noopener noreferrer"
+             class="plan-cta-secondary">
+            Get Started
+          </a>
+        </div>
+
+        <!-- Annual plan (featured) -->
+        <div class="pricing-card featured">
+          <span class="plan-badge badge-featured">Best Value 🔥</span>
+          <div class="plan-name">Annual Plan</div>
+          <div class="plan-price">$79</div>
+          <div class="plan-period">per year · 2 months free</div>
+          <div class="plan-saving">Save 33% vs monthly</div>
+          <a href="https://buy.stripe.com/7sY3cxa804ZHfkP6KlgYU02"
+             target="_blank" rel="noopener noreferrer"
+             class="plan-cta-primary">
+            Start Annual Plan – $79
+          </a>
+        </div>
+
+      </div>
+
+      <p class="upgrade-guarantee">
+        🔒 Cancel anytime &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Instant access after payment
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:12px;"><div class="logo-icon">🌿</div>Nutri<span>Life</span></div>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;max-width:240px;" data-i18n="footer.tagline">Personalized nutrition coaching for better health, culturally adapted and evidence-based.</p>
+        <div style="margin-top:16px;display:flex;gap:10px;">
+          <a href="contact.html" class="btn btn-amber btn-sm">Book Session</a>
+          <a href="downloads.html" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:#fff;">Free Guide</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4 data-i18n="footer.services">Services</h4><a href="coaching.html">1:1 Coaching</a><a href="program.html">Group Program</a><a href="masterclass.html">Masterclass</a><a href="training.html">Online Academy</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.resources">Resources</h4><a href="nutrition-app.html">🤖 Nutrition App</a><a href="recipes.html">Recipe Portal</a><a href="nutrition-data.html">📊 Nutrition Database</a><a href="downloads.html">Free Downloads</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.company">Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copyright">© 2025 NutriLife Coaching. All rights reserved.</p>
+      <div style="display:flex;gap:8px;">
+        <button class="lang-btn" data-set-lang="en" style="color:rgba(255,255,255,0.5);">EN</button>
+        <button class="lang-btn" data-set-lang="fr" style="color:rgba(255,255,255,0.5);">FR</button>
+        <button class="lang-btn" data-set-lang="es" style="color:rgba(255,255,255,0.5);">ES</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience.</p>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button id="decline-cookies" class="btn btn-sm" style="background:rgba(255,255,255,0.1);color:white;">Decline</button>
+    <button id="accept-cookies" class="btn btn-amber btn-sm">Accept</button>
+  </div>
+</div>
+<button class="scroll-top" id="scroll-top">↑</button>
+
+<script src="js/main.js"></script>
+<script>
+/* ══════════════════════════════════════════════
+   NutriLife AI — Nutrition Engine
+══════════════════════════════════════════════ */
+
+// ── TAG SELECTIONS ──
+function initTagSelectors() {
+  document.querySelectorAll('#condition-tags .health-tag').forEach(tag => {
+    tag.addEventListener('click', () => tag.classList.toggle('selected'));
+  });
+  document.querySelectorAll('#cuisine-tags .cuisine-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      document.querySelectorAll('#cuisine-tags .cuisine-tag').forEach(t => t.classList.remove('selected'));
+      tag.classList.add('selected');
+    });
+  });
+  document.querySelectorAll('#diet-tags .health-tag').forEach(tag => {
+    tag.addEventListener('click', () => tag.classList.toggle('selected'));
+  });
+}
+
+// ── GET SELECTED VALUES ──
+function getSelectedTags(containerId) {
+  return [...document.querySelectorAll(`#${containerId} .selected`)].map(t => t.dataset.val);
+}
+
+// ── USER PROFILE ──
+function getUserProfile() {
+  const age = parseInt(document.getElementById('age').value) || 45;
+  const gender = document.getElementById('gender').value;
+  const weight = parseFloat(document.getElementById('weight').value) || 75;
+  const height = parseFloat(document.getElementById('height').value) || 168;
+  const activity = document.getElementById('activity').value;
+  const cooktime = document.getElementById('cooktime').value;
+  const mealtype = document.getElementById('mealtype').value;
+  const specificRequest = document.getElementById('specific-request').value.trim();
+  const conditions = getSelectedTags('condition-tags');
+  const cuisines = getSelectedTags('cuisine-tags');
+  const diets = getSelectedTags('diet-tags');
+  const primaryCondition = conditions.length > 0 ? conditions[0] : 'general';
+  const primaryCuisine = cuisines.length > 0 ? cuisines[0] : 'global';
+  const bmi = weight / ((height / 100) ** 2);
+  const bmr = gender === 'male'
+    ? 10 * weight + 6.25 * height - 5 * age + 5
+    : 10 * weight + 6.25 * height - 5 * age - 161;
+  const activityMultiplier = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725 }[activity] || 1.375;
+  const tdee = Math.round(bmr * activityMultiplier);
+  return { age, gender, weight, height, activity, cooktime, mealtype, specificRequest, conditions, cuisines, primaryCondition, primaryCuisine, diets, bmi, bmr, tdee };
+}
+
+// ── RECIPE DATABASE (expanded) ──
+const RECIPE_DB = {
+  diabetes: {
+    'west-african': [
+      {
+        name: "Diabetic-Friendly Thieboudienne",
+        emoji: "🐟",
+        time: "45 min",
+        servings: 4,
+        difficulty: "Medium",
+        description: "Senegal's national dish transformed for diabetes management — using brown rice, a rainbow of vegetables, and heart-healthy fish. The high fiber content slows glucose absorption dramatically.",
+        culturalNote: "Thiéboudienne (pronounced 'cheb-u-jen') means 'rice with fish' in Wolof. It is the pride of Senegalese cuisine and this diabetes-friendly adaptation preserves all its soul.",
+        ingredients: [
+          { item: "Brown basmati rice", qty: "1½ cups", cal: 330, note: "Low-GI alternative to white rice" },
+          { item: "Lean sea bass or snapper", qty: "400g", cal: 140 },
+          { item: "Tomato paste (no salt added)", qty: "2 tbsp", cal: 25 },
+          { item: "Cabbage wedges", qty: "½ head (~300g)", cal: 40 },
+          { item: "Carrots, thick slices", qty: "2 medium", cal: 50 },
+          { item: "Eggplant, cubed", qty: "1 small", cal: 35 },
+          { item: "Fresh okra pods", qty: "8-10", cal: 30, note: "Slows glucose absorption" },
+          { item: "Red bell pepper", qty: "2, quartered", cal: 40 },
+          { item: "Onion, diced", qty: "1 large", cal: 45 },
+          { item: "Garlic cloves", qty: "4, minced", cal: 20 },
+          { item: "Fresh ginger", qty: "1 inch, grated", cal: 5 },
+          { item: "Olive oil", qty: "2 tbsp", cal: 240 },
+          { item: "Low-sodium fish/vegetable broth", qty: "2½ cups", cal: 15 },
+          { item: "Bay leaf, fresh thyme", qty: "to taste", cal: 5 },
+          { item: "Black pepper, smoked paprika", qty: "to taste", cal: 5 }
+        ],
+        steps: [
+          "Make the yassa marinade: mix garlic, ginger, paprika, and 1 tbsp olive oil. Rub generously on fish. Marinate 30 min minimum (overnight is best).",
+          "Heat remaining olive oil in a large heavy pot. Brown marinated fish 3 min per side. Remove fish, set aside.",
+          "In the same pot, sauté diced onion 4-5 min until golden. Add garlic and tomato paste. Stir and fry 5 min until paste darkens.",
+          "Add 2 cups of broth and all vegetables (except okra). Bring to boil. Simmer 15 min.",
+          "Add rinsed brown rice, okra, and remaining broth. Place fish on top. Season with black pepper.",
+          "Cover tightly. Reduce to low heat. Cook 30-35 min until rice absorbs liquid and is tender.",
+          "Rest off heat 5 min. Serve with a wedge of lemon and fresh herb garnish."
+        ],
+        nutrition: { calories: 385, protein: 28, carbs: 44, fat: 12, fiber: 7, sugar: 4, sodium: 290, gi: 42, gl: 18 },
+        benefits: [
+          "Brown rice has a glycemic index of 50 vs white rice at 72 — significantly reducing blood sugar spikes",
+          "Okra contains a gel-forming fiber called mucilage that slows glucose absorption in the gut",
+          "Omega-3 fatty acids in sea bass improve insulin sensitivity",
+          "The fiber-rich vegetable medley creates a satisfying, blood-sugar-stable meal that lasts 4-5 hours"
+        ],
+        tips: "For extra blood sugar control, let the rice cool slightly before serving — cooled starches form resistant starch, further lowering glycemic impact.",
+        pairWith: "Serve with a small side of fermented locust beans (dawadawa) which contain compounds that may improve insulin function."
+      }
+    ],
+    'mediterranean': [
+      {
+        name: "Greek Lemon Chicken with Tzatziki & Tabbouleh",
+        emoji: "🇬🇷",
+        time: "40 min",
+        servings: 4,
+        difficulty: "Easy",
+        description: "A vibrant Mediterranean plate featuring herbed grilled chicken, cooling tzatziki, and quinoa tabbouleh — a complete diabetes-friendly meal with low glycemic load.",
+        culturalNote: "Mediterranean diet consistently ranks as the best dietary pattern for diabetes management in clinical trials.",
+        ingredients: [
+          { item: "Chicken breast", qty: "500g", cal: 550 },
+          { item: "Greek yogurt (plain, full fat)", qty: "200g", cal: 130 },
+          { item: "Quinoa", qty: "1 cup dry", cal: 310 },
+          { item: "Parsley, mint (large bunches)", qty: "2 bunches", cal: 30 },
+          { item: "Cucumber", qty: "1 large", cal: 20 },
+          { item: "Cherry tomatoes", qty: "200g", cal: 35 },
+          { item: "Lemon", qty: "3 lemons", cal: 15 },
+          { item: "Garlic", qty: "4 cloves", cal: 20 },
+          { item: "Olive oil", qty: "3 tbsp", cal: 360 },
+          { item: "Dried oregano", qty: "2 tsp", cal: 5 },
+          { item: "Dill (fresh or dried)", qty: "1 tbsp", cal: 5 }
+        ],
+        steps: [
+          "Marinate chicken in lemon juice, garlic, oregano, and 1 tbsp olive oil for 20 min.",
+          "Cook quinoa per package instructions. Cool completely.",
+          "Make tzatziki: grate and squeeze cucumber, mix with yogurt, garlic, dill, and lemon.",
+          "Grill chicken 6-7 min per side. Rest 5 min then slice.",
+          "Make tabbouleh: combine quinoa, finely chopped herbs, tomatoes, lemon, and olive oil.",
+          "Plate tabbouleh, top with chicken slices and generous tzatziki."
+        ],
+        nutrition: { calories: 365, protein: 34, carbs: 28, fat: 13, fiber: 4, sugar: 5, sodium: 210, gi: 38, gl: 11 },
+        benefits: ["Low glycemic load of 11 — minimal blood sugar impact", "Quinoa provides complete protein with all essential amino acids", "Probiotics in yogurt improve gut health and insulin sensitivity"],
+        tips: "The protein + fat + fiber combination in this meal results in a very gradual blood sugar rise — ideal for Type 2 diabetes management.",
+        pairWith: "Add a handful of raw walnuts as a side — they further reduce the glycemic response of the meal."
+      }
+    ],
+    'caribbean': [
+      {
+        name: "Caribbean Steamed Fish with Root Vegetables",
+        emoji: "🐠",
+        time: "35 min",
+        servings: 2,
+        difficulty: "Easy",
+        description: "A light, flavor-packed steamed fish with Caribbean spices, using green bananas and yam (low-GI root vegetables) instead of white rice.",
+        culturalNote: "Steamed fish is a cornerstone of Caribbean cuisine — this method preserves all nutrients while infusing flavors.",
+        ingredients: [
+          { item: "Whole snapper or sea bream", qty: "2 small (300g each)", cal: 300 },
+          { item: "Green banana or plantain (unripe)", qty: "2 medium", cal: 160, note: "Lower GI than ripe" },
+          { item: "Yellow yam", qty: "200g", cal: 180 },
+          { item: "Scotch bonnet pepper", qty: "½ (optional)", cal: 5 },
+          { item: "Thyme (fresh)", qty: "4 sprigs", cal: 5 },
+          { item: "Scallions", qty: "4, sliced", cal: 20 },
+          { item: "Garlic", qty: "3 cloves", cal: 15 },
+          { item: "Fresh ginger", qty: "1 inch", cal: 5 },
+          { item: "Lime juice", qty: "1 lime", cal: 10 },
+          { item: "All-spice berries", qty: "4", cal: 5 }
+        ],
+        steps: [
+          "Score fish with deep diagonal cuts. Season with lime juice, garlic, ginger, thyme.",
+          "Parboil green banana and yam for 10 min. They should be slightly undercooked.",
+          "Place yam and banana in a pot. Lay fish on top with herbs and scotch bonnet.",
+          "Add ¼ cup water, cover tightly. Steam on medium heat 20 min.",
+          "Check fish is cooked through (flakes easily). Serve immediately."
+        ],
+        nutrition: { calories: 340, protein: 32, carbs: 35, fat: 7, fiber: 5, sugar: 3, sodium: 180, gi: 40, gl: 14 },
+        benefits: ["Green banana is rich in resistant starch — feeds gut bacteria and dramatically lowers blood sugar response", "Steaming preserves all heat-sensitive vitamins", "Low calorie density supports healthy weight — crucial for diabetes management"],
+        tips: "Unripe (green) plantain and banana have a GI of ~30-40 vs ripe versions at 60-70. Always use green for diabetes management.",
+        pairWith: "Add a side of mixed green salad with avocado for extra fiber and healthy fats."
+      }
+    ],
+    'american': [
+      {
+        name: "Turkey & Black Bean Stuffed Sweet Potato",
+        emoji: "🍠",
+        time: "55 min",
+        servings: 4,
+        difficulty: "Easy",
+        description: "Baked sweet potato loaded with spiced ground turkey and fiber-rich black beans — a diabetes-friendly American comfort food classic.",
+        ingredients: [
+          { item: "Medium sweet potatoes", qty: "4", cal: 400, note: "GI ~61 — lower than white potato at 80" },
+          { item: "Lean ground turkey (93%)", qty: "400g", cal: 520 },
+          { item: "Black beans (no salt, drained)", qty: "1 can", cal: 220 },
+          { item: "Diced tomatoes (no salt)", qty: "1 can", cal: 50 },
+          { item: "Red onion, diced", qty: "1", cal: 45 },
+          { item: "Garlic", qty: "3 cloves", cal: 15 },
+          { item: "Chili powder", qty: "2 tsp", cal: 10 },
+          { item: "Cumin", qty: "1 tsp", cal: 5 },
+          { item: "Smoked paprika", qty: "1 tsp", cal: 5 },
+          { item: "Olive oil", qty: "1 tbsp", cal: 120 },
+          { item: "Greek yogurt or avocado", qty: "for topping", cal: 80 }
+        ],
+        steps: [
+          "Pierce sweet potatoes all over. Bake at 200°C for 45-50 min until soft.",
+          "Brown turkey in olive oil with onion and garlic.",
+          "Add black beans, tomatoes, and spices. Simmer 10 min.",
+          "Split sweet potatoes. Fluff flesh with fork.",
+          "Load with turkey-bean mixture. Top with yogurt or avocado."
+        ],
+        nutrition: { calories: 410, protein: 30, carbs: 48, fat: 10, fiber: 10, sugar: 8, sodium: 250, gi: 45, gl: 22 },
+        benefits: ["Black beans have a very low GI of 28", "Beta-carotene in sweet potato is a powerful antioxidant that reduces oxidative stress in diabetes", "10g fiber per serving dramatically slows carbohydrate absorption"],
+        tips: "Cool leftover sweet potatoes overnight — the reheated version has even more resistant starch and a lower glycemic impact.",
+        pairWith: "Add a green salad with apple cider vinegar dressing — vinegar lowers post-meal blood sugar by 19-34%."
+      }
+    ],
+    'asian': [
+      {
+        name: "Japanese Miso Salmon with Edamame Rice",
+        emoji: "🍱",
+        time: "30 min",
+        servings: 2,
+        difficulty: "Easy",
+        description: "Umami-rich miso-glazed salmon with cauliflower-edamame 'rice' — an elegant, low-carb Japanese-inspired diabetes meal.",
+        ingredients: [
+          { item: "Salmon fillets", qty: "2 × 180g", cal: 490 },
+          { item: "White miso paste", qty: "2 tbsp", cal: 70, note: "Use sparingly — contains sodium" },
+          { item: "Cauliflower head", qty: "1 large, riced", cal: 80 },
+          { item: "Edamame (shelled, frozen)", qty: "1 cup", cal: 185 },
+          { item: "Sesame oil", qty: "1 tbsp", cal: 120 },
+          { item: "Low-sodium soy sauce", qty: "1 tbsp", cal: 10 },
+          { item: "Rice wine vinegar", qty: "1 tbsp", cal: 5 },
+          { item: "Fresh ginger", qty: "1 tsp grated", cal: 5 },
+          { item: "Scallions, sesame seeds", qty: "for garnish", cal: 20 }
+        ],
+        steps: [
+          "Mix miso, soy sauce, vinegar, and ginger. Brush generously on salmon.",
+          "Bake salmon at 200°C for 12-15 min or broil for caramelized finish.",
+          "Rice cauliflower in food processor. Sauté in sesame oil 5 min.",
+          "Add edamame to cauliflower rice. Heat through 3 min.",
+          "Plate rice, top with glazed salmon. Garnish with scallions and sesame."
+        ],
+        nutrition: { calories: 445, protein: 44, fat: 22, carbs: 16, fiber: 7, sugar: 4, sodium: 680, gi: 25, gl: 4 },
+        benefits: ["Glycemic load of just 4 — one of the lowest possible for a full meal", "Omega-3s in salmon counteract diabetes-related inflammation", "Fermented miso contains probiotics that improve gut microbiome and insulin sensitivity"],
+        tips: "Rinse edamame under cold water before adding — this reduces sodium while maintaining protein content.",
+        pairWith: "Serve with a small bowl of miso soup (low-sodium) for additional probiotics."
+      }
+    ]
+  },
+  hypertension: {
+    'west-african': [
+      {
+        name: "Low-Sodium Egusi Soup with Turkey",
+        emoji: "🌰",
+        time: "50 min",
+        servings: 6,
+        difficulty: "Medium",
+        description: "Nigeria's iconic egusi melon seed soup — completely reformulated for hypertension management: no maggi/knorr cubes, no palm oil, using olive oil and natural flavors.",
+        culturalNote: "Egusi soup is eaten across West and Central Africa. Most traditional versions are high in sodium from seasoning cubes. This reformulation tastes just as incredible.",
+        ingredients: [
+          { item: "Ground egusi melon seeds", qty: "200g", cal: 1020, note: "High in magnesium — lowers BP" },
+          { item: "Turkey breast (lean)", qty: "400g", cal: 440 },
+          { item: "Fresh spinach or ugu leaves", qty: "300g", cal: 70 },
+          { item: "Tomatoes", qty: "4 medium, blended", cal: 80 },
+          { item: "Red bell peppers", qty: "2, blended", cal: 50 },
+          { item: "Onion", qty: "1 large", cal: 45 },
+          { item: "Garlic", qty: "5 cloves", cal: 25 },
+          { item: "Fresh ginger", qty: "2 inches", cal: 15 },
+          { item: "Olive oil", qty: "3 tbsp", cal: 360 },
+          { item: "Small dried crayfish", qty: "1 tbsp only", cal: 30, note: "Use sparingly — reduce sodium" },
+          { item: "Uziza seeds or black pepper", qty: "1 tsp", cal: 5 },
+          { item: "Thyme, bay leaf", qty: "to taste", cal: 5 },
+          { item: "NO MAGGI / NO SALT CUBES — use herb blend instead", qty: "—", cal: 0 }
+        ],
+        steps: [
+          "Cook turkey with onion (half), garlic, ginger, thyme. NO salt cubes. Reserve broth.",
+          "Blend tomatoes and red bell peppers. Fry in olive oil 20 min, stirring, until oil surfaces.",
+          "Mix egusi with 3 tbsp cold water to form a thick paste. Add to tomato sauce in dollops.",
+          "Cover and cook egusi 12-15 min on medium. Stir frequently to prevent burning.",
+          "Add turkey, broth, crayfish, and uziza. Simmer 10 min.",
+          "Add leafy greens. Cook 4-5 min. Taste and adjust with natural herbs only.",
+          "Serve with whole-grain swallow or brown rice."
+        ],
+        nutrition: { calories: 285, protein: 22, carbs: 12, fat: 18, fiber: 5, sodium: 320, potassium: 480 },
+        benefits: [
+          "Magnesium in egusi seeds is crucial for blood pressure — deficiency is linked to hypertension",
+          "Eliminating salt cubes reduces sodium by ~800mg per serving compared to traditional recipe",
+          "Olive oil provides oleocanthal — a natural anti-inflammatory compound",
+          "Garlic and ginger contain compounds that naturally lower blood pressure"
+        ],
+        tips: "Fermented locust beans (iru/dawadawa) can replace some salt — they add umami depth with far less sodium.",
+        pairWith: "Serve with oat-based swallow or small portion of fufu made with unripe plantain for added blood pressure benefit."
+      }
+    ],
+    'mediterranean': [
+      {
+        name: "DASH Diet Mediterranean Platter",
+        emoji: "🫒",
+        time: "25 min",
+        servings: 4,
+        difficulty: "Easy",
+        description: "The DASH diet (Dietary Approaches to Stop Hypertension) and Mediterranean diet combined in one stunning platter — clinically proven to lower systolic blood pressure by 8-14 mmHg.",
+        ingredients: [
+          { item: "Grilled skinless chicken breast", qty: "400g", cal: 440 },
+          { item: "Hummus (low-sodium, homemade)", qty: "200g", cal: 320 },
+          { item: "Tabbouleh (bulgur or quinoa)", qty: "2 cups", cal: 220 },
+          { item: "Roasted red peppers", qty: "3, sliced", cal: 80 },
+          { item: "Kalamata olives (4-5 only — high sodium)", qty: "20g", cal: 60 },
+          { item: "Cucumber, sliced", qty: "1", cal: 20 },
+          { item: "Cherry tomatoes", qty: "200g", cal: 35 },
+          { item: "Whole grain pita (1 per person)", qty: "4", cal: 400 },
+          { item: "Feta cheese (small amount)", qty: "60g", cal: 160 },
+          { item: "Olive oil & lemon dressing", qty: "to drizzle", cal: 120 }
+        ],
+        steps: [
+          "Season chicken with herbs, garlic, and lemon. Grill 6-7 min per side.",
+          "Arrange all components on large platters family-style.",
+          "Drizzle everything with olive oil and lemon juice.",
+          "Serve with warm whole grain pita."
+        ],
+        nutrition: { calories: 395, protein: 35, carbs: 32, fat: 15, fiber: 7, sodium: 480, potassium: 620 },
+        benefits: ["Clinical studies: DASH diet lowers BP by 8-14 systolic mmHg — comparable to medication", "High potassium from vegetables counteracts sodium's BP-raising effect", "Olive oil polyphenols have vasodilatory effects"],
+        tips: "Key DASH principles: high potassium (4,700mg/day), high calcium, high magnesium, low sodium (<2,300mg). This meal provides all four.",
+        pairWith: "Start with a beet and walnut salad (beets contain dietary nitrates that dilate blood vessels)."
+      }
+    ]
+  },
+  kidney: {
+    'west-african': [
+      {
+        name: "Renal-Safe Ogbono Soup (CKD Adapted)",
+        emoji: "🌰",
+        time: "45 min",
+        servings: 4,
+        difficulty: "Medium",
+        description: "Ogbono (wild mango seed) soup adapted for chronic kidney disease — reduced potassium through leaching technique, controlled protein, no high-phosphorus ingredients.",
+        culturalNote: "Ogbono soup is popular across West Africa for its unique 'draw' (slippery) texture. This CKD-safe version maintains flavor while protecting kidney health.",
+        ingredients: [
+          { item: "Ground ogbono seeds", qty: "100g", cal: 550 },
+          { item: "Lean beef or chicken (controlled portion)", qty: "200g only", cal: 220, note: "Limit protein to 20-25g/serving for CKD" },
+          { item: "Spinach (blanched and drained)", qty: "200g", cal: 45, note: "Blanching reduces potassium by 30-50%" },
+          { item: "Red bell pepper (low-potassium veg)", qty: "2, blended", cal: 50 },
+          { item: "Onion", qty: "½ only", cal: 22 },
+          { item: "Garlic (limited)", qty: "2 cloves", cal: 10 },
+          { item: "Olive oil (no palm oil)", qty: "2 tbsp", cal: 240 },
+          { item: "Low-sodium broth (homemade)", qty: "1 cup", cal: 10 },
+          { item: "Thyme, bay leaf (dried)", qty: "to taste", cal: 5 },
+          { item: "NO crayfish (high phosphorus)", qty: "—", cal: 0 },
+          { item: "NO tomato paste (high potassium)", qty: "—", cal: 0 }
+        ],
+        steps: [
+          "LEACHING TECHNIQUE: Boil spinach 3 min. Drain. Rinse with cold water. Discard water. Repeat once. This reduces potassium by up to 50%.",
+          "Cook meat with minimal onion and herbs. NO salt cubes. Reserve small amount of broth.",
+          "Heat olive oil in pot. Add blended red pepper. Cook 10 min on medium.",
+          "Add ground ogbono. Stir constantly 8 min — it will thicken.",
+          "Add controlled broth gradually. Add meat and leached spinach.",
+          "Simmer 8 min. Serve with white rice (low-potassium choice) or small fufu portion."
+        ],
+        nutrition: { calories: 295, protein: 22, carbs: 10, fat: 18, fiber: 4, sodium: 280, potassium: 310, phosphorus: 190 },
+        benefits: [
+          "Leached spinach reduces potassium from ~600mg to ~300mg per serving",
+          "Controlled protein portion (22g) prevents additional kidney strain",
+          "No crayfish eliminates high-phosphorus content",
+          "White rice is lower in potassium and phosphorus than brown rice — preferred in CKD stages 3-4"
+        ],
+        tips: "IMPORTANT for CKD: Always leach high-potassium vegetables before cooking. Double-boiling (boiling, discarding water, boiling again) removes up to 60% of potassium.",
+        pairWith: "Discuss potassium and phosphorus targets with your nephrologist — individual CKD dietary needs vary greatly."
+      }
+    ]
+  },
+  heart: {
+    'west-african': [
+      {
+        name: "Heart-Healthy Grilled Mackerel with Vegetable Stew",
+        emoji: "🐡",
+        time: "35 min",
+        servings: 4,
+        difficulty: "Easy",
+        description: "Atlantic mackerel is the richest source of heart-protective EPA and DHA omega-3s. This recipe combines West African spicing with maximum cardiovascular benefit.",
+        ingredients: [
+          { item: "Atlantic mackerel (whole or fillets)", qty: "4 fillets (~600g)", cal: 800, note: "Highest EPA/DHA of any fish" },
+          { item: "Tomatoes, blended", qty: "4 large", cal: 100 },
+          { item: "Onion", qty: "1 large", cal: 45 },
+          { item: "Fresh garlic", qty: "6 cloves", cal: 30, note: "Contains allicin — lowers LDL cholesterol" },
+          { item: "Fresh ginger", qty: "2 inches", cal: 15 },
+          { item: "Lemon juice", qty: "2 lemons", cal: 20 },
+          { item: "Scotch bonnet", qty: "½, optional", cal: 5 },
+          { item: "Fresh parsley, cilantro", qty: "large bunches", cal: 15 },
+          { item: "Olive oil", qty: "2 tbsp", cal: 240 },
+          { item: "Turmeric", qty: "1 tsp", cal: 5, note: "Potent anti-inflammatory" },
+          { item: "Mixed leafy greens", qty: "300g", cal: 60 }
+        ],
+        steps: [
+          "Score mackerel on both sides. Make paste of garlic, ginger, lemon, turmeric. Apply to fish.",
+          "Grill fish on very high heat 5-6 min per side. Skin should be charred.",
+          "Meanwhile sauté onion in olive oil. Add blended tomato with scotch bonnet.",
+          "Cook tomato sauce 15 min until thickened. Add greens and cook 3 min.",
+          "Serve fish over greens with tomato sauce. Garnish with fresh herbs."
+        ],
+        nutrition: { calories: 420, protein: 36, carbs: 12, fat: 26, fiber: 4, sodium: 240, omega3: "3.4g" },
+        benefits: ["3.4g EPA+DHA per serving — reduces cardiac death risk by 36%", "Grilling (not frying) preserves omega-3s and avoids trans fats", "Garlic allicin reduces LDL by 10-15% and triglycerides by 15%", "Turmeric reduces CRP (inflammatory marker) associated with heart disease"],
+        tips: "Eat oily fish like mackerel, sardines, or salmon 2-3x per week for cardiovascular protection. This is more effective than fish oil supplements.",
+        pairWith: "Pair with a glass of pomegranate juice (unsweetened) — its polyphenols reduce arterial stiffness."
+      }
+    ]
+  },
+  digestive: {
+    'west-african': [
+      {
+        name: "Baobab & Probiotic Gut-Healing Smoothie Bowl",
+        emoji: "🌺",
+        time: "10 min",
+        servings: 2,
+        difficulty: "Easy",
+        description: "Baobab fruit — the African superfood with the world's highest antioxidant content — combined with gut-healing probiotics, prebiotics, and digestive enzymes.",
+        ingredients: [
+          { item: "Baobab powder", qty: "2 tbsp", cal: 40, note: "Prebiotic fiber — feeds beneficial bacteria" },
+          { item: "Plain kefir (live cultures)", qty: "200ml", cal: 130, note: "12 probiotic strains" },
+          { item: "Frozen mango chunks", qty: "1 cup", cal: 100 },
+          { item: "Banana (slightly green for more resistant starch)", qty: "1", cal: 90 },
+          { item: "Fresh ginger", qty: "1 tsp, grated", cal: 5 },
+          { item: "Ground flaxseed", qty: "2 tbsp", cal: 75, note: "Omega-3 + insoluble fiber" },
+          { item: "Chia seeds", qty: "1 tbsp", cal: 60, note: "Forms a soothing gel in the gut" },
+          { item: "Honey (raw, local)", qty: "1 tbsp", cal: 60, note: "Contains prebiotic oligosaccharides" },
+          { item: "Toppings: granola, berries, coconut flakes", qty: "to taste", cal: 80 }
+        ],
+        steps: [
+          "Blend kefir, mango, banana, ginger, and baobab powder until smooth.",
+          "Pour into bowls.",
+          "Sprinkle flaxseed, chia, granola, berries, and coconut flakes on top.",
+          "Drizzle with honey. Eat immediately."
+        ],
+        nutrition: { calories: 320, protein: 10, carbs: 52, fat: 8, fiber: 11, probiotics: "10B+ CFU" },
+        benefits: [
+          "Baobab fiber is one of the highest-rated prebiotics — feeds Lactobacillus and Bifidobacterium",
+          "Kefir has been shown to reduce IBS symptoms, bloating, and gut permeability",
+          "Chia seeds form a soothing mucilaginous gel that coats and protects the gut lining",
+          "Raw honey contains oligosaccharides that act as prebiotics and have antimicrobial properties"
+        ],
+        tips: "For IBS, introduce baobab powder gradually — start with 1 tsp and increase over 2 weeks to avoid initial gas.",
+        pairWith: "Follow with a small cup of ginger tea — ginger is a proven digestive motility enhancer."
+      }
+    ]
+  },
+  cancer: {
+    'west-african': [
+      {
+        name: "Moringa & Turmeric Anti-Cancer Soup",
+        emoji: "🌿",
+        time: "30 min",
+        servings: 4,
+        difficulty: "Easy",
+        description: "Moringa — Africa's miracle tree — combined with turmeric, ginger, and garlic creates one of the most potent anti-inflammatory, anti-cancer nutritional combinations in food science.",
+        ingredients: [
+          { item: "Fresh moringa leaves (or 2 tbsp powder)", qty: "100g", cal: 65, note: "Contains 46 antioxidants, Quercetin, Chlorogenic acid" },
+          { item: "Sweet potato", qty: "400g, cubed", cal: 360, note: "Beta-carotene converts to Vitamin A — anti-cancer" },
+          { item: "Fresh turmeric (or 2 tsp powder)", qty: "3 inches", cal: 30, note: "Curcumin inhibits cancer cell proliferation" },
+          { item: "Fresh ginger", qty: "2 inches", cal: 15, note: "6-Gingerol has anti-tumor properties" },
+          { item: "Garlic", qty: "6 cloves", cal: 30, note: "Allicin and organosulfur compounds — anti-cancer" },
+          { item: "Onion", qty: "1", cal: 45, note: "Quercetin — cancer cell apoptosis inducer" },
+          { item: "Coconut milk", qty: "400ml", cal: 550 },
+          { item: "Low-sodium vegetable broth", qty: "500ml", cal: 20 },
+          { item: "Black pepper", qty: "1 tsp — ESSENTIAL", cal: 5, note: "Piperine increases curcumin absorption 2000%" },
+          { item: "Olive oil", qty: "2 tbsp", cal: 240 },
+          { item: "Lime juice", qty: "1 lime", cal: 10 }
+        ],
+        steps: [
+          "Sauté onion and garlic in olive oil 4 min. Add turmeric, ginger, and 1 tsp black pepper.",
+          "Add sweet potato. Stir to coat with spices. Cook 3 min.",
+          "Add coconut milk and broth. Bring to boil. Simmer 15 min until sweet potato is soft.",
+          "Add moringa leaves (or stir in powder). Cook 3 min.",
+          "Blend until smooth. Add lime juice. Serve warm.",
+          "CRITICAL: Always use black pepper with turmeric — without it, curcumin has less than 1% bioavailability."
+        ],
+        nutrition: { calories: 285, protein: 5, carbs: 32, fat: 16, fiber: 6, antioxidants: "Very High", ORAC: "28,000+" },
+        benefits: [
+          "Curcumin (turmeric) has over 2,000 peer-reviewed studies showing anti-cancer, anti-inflammatory effects",
+          "Moringa contains Niazimicin — a compound that suppresses cancer cell development",
+          "Beta-carotene in sweet potato is converted to Vitamin A, which regulates cancer cell differentiation",
+          "6-Gingerol in ginger induces apoptosis (programmed death) of cancer cells in vitro studies"
+        ],
+        tips: "This soup is gentle enough for patients experiencing nausea from chemotherapy — serve in small portions at slightly warm (not hot) temperature.",
+        pairWith: "Serve with green tea (EGCG — a potent cancer-fighting polyphenol) and a small handful of Brazil nuts (selenium — crucial during treatment)."
+      }
+    ]
+  },
+  general: {
+    'west-african': [
+      {
+        name: "Moringa-Enriched Jollof Rice",
+        emoji: "🍚",
+        time: "65 min",
+        servings: 6,
+        difficulty: "Medium",
+        description: "West Africa's most celebrated dish elevated to superfood status — vibrant tomato-based Jollof Rice enriched with moringa powder, using brown parboiled rice and loaded with vegetables.",
+        culturalNote: "Jollof Rice is the ultimate celebration dish across West Africa. 'Jollof Wars' between Nigeria, Ghana, and Senegal are a beloved cultural tradition. This version wins on nutrition.",
+        ingredients: [
+          { item: "Parboiled or brown rice", qty: "2 cups", cal: 680 },
+          { item: "Moringa leaf powder", qty: "2 tbsp", cal: 50, note: "40x more vitamin C than oranges" },
+          { item: "Canned whole tomatoes (no salt)", qty: "800g", cal: 140 },
+          { item: "Red bell peppers", qty: "3, quartered", cal: 90 },
+          { item: "Onion", qty: "2 large", cal: 90 },
+          { item: "Scotch bonnet pepper", qty: "1 (adjust to taste)", cal: 10 },
+          { item: "Low-sodium chicken stock", qty: "2½ cups", cal: 30 },
+          { item: "Olive oil", qty: "3 tbsp", cal: 360 },
+          { item: "Bay leaves", qty: "3", cal: 5 },
+          { item: "Thyme (fresh)", qty: "3 sprigs", cal: 5 },
+          { item: "Curry powder", qty: "1 tsp", cal: 10 },
+          { item: "Smoked paprika", qty: "2 tsp", cal: 10 },
+          { item: "Mixed vegetables (peas, corn, carrots)", qty: "1½ cups", cal: 90 }
+        ],
+        steps: [
+          "Blend tomatoes, red peppers, onion (1), and scotch bonnet until smooth.",
+          "Fry sliced remaining onion in olive oil until deep golden-brown (the Maillard reaction gives Jollof its characteristic smoky flavor).",
+          "Pour in tomato blend. Fry on medium-high heat 25 min, stirring every 3 min, until paste is very dark and thick.",
+          "Add stock, bay leaves, thyme, paprika, and curry. Bring to rolling boil.",
+          "Rinse rice thoroughly. Add to pot. Stir once. Cover tightly with foil then lid.",
+          "Cook 10 min high heat, then 20-25 min lowest heat. DO NOT LIFT LID.",
+          "In last 10 min, add mixed vegetables. Stir in moringa powder.",
+          "The 'party Jollof' smokiness comes from the slight browning of the bottom — this is desired.",
+          "Rest 10 min before serving. Fluff gently."
+        ],
+        nutrition: { calories: 315, protein: 9, carbs: 58, fat: 8, fiber: 6, vitaminC: "185%DV", vitaminA: "90%DV" },
+        benefits: [
+          "Moringa adds 7x the vitamin C of oranges and 4x the calcium of milk per serving",
+          "Brown parboiled rice retains more fiber and nutrients than fully white rice",
+          "Lycopene in tomatoes is a powerful antioxidant — absorption enhanced by cooking with oil",
+          "Bell peppers provide more vitamin C than oranges and are loaded with beta-carotene"
+        ],
+        tips: "The secret to legendary Jollof is patience with the tomato fry — 25 min minimum. This reduces acidity and develops deep Maillard flavor compounds.",
+        pairWith: "Serve with grilled fish or chicken, fried plantain (dodo), and a fresh cucumber-tomato salad."
+      }
+    ]
+  }
+};
+
+// ── CONDITION TIPS ──
+const CONDITION_TIPS = {
+  diabetes: {
+    title: "🩸 Nutrition Tips for Diabetes",
+    tips: [
+      { icon: "📊", title: "Understand Glycemic Load", text: "Glycemic Load (GL) is more useful than Glycemic Index — it considers portion size. Target <10 GL per meal for optimal blood sugar control." },
+      { icon: "🔢", title: "The Plate Method", text: "½ plate non-starchy vegetables, ¼ lean protein, ¼ complex carbohydrates. No calorie counting needed — just portion architecture." },
+      { icon: "🧈", title: "Add Fat to Carbs", text: "Eating fat with carbohydrates slows glucose absorption significantly. Add olive oil, avocado, or nuts to every carb-containing meal." },
+      { icon: "🍎", title: "Fiber is Your Best Friend", text: "Target 25-35g fiber/day. Soluble fiber from oats, okra, legumes, and psyllium directly lowers post-meal blood sugar by 20-30%." },
+      { icon: "🚶", title: "Walk After Every Meal", text: "A 10-minute walk after meals reduces post-meal blood sugar by 22% — more effective than pre-meal exercise for glucose management." },
+      { icon: "⏰", title: "Eat at Consistent Times", text: "Irregular meal timing disrupts circadian insulin rhythms. Eat meals at the same time daily to stabilize your blood sugar pattern." }
+    ]
+  },
+  hypertension: {
+    title: "❤️ Nutrition Tips for Hypertension",
+    tips: [
+      { icon: "🧂", title: "Master Sodium", text: "Target <2,300mg sodium/day (1,500mg if severely hypertensive). Hidden sodium: canned foods, bread, restaurant meals, and 'healthy' sauces are the biggest culprits." },
+      { icon: "🍌", title: "Increase Potassium", text: "Target 4,700mg potassium/day. Potassium counteracts sodium and relaxes blood vessel walls. Top sources: potatoes, bananas, spinach, avocado, beans." },
+      { icon: "🥛", title: "Calcium & Magnesium Matter", text: "Calcium (1,200mg/day) and magnesium (420mg/day) are crucial for blood pressure regulation. Dairy, leafy greens, nuts, and seeds provide these." },
+      { icon: "🍷", title: "Alcohol", text: "More than 2 drinks/day significantly raises blood pressure. Reducing alcohol to 1 drink or less can lower systolic BP by 2-4 mmHg." },
+      { icon: "🌿", title: "Herbs Over Salt", text: "Replace salt with these: garlic, ginger, cumin, turmeric, coriander, bay leaves, fresh herbs. All have natural blood pressure-lowering properties." },
+      { icon: "🐟", title: "Omega-3 Rich Foods", text: "Fatty fish 2-3x/week reduces blood pressure by 3-5 mmHg. Mackerel, sardines, and salmon are most effective." }
+    ]
+  },
+  kidney: {
+    title: "🫘 Nutrition Tips for Kidney Disease (CKD)",
+    tips: [
+      { icon: "⚗️", title: "The Leaching Technique", text: "High-potassium vegetables (potatoes, sweet potato, beets, tomatoes) can be made safer by peeling, dicing small, boiling in lots of water, draining, and discarding the water." },
+      { icon: "🥩", title: "Controlled Protein", text: "CKD stages 3-5: limit protein to 0.6-0.8g/kg body weight/day. This reduces kidney workload. In dialysis, protein needs increase — follow nephrologist guidance." },
+      { icon: "🧂", title: "Phosphorus Awareness", text: "Avoid: processed foods, cola drinks, dairy excess, nuts, legumes (in late CKD). Phosphorus additives in processed foods are 100% absorbed — natural phosphorus only 40-60%." },
+      { icon: "💧", title: "Fluid Management", text: "In advanced CKD, fluid restriction may be needed. Measure urine output plus 500-700ml. Ice chips and frozen fruit help manage thirst." },
+      { icon: "🚫", title: "Potassium-Rich Foods to Limit", text: "High-K foods: bananas, oranges, potatoes, tomatoes, avocados, dairy, nuts. Lower-K alternatives: apples, berries, cabbage, cauliflower, white rice." },
+      { icon: "🩺", title: "Work With Your Renal Dietitian", text: "CKD nutrition is highly individual based on your blood lab values. A registered renal dietitian creates a personalized plan based on your potassium, phosphorus, and creatinine levels." }
+    ]
+  },
+  heart: {
+    title: "🫀 Nutrition Tips for Heart Health",
+    tips: [
+      { icon: "🐟", title: "Omega-3 First Principle", text: "Omega-3s (EPA+DHA) are the most evidence-backed nutrients for heart protection. Target 2-3g EPA+DHA daily from fatty fish: mackerel, sardines, salmon, anchovies." },
+      { icon: "🫙", title: "Replace Saturated with Unsaturated", text: "Swap: butter→olive oil, fatty beef→legumes, full-fat dairy→plant sources. Replacing 5% calories from saturated fat with unsaturated fat reduces heart disease risk by 15%." },
+      { icon: "🌾", title: "Soluble Fiber for Cholesterol", text: "Beta-glucan in oats, barley, and legumes binds to LDL cholesterol and removes it. 3g daily beta-glucan reduces LDL by 5-10%." },
+      { icon: "🥦", title: "Nitrate-Rich Vegetables", text: "Beets, spinach, arugula, and celery are rich in dietary nitrates that convert to nitric oxide — a natural vasodilator that lowers blood pressure." },
+      { icon: "🍫", title: "Dark Chocolate (70%+)", text: "30-45g dark chocolate daily reduces blood pressure by 2-3 mmHg and improves blood vessel flexibility. Flavanols are the active compounds." },
+      { icon: "🧄", title: "Garlic Daily", text: "½ to 1 clove of raw garlic daily reduces total cholesterol by 9-12% and LDL by 10-15%. Allicin is most potent when garlic is crushed raw and left 10 min before use." }
+    ]
+  },
+  digestive: {
+    title: "🌿 Nutrition Tips for Digestive Health",
+    tips: [
+      { icon: "🦠", title: "Build Your Microbiome", text: "Your gut needs 30+ plant varieties per week for optimal microbiome diversity. Count every different plant food you eat — herbs, spices, and teas count!" },
+      { icon: "🥒", title: "Fermented Foods Daily", text: "Include: yogurt, kefir, kimchi, sauerkraut, miso, or kombucha daily. These introduce live bacteria that improve digestion, immunity, and mental health." },
+      { icon: "💧", title: "Hydration for Gut Motility", text: "Drink 6-8 glasses water daily between meals. Fiber without adequate water causes constipation. Warm water in the morning stimulates peristalsis." },
+      { icon: "🧅", title: "Prebiotic Foods", text: "Feed your good bacteria with: garlic, onions, leeks, asparagus, bananas, oats, and chicory root. Prebiotics are the 'food' for probiotics." },
+      { icon: "⚠️", title: "IBS Trigger Foods", text: "Common IBS triggers (FODMAP): garlic, onion, wheat, dairy, apples, beans. Keep a food-symptom diary to identify YOUR personal triggers — they vary significantly." },
+      { icon: "🫚", title: "Healthy Fats for Gut Lining", text: "Omega-3s and olive oil support gut membrane integrity and reduce intestinal inflammation. Bone broth provides collagen and glycine that literally repair the gut lining." }
+    ]
+  },
+  cancer: {
+    title: "🎗️ Nutrition Tips for Cancer Support",
+    tips: [
+      { icon: "🌿", title: "Anti-Inflammatory Foundation", text: "The Mediterranean diet is consistently associated with 12-15% lower cancer risk. Focus on: olive oil, fish, legumes, whole grains, vegetables, fruits, and limited red meat." },
+      { icon: "🫐", title: "Eat the Rainbow Daily", text: "Different colored fruits/vegetables contain different cancer-fighting phytochemicals. Red (lycopene), orange (beta-carotene), blue/purple (anthocyanins), green (chlorophyll, isothiocyanates)." },
+      { icon: "🥦", title: "Cruciferous Vegetables", text: "Broccoli, cauliflower, Brussels sprouts, and kale contain sulforaphane and indole-3-carbinol — some of the most studied anti-cancer compounds. Eat raw or lightly steamed (heat destroys sulforaphane)." },
+      { icon: "🍵", title: "Green Tea & Polyphenols", text: "3-5 cups green tea daily. EGCG (epigallocatechin gallate) in green tea inhibits cancer cell proliferation in numerous studies. Avoid adding milk (it binds polyphenols)." },
+      { icon: "🧄", title: "Garlic & Allium Vegetables", text: "People who consume high amounts of garlic, onions, and leeks show 30-35% lower risk of colorectal cancer. Crush raw garlic and wait 10 min before cooking to maximize allicin." },
+      { icon: "⚖️", title: "Maintain Healthy Weight", text: "Overweight/obesity is linked to 13 types of cancer. Even 5-10% weight loss reduces cancer biomarkers significantly. The anti-inflammatory effects of weight loss are protective." }
+    ]
+  },
+  general: {
+    title: "💪 General Health & Wellness Tips",
+    tips: [
+      { icon: "🌈", title: "Eat 30 Plants Per Week", text: "Research shows people eating 30+ different plant foods weekly have significantly better gut microbiome diversity, lower inflammation, and better overall health outcomes." },
+      { icon: "🫙", title: "Extra Virgin Olive Oil Daily", text: "2-4 tablespoons EVOO daily is associated with 30-35% reduction in cardiovascular events, cancer, and type 2 diabetes. It's the most evidence-backed single food for longevity." },
+      { icon: "🐟", title: "Wild Seafood Twice Weekly", text: "Omega-3 fatty acids from fish are essential for brain health, heart health, and inflammation control. Cold-water oily fish (mackerel, sardines, salmon) are most potent." },
+      { icon: "🫘", title: "Legumes for Longevity", text: "Legumes (beans, lentils, chickpeas) are the #1 predictor of longevity across all Blue Zone populations worldwide. Aim for 1 cup daily." },
+      { icon: "🥗", title: "Vegetables as Foundation", text: "Target ½ of every plate as non-starchy vegetables. This automatically controls calories, boosts fiber and micronutrients, and alkalizes body chemistry." },
+      { icon: "🧊", title: "Minimize Ultra-Processed Foods", text: "Ultra-processed foods (UPF) — those with >5 ingredients and industrial additives — are now linked to 32+ adverse health outcomes including cancer, heart disease, and depression." }
+    ]
+  }
+};
+
+// ── BMR/TDEE CALCULATION ──
+function calculateNutrition(profile) {
+  const { age, gender, weight, height, activity, conditions, tdee, bmi } = profile;
+  const primaryCondition = conditions[0] || 'general';
+
+  let targetCalories = tdee;
+  let proteinG, carbG, fatG, fiberG, sodiumMg, notes;
+
+  // Condition-specific adjustments
+  switch(primaryCondition) {
+    case 'diabetes': case 'prediabetes':
+      targetCalories = tdee - 300; // slight deficit
+      proteinG = Math.round(weight * 1.2);
+      carbG = Math.round((targetCalories * 0.40) / 4);
+      fatG = Math.round((targetCalories * 0.35) / 9);
+      fiberG = 35;
+      sodiumMg = 2300;
+      notes = "Carbohydrates limited to 40% of calories. High fiber (35g+) to slow glucose absorption. Consistent meal timing recommended.";
+      break;
+    case 'hypertension':
+      targetCalories = bmi > 25 ? tdee - 400 : tdee;
+      proteinG = Math.round(weight * 1.0);
+      carbG = Math.round((targetCalories * 0.50) / 4);
+      fatG = Math.round((targetCalories * 0.30) / 9);
+      fiberG = 30;
+      sodiumMg = 1500;
+      notes = "DASH diet principles: sodium <1,500mg/day, potassium >4,700mg/day, magnesium >500mg/day.";
+      break;
+    case 'kidney':
+      proteinG = Math.round(weight * 0.7); // restricted protein
+      targetCalories = tdee;
+      carbG = Math.round((targetCalories * 0.55) / 4);
+      fatG = Math.round((targetCalories * 0.30) / 9);
+      fiberG = 20;
+      sodiumMg = 1500;
+      notes = "Protein restricted to 0.7g/kg. Potassium & phosphorus monitoring essential. Consult your nephrologist for exact targets.";
+      break;
+    case 'heart': case 'stroke':
+      targetCalories = bmi > 25 ? tdee - 400 : tdee;
+      proteinG = Math.round(weight * 1.0);
+      carbG = Math.round((targetCalories * 0.45) / 4);
+      fatG = Math.round((targetCalories * 0.35) / 9);
+      fiberG = 30;
+      sodiumMg = 2000;
+      notes = "Focus on unsaturated fats (omega-3, olive oil). Limit saturated fat <7% calories. Target 2-3g EPA+DHA from fish.";
+      break;
+    case 'weightloss':
+      targetCalories = Math.max(1200, tdee - 500);
+      proteinG = Math.round(weight * 1.6); // high protein for satiety
+      carbG = Math.round((targetCalories * 0.35) / 4);
+      fatG = Math.round((targetCalories * 0.30) / 9);
+      fiberG = 35;
+      sodiumMg = 2300;
+      notes = "500-calorie deficit for ~0.5kg/week loss. High protein preserves muscle during weight loss.";
+      break;
+    default:
+      proteinG = Math.round(weight * 1.0);
+      carbG = Math.round((targetCalories * 0.50) / 4);
+      fatG = Math.round((targetCalories * 0.30) / 9);
+      fiberG = 28;
+      sodiumMg = 2300;
+      notes = "Balanced macronutrient distribution for general health and wellness.";
+  }
+
+  return { targetCalories, proteinG, carbG, fatG, fiberG, sodiumMg, bmi: bmi.toFixed(1), notes, primaryCondition };
+}
+
+// ── GET RECIPE FROM DB ──
+function selectRecipe(profile) {
+  const { primaryCondition, primaryCuisine, specificRequest } = profile;
+
+  let pool = RECIPE_DB[primaryCondition]?.[primaryCuisine]
+    || RECIPE_DB[primaryCondition]?.['west-african']
+    || RECIPE_DB['general']?.['west-african'];
+
+  if (!pool || !pool.length) {
+    pool = RECIPE_DB['general']['west-african'];
+  }
+
+  // If specific request provided, try to match
+  if (specificRequest) {
+    const req = specificRequest.toLowerCase();
+    const found = Object.values(RECIPE_DB).flatMap(c => Object.values(c).flat())
+      .find(r => r.name.toLowerCase().includes(req) || r.description.toLowerCase().includes(req));
+    if (found) return found;
+  }
+
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ── FREEMIUM USAGE TRACKING ──
+function getUsageCount() {
+  return parseInt(localStorage.getItem('recipe_usage_count') || '0', 10);
+}
+function incrementUsage() {
+  let count = getUsageCount();
+  count++;
+  localStorage.setItem('recipe_usage_count', count);
+}
+
+function _updateGenButton(usage) {
+  const btn = document.getElementById('generate-recipe-btn');
+  if (!btn) return;
+  const remaining = 3 - usage;
+  if (remaining <= 0) {
+    btn.classList.add('gen-btn-locked');
+    btn.innerHTML = '🔒 Upgrade to continue';
+  } else {
+    btn.classList.remove('gen-btn-locked');
+    btn.innerHTML = `🤖 Generate My Recipe <span class="usage-badge">${remaining} left</span>`;
+  }
+}
+
+function _showPaywall() {
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('recipe-output').style.display = 'none';
+  const soft = document.getElementById('soft-upgrade-prompt');
+  if (soft) soft.style.display = 'none';
+  const pw = document.getElementById('paywall-screen');
+  if (pw) pw.style.display = 'flex';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const usage = getUsageCount();
+  _updateGenButton(usage);
+  if (usage >= 3) _showPaywall();
+});
+
+// ── GENERATE RECIPE ──
+function generateRecipe() {
+  // Freemium gate — read usage BEFORE incrementing
+  let usage = getUsageCount();
+
+  // Update button badge immediately to reflect current remaining uses (Task 3 & 4)
+  let remaining = 3 - usage;
+  const btn = document.getElementById('generate-recipe-btn');
+  if (btn) {
+    if (remaining <= 0) {
+      btn.classList.add('gen-btn-locked');
+      btn.innerHTML = '🔒 Upgrade to continue';
+    } else {
+      btn.classList.remove('gen-btn-locked');
+      btn.innerHTML = `🤖 Generate My Recipe <span class="usage-badge">${remaining} left</span>`;
+    }
+  }
+
+  if (usage >= 3) {
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('recipe-output').style.display = 'none';
+    document.getElementById('paywall-screen').style.display = 'flex';
+    return;
+  }
+
+  const profile = getUserProfile();
+  const nutrition = calculateNutrition(profile);
+  const conditionList = profile.conditions.join(', ') || 'general health';
+
+  // Show loading
+  document.getElementById('welcome-screen').style.display = 'none';
+  const paywallEl = document.getElementById('paywall-screen');
+  if (paywallEl) paywallEl.style.display = 'none';
+  const output = document.getElementById('recipe-output');
+  output.style.display = 'block';
+  output.innerHTML = `
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <div class="loading-text">Analyzing your health profile<span class="loading-dots"></span></div>
+      <p style="color:var(--light);font-size:0.85rem;">Consulting food databases & clinical guidelines</p>
+    </div>`;
+
+  switchTab('recipe');
+
+  setTimeout(() => {
+    const recipe = selectRecipe(profile);
+    const nut = recipe.nutrition;
+
+    output.innerHTML = `
+      <div class="result-card">
+        <div class="result-header">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+            <div>
+              <div style="font-size:0.8rem;opacity:0.75;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">
+                Generated for: ${conditionList} • ${profile.primaryCuisine} cuisine
+              </div>
+              <h2>${recipe.emoji} ${recipe.name}</h2>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+                <span style="background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:50px;font-size:0.75rem;">⏱ ${recipe.time}</span>
+                <span style="background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:50px;font-size:0.75rem;">👤 ${recipe.servings} servings</span>
+                <span style="background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:50px;font-size:0.75rem;">📊 ${recipe.difficulty}</span>
+              </div>
+            </div>
+            <button onclick="generateRecipe()" class="btn btn-white btn-sm" style="color:var(--green);flex-shrink:0;">🔄 Generate Another</button>
+          </div>
+        </div>
+        <div class="result-body">
+          <p style="color:var(--mid);margin-bottom:16px;">${recipe.description}</p>
+          ${recipe.culturalNote ? `<div class="tip-box" style="background:var(--cream-dark);border-left-color:var(--green);"><p>🌍 <strong>Cultural Note:</strong> ${recipe.culturalNote}</p></div>` : ''}
+
+          <div class="section-title">📊 Nutritional Summary (per serving)</div>
+          <div class="macro-grid">
+            <div class="macro-card"><div class="macro-value" style="color:var(--green);">${nut.calories}</div><div class="macro-label">Calories</div></div>
+            <div class="macro-card"><div class="macro-value" style="color:var(--amber);">${nut.protein}g</div><div class="macro-label">Protein</div></div>
+            <div class="macro-card"><div class="macro-value" style="color:var(--green);">${nut.carbs}g</div><div class="macro-label">Carbs</div></div>
+            <div class="macro-card"><div class="macro-value" style="color:var(--amber);">${nut.fat}g</div><div class="macro-label">Fat</div></div>
+            <div class="macro-card"><div class="macro-value" style="color:var(--green);">${nut.fiber}g</div><div class="macro-label">Fiber</div></div>
+          </div>
+          ${nut.gi ? `<div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;">
+            <span class="nutrient-pill">Glycemic Index: ${nut.gi}</span>
+            <span class="nutrient-pill">Glycemic Load: ${nut.gl}</span>
+            ${nut.sodium ? `<span class="nutrient-pill">Sodium: ${nut.sodium}mg</span>` : ''}
+          </div>` : ''}
+
+          <div class="section-title">📋 Ingredients (${recipe.servings} servings)</div>
+          <table class="ing-table">
+            <thead><tr><th style="text-align:left;padding:8px;font-size:0.8rem;color:var(--light);border-bottom:2px solid var(--cream-dark);">Ingredient</th><th style="text-align:left;padding:8px;font-size:0.8rem;color:var(--light);border-bottom:2px solid var(--cream-dark);">Quantity</th><th style="text-align:right;padding:8px;font-size:0.8rem;color:var(--light);border-bottom:2px solid var(--cream-dark);">Calories</th></tr></thead>
+            <tbody>
+              ${recipe.ingredients.map(ing => `
+                <tr>
+                  <td>${ing.item}${ing.note ? `<br><span style="font-size:0.75rem;color:var(--green);font-weight:normal;">${ing.note}</span>` : ''}</td>
+                  <td style="color:var(--mid);">${ing.qty}</td>
+                  <td style="text-align:right;color:var(--light);">${ing.cal || '—'}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+
+          <div class="section-title">👨‍🍳 Step-by-Step Instructions</div>
+          ${recipe.steps.map((step, i) => `
+            <div class="step-box">
+              <div class="step-circle">${i + 1}</div>
+              <div class="step-text">${step}</div>
+            </div>`).join('')}
+
+          ${recipe.tips ? `<div class="tip-box"><p>💡 <strong>Pro Tip:</strong> ${recipe.tips}</p></div>` : ''}
+          ${recipe.pairWith ? `<div class="tip-box" style="background:var(--green-pale);border-left-color:var(--green-mid);margin-top:12px;"><p>🍷 <strong>Pair With:</strong> ${recipe.pairWith}</p></div>` : ''}
+
+          <div class="section-title">✅ Health Benefits for Your Condition</div>
+          ${(recipe.benefits || []).map(b => `<div class="benefit-card"><p>✅ ${b}</p></div>`).join('')}
+
+          <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <button onclick="generateRecipe()" class="btn btn-primary">🔄 Generate New Recipe</button>
+            <button onclick="generateMealPlan()" class="btn btn-amber">📅 Build 7-Day Meal Plan</button>
+            <button onclick="window.print()" class="print-recipe-btn">🖨️ Print Recipe</button>
+          </div>
+        </div>
+      </div>`;
+
+    // Update tips tab
+    updateTipsTab(profile.conditions[0] || 'general');
+    // Update nutrition tab
+    updateNutritionTab(profile, nutrition);
+
+    // ── INCREMENT usage AFTER recipe is displayed ──
+    incrementUsage();
+    const newUsage = getUsageCount();
+
+    // Update button badge to reflect post-generation remaining uses
+    _updateGenButton(newUsage);
+
+    // Soft prompt: show after FIRST generation only (usage was 0 before this run)
+    if (usage === 0) {
+      document.getElementById('soft-upgrade-prompt').style.display = 'block';
+    }
+  }, 1800);
+}
+
+// ── GENERATE 7-DAY MEAL PLAN ──
+function generateMealPlan() {
+  const profile = getUserProfile();
+  const nutrition = calculateNutrition(profile);
+  const condition = profile.conditions[0] || 'general';
+  const cuisine = profile.primaryCuisine;
+
+  switchTab('plan');
+  document.getElementById('plan-welcome').style.display = 'none';
+  const output = document.getElementById('plan-output');
+  output.style.display = 'block';
+  output.innerHTML = `
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+      <div class="loading-text">Building your 7-day meal plan<span class="loading-dots"></span></div>
+      <p style="color:var(--light);font-size:0.85rem;">Balancing macronutrients • Considering your health condition • Drawing from ${cuisine} cuisine</p>
+    </div>`;
+
+  setTimeout(() => {
+    const PLANS = getMealPlan(condition, cuisine, nutrition.targetCalories);
+    output.innerHTML = `
+      <div class="result-card">
+        <div class="result-header">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+            <div>
+              <div style="font-size:0.8rem;opacity:0.75;margin-bottom:6px;">Personalized 7-Day Meal Plan • ${condition} • ~${nutrition.targetCalories} kcal/day</div>
+              <h2>📅 Your 7-Day Healing Plan</h2>
+            </div>
+            <button onclick="generateMealPlan()" class="btn btn-white btn-sm" style="color:var(--green);flex-shrink:0;">🔄 Regenerate Plan</button>
+          </div>
+        </div>
+        <div class="result-body">
+          <div style="background:var(--green-pale);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;">
+            <strong style="color:var(--green-dark);">📊 Daily Targets:</strong>
+            <span style="margin-left:12px;font-size:0.9rem;">
+              Calories: <strong>${nutrition.targetCalories}</strong> •
+              Protein: <strong>${nutrition.proteinG}g</strong> •
+              Carbs: <strong>${nutrition.carbG}g</strong> •
+              Fat: <strong>${nutrition.fatG}g</strong> •
+              Fiber: <strong>${nutrition.fiberG}g+</strong>
+            </span>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="meal-plan-table">
+              <thead>
+                <tr>
+                  <th style="min-width:80px;">Day</th>
+                  <th style="min-width:160px;">🌅 Breakfast</th>
+                  <th style="min-width:160px;">☀️ Lunch</th>
+                  <th style="min-width:60px;">Snack</th>
+                  <th style="min-width:160px;">🌙 Dinner</th>
+                  <th style="min-width:70px;">Total kcal</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${PLANS.map((day, i) => `
+                  <tr>
+                    <td class="day-cell">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i]}</td>
+                    <td>${day.breakfast}<br><span class="kcal-chip">${day.bkcal} kcal</span></td>
+                    <td>${day.lunch}<br><span class="kcal-chip">${day.lkcal} kcal</span></td>
+                    <td>${day.snack}<br><span class="kcal-chip">${day.skcal} kcal</span></td>
+                    <td>${day.dinner}<br><span class="kcal-chip">${day.dkcal} kcal</span></td>
+                    <td><strong style="color:var(--green);">${day.bkcal+day.lkcal+day.skcal+day.dkcal}</strong></td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:24px;background:var(--amber-pale);border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--amber);">
+            <p style="margin:0;font-size:0.9rem;"><strong>📝 Plan Notes:</strong> ${nutrition.notes}</p>
+          </div>
+          <div style="margin-top:20px;background:var(--cream-dark);border-radius:var(--radius-sm);padding:16px;">
+            <p style="margin:0 0 8px;font-weight:700;font-size:0.9rem;">🛒 Weekly Shopping Tips:</p>
+            <ul style="margin:0;padding-left:20px;font-size:0.85rem;color:var(--mid);">
+              <li>Buy fish in bulk and freeze portions for the week</li>
+              <li>Batch cook grains (brown rice, quinoa) Sunday for the week</li>
+              <li>Pre-chop vegetables Sunday evening for quick weekday cooking</li>
+              <li>Buy seasonal West African vegetables from ethnic grocery stores for best prices</li>
+              <li>Keep frozen vegetables as backup — nutritionally equivalent to fresh</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+            <button onclick="generateMealPlan()" class="btn btn-primary">🔄 Regenerate Plan</button>
+            <button onclick="window.print()" class="print-recipe-btn">🖨️ Print Plan</button>
+            <a href="coaching.html" class="btn btn-outline btn-sm">📋 Get Full Coaching Support</a>
+          </div>
+        </div>
+      </div>`;
+  }, 2200);
+}
+
+function getMealPlan(condition, cuisine, kcal) {
+  const plans = {
+    diabetes: [
+      {breakfast:"Steel-cut oats, chia seeds, cinnamon, berries",bkcal:280,lunch:"Grilled chicken quinoa salad",lkcal:380,snack:"Handful almonds + apple",skcal:190,dinner:"Diabetic Thieboudienne (brown rice version)",dkcal:385},
+      {breakfast:"Scrambled eggs, whole grain toast, avocado",bkcal:310,lunch:"Lentil & spinach soup + whole grain bread",lkcal:350,snack:"Greek yogurt + flaxseed",skcal:160,dinner:"Suya-spiced turkey + roasted vegetables",dkcal:420},
+      {breakfast:"Moringa smoothie + boiled egg",bkcal:240,lunch:"Cauliflower jollof rice + grilled fish",lkcal:380,snack:"Celery + hummus",skcal:130,dinner:"Mediterranean stuffed peppers",dkcal:285},
+      {breakfast:"High-protein yogurt parfait + granola",bkcal:280,lunch:"Turkey black bean stuffed sweet potato",lkcal:410,snack:"Walnuts + pear",skcal:180,dinner:"Miso salmon + edamame cauliflower rice",dkcal:445},
+      {breakfast:"Veggie omelette (3 eggs) + salad",bkcal:300,lunch:"Okra tomato stew + brown rice",lkcal:340,snack:"Chia pudding",skcal:175,dinner:"Caribbean steamed fish + green banana",dkcal:340},
+      {breakfast:"Whole grain pancakes + mixed berries",bkcal:320,lunch:"Quinoa tabbouleh + grilled chicken",lkcal:365,snack:"Boiled egg + cherry tomatoes",skcal:120,dinner:"Heart-healthy egusi soup + small fufu",dkcal:360},
+      {breakfast:"Avocado toast + poached eggs",bkcal:350,lunch:"Bone broth vegetable soup + whole grain roll",lkcal:280,snack:"Baobab kefir smoothie",skcal:195,dinner:"Moringa jollof rice + grilled mackerel",dkcal:470}
+    ],
+    hypertension: [
+      {breakfast:"Oat porridge + banana + walnut",bkcal:340,lunch:"DASH platter: chicken, tabbouleh, hummus",lkcal:395,snack:"Beet & walnut salad",skcal:195,dinner:"Low-sodium egusi soup + whole grain swallow",dkcal:380},
+      {breakfast:"Berry smoothie + whole grain toast",bkcal:290,lunch:"Grilled mackerel + leafy green salad",lkcal:420,snack:"Apple + almond butter",skcal:200,dinner:"Plantain avocado toast + bean soup",dkcal:360},
+      {breakfast:"Greek yogurt + seeds + orange",bkcal:260,lunch:"Mediterranean stuffed peppers + quinoa",lkcal:370,snack:"Kefir smoothie",skcal:185,dinner:"DASH salmon with herbs + steamed veg",dkcal:420},
+      {breakfast:"Egg white omelette + avocado + tomato",bkcal:300,lunch:"Lentil soup + whole grain bread",lkcal:350,snack:"Handful walnuts + pear",skcal:190,dinner:"Healthy jollof rice + chicken",dkcal:385},
+      {breakfast:"Smoothie bowl: baobab, mango, kefir",bkcal:310,lunch:"Efo riro + brown rice",lkcal:380,snack:"Dark chocolate (70%+) + berries",skcal:160,dinner:"Caribbean steamed fish + roasted vegetables",dkcal:400},
+      {breakfast:"Steel-cut oats + berries + flaxseed",bkcal:320,lunch:"Suya turkey + large salad",lkcal:360,snack:"Celery + hummus",skcal:130,dinner:"Grilled sea bream + Mediterranean veg",dkcal:390},
+      {breakfast:"Whole grain avocado toast + eggs",bkcal:340,lunch:"Mafé peanut stew + small portion rice",lkcal:400,snack:"Yogurt + honey",skcal:150,dinner:"Moringa chicken stew + cauliflower rice",dkcal:340}
+    ],
+    general: [
+      {breakfast:"Moringa smoothie bowl + granola",bkcal:310,lunch:"Jollof rice + grilled chicken + salad",lkcal:420,snack:"Baobab yogurt + berries",skcal:195,dinner:"Mafé peanut stew + brown rice",dkcal:470},
+      {breakfast:"Avocado & egg toast + fruit",bkcal:340,lunch:"Tabbouleh + grilled fish",lkcal:380,snack:"Mixed nuts + dark chocolate",skcal:210,dinner:"Ndolé bitterleaf stew + fufu",dkcal:450},
+      {breakfast:"Oat porridge + mixed seeds + mango",bkcal:320,lunch:"Mediterranean platter",lkcal:395,snack:"Kefir smoothie",skcal:185,dinner:"Heart-healthy mackerel + efo riro",dkcal:440},
+      {breakfast:"Greek yogurt parfait + chia + honey",bkcal:280,lunch:"Lentil soup + whole grain bread",lkcal:350,snack:"Apple + almond butter",skcal:200,dinner:"Suya turkey + quinoa salad",dkcal:420},
+      {breakfast:"Plantain & egg scramble",bkcal:330,lunch:"Buddha bowl + tahini dressing",lkcal:485,snack:"Baobab smoothie",skcal:175,dinner:"Thieboudienne (traditional version)",dkcal:440},
+      {breakfast:"Whole grain pancakes + berries",bkcal:310,lunch:"Okra stew + brown rice + grilled chicken",lkcal:410,snack:"Boiled egg + tomatoes",skcal:120,dinner:"Moringa soup + whole grain couscous",dkcal:380},
+      {breakfast:"Chia pudding + mango + coconut",bkcal:290,lunch:"Efo riro + pounded yam (small portion)",lkcal:420,snack:"Walnuts + pear",skcal:180,dinner:"Caribbean fish stew + green banana",dkcal:380}
+    ]
+  };
+  return plans[condition] || plans['general'];
+}
+
+// ── UPDATE TIPS TAB ──
+function updateTipsTab(condition) {
+  const data = CONDITION_TIPS[condition] || CONDITION_TIPS['general'];
+  const container = document.getElementById('tips-cards');
+  document.querySelector('#content-tips h3').textContent = data.title;
+  container.innerHTML = data.tips.map(tip => `
+    <div style="background:var(--white);border-radius:var(--radius-sm);padding:20px;margin-bottom:12px;box-shadow:var(--shadow-sm);border-left:4px solid var(--green);">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div style="font-size:1.5rem;flex-shrink:0;">${tip.icon}</div>
+        <div>
+          <h4 style="margin:0 0 6px;font-size:1rem;">${tip.title}</h4>
+          <p style="margin:0;font-size:0.88rem;color:var(--mid);">${tip.text}</p>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── UPDATE NUTRITION TAB ──
+function updateNutritionTab(profile, nut) {
+  const bmiStatus = nut.bmi < 18.5 ? '⚠️ Underweight' : nut.bmi < 25 ? '✅ Healthy Weight' : nut.bmi < 30 ? '⚠️ Overweight' : '❌ Obese';
+  document.getElementById('nutrition-calc-output').innerHTML = `
+    <div style="margin-top:24px;">
+      <div class="grid-2" style="gap:16px;margin-bottom:24px;">
+        <div style="background:var(--green-pale);border-radius:var(--radius-sm);padding:20px;">
+          <div style="font-size:0.75rem;text-transform:uppercase;color:var(--green);font-weight:700;">BMI</div>
+          <div style="font-size:2rem;font-weight:900;color:var(--green-dark);">${nut.bmi}</div>
+          <div style="font-size:0.85rem;color:var(--mid);">${bmiStatus}</div>
+        </div>
+        <div style="background:var(--amber-pale);border-radius:var(--radius-sm);padding:20px;">
+          <div style="font-size:0.75rem;text-transform:uppercase;color:var(--amber);font-weight:700;">Daily Calorie Target</div>
+          <div style="font-size:2rem;font-weight:900;color:var(--dark);">${nut.targetCalories}</div>
+          <div style="font-size:0.85rem;color:var(--mid);">kcal/day</div>
+        </div>
+      </div>
+      <h4 style="margin-bottom:16px;">Daily Macronutrient Targets</h4>
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+          <span>🥩 Protein</span><strong>${nut.proteinG}g / day</strong>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" data-progress="75" style="background:linear-gradient(90deg,var(--amber),var(--amber-light));width:75%;"></div></div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+          <span>🌾 Carbohydrates</span><strong>${nut.carbG}g / day</strong>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" data-progress="60" style="background:linear-gradient(90deg,var(--green),var(--green-light));width:60%;"></div></div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+          <span>🫙 Healthy Fats</span><strong>${nut.fatG}g / day</strong>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" data-progress="45" style="background:linear-gradient(90deg,#F4A261,#E76F51);width:45%;"></div></div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+          <span>🌿 Fiber (minimum)</span><strong>${nut.fiberG}g / day</strong>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" data-progress="85" style="width:85%;"></div></div>
+      </div>
+      <div style="background:var(--amber-pale);border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--amber);">
+        <p style="margin:0;font-size:0.88rem;"><strong>📋 Clinical Notes:</strong> ${nut.notes}</p>
+      </div>
+      <p style="margin-top:16px;font-size:0.8rem;color:var(--light);">⚠️ These targets are estimated using standard BMR/TDEE formulas and condition-specific clinical guidelines. Consult a registered dietitian for precise individual targets.</p>
+    </div>`;
+}
+
+// ── TAB SWITCHING ──
+function switchTab(tab) {
+  ['recipe','plan','nutrition','tips'].forEach(t => {
+    document.getElementById(`content-${t}`).style.display = t === tab ? 'flex' : 'none';
+    document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+  });
+  if (tab !== 'recipe') document.getElementById(`content-${tab}`).style.display = 'block';
+  if (tab === 'recipe') document.getElementById(`content-recipe`).style.display = 'flex';
+  if (tab === 'recipe') document.getElementById(`content-recipe`).style.flexDirection = 'column';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTagSelectors();
+  // Initialize first tab
+  switchTab('recipe');
+  // Auto-populate tips for default condition
+  updateTipsTab('diabetes');
+});
+</script>
+</body>
+</html>
